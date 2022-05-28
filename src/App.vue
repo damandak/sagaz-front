@@ -28,6 +28,7 @@
 }
 
 nav {
+  display: none; // REMOVE THIS LINE TO SHOW THE NAVIGATION
   overflow: hidden;
   position: fixed;
   top: 0;
@@ -72,11 +73,11 @@ nav {
 #main-container {
   position: absolute;
   width: 100%;
-  margin-top: 90px;
+  margin-top: 0px; // CHANGE TO 90PX IF YOU WANT TO SHOW THE NAVIGATION
   overflow-y: auto;
   overflow-x: hidden;
   height: calc(100vh - 91px);
-  background-image: url("~@/assets/yelo.jpg");
+  //background-image: url("~@/assets/yelo.jpg");
   background-size: cover;
   background-position: center;
 }
