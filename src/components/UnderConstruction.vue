@@ -26,6 +26,19 @@
   display: block;
   line-height: 80px;
   margin-bottom: 0px;
+  background: linear-gradient(to right, #fff 40%, #04cdd1 50%, #fff 60%);
+  background-size: 400% auto;
+  color: #000;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 12s linear infinite;
+  @keyframes shine {
+    to {
+      background-position: 400% center;
+    }
+  }
 }
 #coming-soon {
   font-family: "Poppins", sans-serif;
