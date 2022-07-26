@@ -1,18 +1,19 @@
 <template>
   <div class="main-content">
-    <SectionTitle content="Sobre Sagaz"></SectionTitle>
+    <SectionTitle content="Contacto"></SectionTitle>
   </div>
 </template>
 <script>
 import SectionTitle from "@/components/MainContainer/SectionTitle.vue";
 
 export default {
-  name: "AboutView",
+  name: "ContactView",
   components: {
     SectionTitle,
   },
 };
 </script>
+
 <style>
 .main-content {
   position: absolute;

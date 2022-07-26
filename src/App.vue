@@ -1,21 +1,19 @@
 <template>
-  <div class="full-container">
-    <nav>
-      <div class="nav-wrapper">
-        <router-link to="/">Inicio</router-link> |
-        <router-link to="/about">Sobre SAGAZ</router-link> |
-        <router-link to="/about">GLOFs</router-link> |
-        <router-link to="/about">Lagos</router-link>
-      </div>
-      <div class="nav-account">
-        <router-link to="/login">Registro / Iniciar Sesión</router-link>
-      </div>
-    </nav>
-    <div id="main-container">
+  <div class="full-container" :class="{ full_under: underConstruction }">
+    <UnderConstruction v-if="underConstruction" class="underconst" />
+    <div v-else>
+      <MainNav />
       <router-view />
     </div>
   </div>
 </template>
+
+<script setup>
+import MainNav from "./components/Nav/MainNav.vue";
+import UnderConstruction from "./components/UnderConstruction.vue";
+
+const underConstruction = false;
+</script>
 
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;900&display=swap");
@@ -23,62 +21,43 @@
   font-family: Poppins, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #e1e1e1;
 }
 
-nav {
-  display: none; // REMOVE THIS LINE TO SHOW THE NAVIGATION
+:root {
+  --primary-color: #0089a4;
+  --primary-color-light: #00b4d7;
+  --secondary-color: #d72300;
+  --triadic-color-one: #a40089;
+  --triadic-color-one-light: #d700b4;
+  --triadic-color-two: #89a400;
+  --triadic-color-two-light: #b4d700;
+}
+
+.full-container {
+  width: 100%;
+  height: 100vh;
+}
+.full_under {
   overflow: hidden;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 50px;
-  padding: 30px 0 10px 0;
-  vertical-align: middle;
-  border-bottom: 1px solid #e1e1e143;
-
-  background-color: #000000;
-
-  a {
-    font-weight: bold;
-    background-image: linear-gradient(to right, #04cdd1 20%, #ffffff 50%);
-    background-size: 500%;
-    background-position: -400%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-decoration: none;
-    margin-left: 10px;
-    margin-right: 10px;
-
-    &.router-link-exact-active {
-      color: #04cdd1;
-    }
-  }
-  a:hover {
-    //color: #04cdd1;
-    transition: 0.6s ease-out;
-    background-position: -355%;
-  }
+  background-image: linear-gradient(
+    -45deg,
+    #0f0f0f 0%,
+    rgb(37, 37, 37) 20%,
+    rgba(87, 111, 230, 1) 61%,
+    rgba(59, 173, 227, 1) 100%
+  );
+  animation: AnimateBG 20s ease infinite;
 }
-
-.nav-account {
-  display: inline-block;
-  position: absolute;
-  right: 0;
-  top: 0;
-  padding: 30px 20px 10px 0;
-}
-#main-container {
-  position: absolute;
-  width: 100%;
-  margin-top: 0px; // CHANGE TO 90PX IF YOU WANT TO SHOW THE NAVIGATION
-  overflow-y: auto;
-  overflow-x: hidden;
-  height: calc(100vh - 91px);
-  //background-image: url("~@/assets/yelo.jpg");
-  background-size: cover;
-  background-position: center;
+@keyframes AnimateBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 </style>
