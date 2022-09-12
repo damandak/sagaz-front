@@ -12,6 +12,7 @@
     "chart.js": "^3.8.0",
     "chartjs-adapter-moment": "^1.0.0",
     "core-js": "^3.8.3",
+    "leaflet": "^1.8.0",
     "moment": "^2.29.4",
     "vue": "^3.2.13",
     "vue-axios": "^3.4.1",
@@ -22,6 +23,9 @@
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
+    "@iconify-icons/eva": "^1.2.3",
+    "@iconify/vue": "^4.0.0",
+    "@vue-leaflet/vue-leaflet": "^0.6.1",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-plugin-router": "~5.0.0",
@@ -61,6 +65,9 @@
       "script-setup-uses-vars": "off",
       "no-unused-vars": "off"
     }
+  },
+  "overrides": {
+    "autoprefixer": "10.4.5"
   },
   "browserslist": [
     "> 1%",

@@ -38,9 +38,10 @@ export default {
   background-clip: text;
   color: transparent;
   text-decoration: none;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: 15px;
+  margin-right: 15px;
   font-size: 14px;
+  pointer-events: auto;
 
   &.router-link-exact-active {
     color: var(--primary-color-light);
@@ -55,5 +56,6 @@ export default {
   color: var(--primary-color-light);
   transition: 0.6s ease-out;
   background-position: -355%;
+  text-shadow: 0 0 2px black;
 }
 </style>

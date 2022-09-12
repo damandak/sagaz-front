@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav class="mainnav">
     <MainLogo></MainLogo>
     <div class="nav-wrapper">
       <NavButton to="/" content="LAGOS"></NavButton>
@@ -22,36 +22,29 @@ export default {
 };
 </script>
 
-<style>
-nav {
+<style scoped lang="scss">
+.mainnav {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   overflow: hidden;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 50px;
-  padding: 0 0 10px 0;
-  border-bottom: 1px solid #e1e1e143;
-  background-color: #0c0c0c;
-  z-index: 10;
+  height: 60px;
+  //border-bottom: 1px solid #e1e1e14d;
+  background-color: transparent;
+  z-index: 60;
+  pointer-events: none;
+  /*background-image: linear-gradient(-45deg, #0f0f0f, #141414 95%);*/
 }
 
 .nav-wrapper {
   position: absolute;
   right: 0;
   top: 0;
-  margin-right: 10px;
-  padding: 20px 0 0 0;
+  margin: 20px 10px 15px 0;
   justify-content: space-between;
-  height: calc(100%-20px);
-}
-
-.nav-account {
-  display: inline-block;
-  position: absolute;
-  right: 0;
-  top: 0;
-  padding: 30px 20px 10px 0;
-  text-align: right;
 }
 </style>

@@ -3,6 +3,7 @@ import HomeView from "../views/HomeView.vue";
 import AboutView from "../views/AboutView.vue";
 import ContactView from "../views/ContactView.vue";
 import LakeView from "../views/LakeView.vue";
+import FakeView from "../views/FakeView.vue";
 
 const routes = [
   {
@@ -25,6 +26,11 @@ const routes = [
     name: "Lake",
     component: LakeView,
     props: true,
+  },
+  {
+    path: "/fake",
+    name: "fake",
+    component: FakeView,
   },
 ];
 

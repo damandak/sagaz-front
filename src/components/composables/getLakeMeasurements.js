@@ -24,19 +24,29 @@ export const lakemeasurements = reactive({
   alert_status: [],
 });
 
-const apiUrl = "http://localhost:8000/api/lakemeasurements/";
-const apiKey = "4hJb3MIV.T7rL0Q4w4or5dnfr9qvRNX0bG0tdqoVS";
+var apiUrl = "";
+var apiKey = "";
+
+if (process.env.NODE_ENV === "development") {
+  apiUrl = "http://localhost:8000/api/lakemeasurements/";
+  apiKey = "4hJb3MIV.T7rL0Q4w4or5dnfr9qvRNX0bG0tdqoVS";
+} else {
+  apiUrl = "https://www.sagaz.org/api/lakemeasurements/";
+  apiKey = process.env.VUE_APP_API_KEY;
+}
 
 export function getLakeMeasurements(id, interval) {
   const apiUrlwithId = apiUrl + id + "/" + interval + "/";
   axios.defaults.headers.common.Authorization = `Api-Key ${apiKey}`;
-  if (interval === "day") {
+  if (interval === "daily") {
     format = "YYYY-MM-DD HH:mm:ss";
-  } else if (interval === "week") {
+  } else if (interval === "biweekly") {
     format = "YYYY-MM-DD HH:mm:ss";
-  } else if (interval === "month") {
+  } else if (interval === "weekly") {
     format = "YYYY-MM-DD HH:mm:ss";
-  } else if (interval === "year") {
+  } else if (interval === "monthly") {
+    format = "YYYY-MM-DD HH:mm:ss";
+  } else if (interval === "yearly") {
     format = "YYYY-MM-DD HH:mm:ss";
   } else {
     format = "YYYY-MM-DD HH:mm:ss";
@@ -49,6 +59,12 @@ export function getLakeMeasurements(id, interval) {
     lakemeasurements.atmospheric_temperature = [];
     lakemeasurements.precipitation = [];
     lakemeasurements.alert_status = [];
+    // Si no hay datos, acá se caería!!
+    if (data.length === 0) {
+      console.log(
+        "Error porque no hay datos que mostrar en el intervalo escogido"
+      );
+    }
     lakemeasurements.start_date = moment(data[0].date).format(format);
     lakemeasurements.end_date = moment(data[data.length - 1].date).format(
       format

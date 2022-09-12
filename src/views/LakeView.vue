@@ -1,16 +1,16 @@
 <template>
-  <div class="main-content">
+  <div class="main-content lake-view-container">
     <div v-if="lake.loaded" class="lake-main-data">
-      <h1>{{ lake.lakedata.name }}</h1>
-      <div class="lake-image"></div>
+      <h1 class="section-title">{{ lake.lakedata.name }}</h1>
+      <img :src="lake.lakedata.image" class="lake-image" alt="" />
       <div class="lake-general-data">
         <p><b>País: </b>{{ lake.lakedata.country }}</p>
         <p><b>Región: </b>{{ lake.lakedata.region }}</p>
-        <p><b>Latitud: </b>{{ lake.lakedata.lat }}°</p>
-        <p><b>Longitud: </b>{{ lake.lakedata.lon }}°</p>
+        <p><b>Latitud: </b>{{ lake.lakedata.lat.toFixed(4) }}°</p>
+        <p><b>Longitud: </b>{{ lake.lakedata.lon.toFixed(4) }}°</p>
         <p><b>Altitud: </b>{{ lake.lakedata.altitude }} msnm</p>
-        <p><b>Área: </b>{{ lake.lakedata.area }} mts2</p>
-        <p><b>Volumen: </b>{{ lake.lakedata.volume }} m3</p>
+        <p><b>Área: </b>{{ lake.lakedata.area }} kms2</p>
+        <p><b>Volumen: </b>{{ lake.lakedata.volume }} millones de m3</p>
         <p><b>Estado Estación: </b>{{ lake.lakedata.station_status }}</p>
       </div>
     </div>
@@ -26,11 +26,7 @@ import LakeDetail from "@/components/Lakes/LakeDetail.vue";
 import { useRoute } from "vue-router";
 
 const id = useRoute().params.id;
-let interval = "week";
-
-const image_url = computed(() => {
-  return `url('${lake.lakedata.image}')`;
-});
+let interval = "biweekly";
 
 onMounted(() => {
   getLake(id);
@@ -38,28 +34,20 @@ onMounted(() => {
 </script>
 
 <style>
-.main-content {
-  position: absolute;
-  width: 100%;
-  padding-top: 60px;
-  overflow-y: visible;
-  overflow-x: hidden;
-  height: calc(100vh - 60px);
-  background-size: cover;
-  background-position: center;
-  margin: 0;
-  text-align: center;
+.lake-view-container {
+  background-image: linear-gradient(
+    -45deg,
+    rgb(0 180 215 / 92%),
+    #070707f1 95%
+  );
 }
 .lake-image {
-  width: 100%;
-  max-width: 800px;
   margin: auto;
-  height: 50vh;
-  min-height: 300px;
-  background-image: v-bind(image_url);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  height: 70vh;
+  max-height: 600px;
+  object-fit: cover;
+  border: solid 2px white;
+  border-radius: 10px;
 }
 .lake-general-data {
   width: 100%;

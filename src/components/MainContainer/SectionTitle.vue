@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <h1>{{ content }}</h1>
+    <h1 class="section-title">{{ content }}</h1>
   </div>
 </template>
 <script>

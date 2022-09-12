@@ -1,10 +1,9 @@
 <template>
   <div id="temp-container">
     <div class="main-image" />
-    <h1>Sitio en Construcción</h1>
+    <h1 class="titleunderconst">Sitio en Construcción</h1>
   </div>
 </template>
-
 <style lang="scss">
 #main-title {
   font-family: "Poppins", sans-serif;
@@ -41,7 +40,7 @@
   overflow: hidden;
 }
 @media screen and (max-width: 1000px) {
-  h1 {
+  h1.titleunderconst {
     font-size: 25px;
   }
   .underconst {
@@ -49,7 +48,7 @@
   }
 }
 @media screen and (min-width: 1000px) {
-  h1 {
+  h1.titleunderconst {
     font-size: 50px;
   }
   .underconst {

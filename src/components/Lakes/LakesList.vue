@@ -1,6 +1,6 @@
 <template>
   <div class="lakes-list">
-    <h1>Lagos</h1>
+    <h1 class="section-title">Lagos</h1>
     <table v-if="lakesdata.lakes" class="sagaz-table">
       <thead>
         <tr>
@@ -27,11 +27,11 @@
           </th>
           <td>{{ lake.country }}</td>
           <td>{{ lake.region }}</td>
-          <td>{{ lake.lat }}°</td>
-          <td>{{ lake.lon }}°</td>
+          <td>{{ lake.lat.toFixed(4) }}°</td>
+          <td>{{ lake.lon.toFixed(4) }}°</td>
           <td>{{ lake.altitude }} msnm</td>
-          <td>{{ lake.area }} m<span class="sup">2</span></td>
-          <td>{{ lake.volume }} m<span class="sup">3</span></td>
+          <td>{{ lake.area }} kms<span class="sup">2</span></td>
+          <td>{{ lake.volume }} millones de m<span class="sup">3</span></td>
           <td>{{ lake.station_status }}</td>
         </tr>
       </tbody>
@@ -49,11 +49,11 @@
         </h3>
         <p><b>País: </b>{{ lake.country }}</p>
         <p><b>Región: </b>{{ lake.region }}</p>
-        <p><b>Latitud: </b>{{ lake.lat }}°</p>
-        <p><b>Longitud: </b>{{ lake.lon }}°</p>
+        <p><b>Latitud: </b>{{ lake.lat.toFixed(4) }}°</p>
+        <p><b>Longitud: </b>{{ lake.lon.toFixed(4) }}°</p>
         <p><b>Altitud: </b>{{ lake.altitude }} msnm</p>
-        <p><b>Área: </b>{{ lake.area }} mts2</p>
-        <p><b>Volumen: </b>{{ lake.volume }} m3</p>
+        <p><b>Área: </b>{{ lake.area }} kms2</p>
+        <p><b>Volumen: </b>{{ lake.volume }} millones de m3</p>
         <p><b>Estado Estación: </b>{{ lake.station_status }}</p>
       </div>
     </div>
@@ -70,12 +70,8 @@ const props = defineProps({
 </script>
 
 <style>
-.lakes_container {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  top: 0px;
-  align-items: center;
+.lakes-list {
+  overflow: auto;
 }
 @media only screen and (min-width: 1000px) {
   .sagaz-table {
@@ -125,7 +121,7 @@ const props = defineProps({
   .sagaz-table {
     display: none;
   }
-  h1 {
+  .section-title {
     position: relative;
     top: -10px;
   }

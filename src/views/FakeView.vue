@@ -1,29 +1,12 @@
 <template>
-  <div v-if="underConstruction" class="full-container full_under">
-    <button class="hidden-button" @click="click()"></button>
-    <UnderConstruction class="underconst" />
-  </div>
-  <div v-else class="full-container">
+  <div class="full-container">
     <MainNav />
-    <router-view v-slot="{ Component }">
-      <keep-alive>
-        <component :is="Component" />
-      </keep-alive>
-    </router-view>
+    <router-view />
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
-import MainNav from "./components/Nav/MainNav.vue";
-import UnderConstruction from "./components/UnderConstruction.vue";
-
-var underConstruction = ref(true);
-
-function click() {
-  console.log("click");
-  underConstruction.value = false;
-}
+import MainNav from "../components/Nav/MainNav.vue";
 </script>
 
 <style lang="scss">
@@ -36,8 +19,8 @@ function click() {
 }
 
 :root {
-  --primary-color: #0082ad;
-  --primary-color-light: #52cff8;
+  --primary-color: #0089a4;
+  --primary-color-light: #00b4d7;
   --secondary-color: #d72300;
   --triadic-color-one: #a40089;
   --triadic-color-one-light: #d700b4;
@@ -85,15 +68,5 @@ function click() {
 }
 .section-title {
   margin-top: 60px;
-}
-.hidden-button {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 10px;
-  height: 10px;
-  background-color: rgba(255, 255, 255, 0);
-  cursor: pointer;
-  border: none;
 }
 </style>

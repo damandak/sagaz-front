@@ -3,7 +3,7 @@
     <LineChart
       :chart-data="data"
       :options="data.options"
-      css-classes="chart-container"
+      :css-classes="chartCSS"
     />
   </div>
 </template>
@@ -39,6 +39,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  chartCSS: {
+    type: String,
+    default: "chart-container",
+  },
   label: {
     type: Object,
     required: true,
@@ -71,17 +75,22 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  labelColor: {
+    type: String,
+    default: "rgba(255, 255, 255, 1)",
+  },
 });
 
 const data = computed(() => ({
+  backgroundColor: "#000",
   labels: props.chartData.map((element) => element.date),
   datasets: [
     {
       data: props.chartData.map((element) => element.data),
       backgroundColor: props.point_color,
       borderColor: props.line_color,
-      color: "#FFF", // Text Color
-      backdropColor: "rgba(0, 255, 0, 1)", // Backdrop Color
+      color: "#FFF", // text color
+      backdropColor: "#FFF", // Backdrop Color
       borderWidth: 1,
     },
   ],
@@ -101,14 +110,21 @@ const data = computed(() => ({
           unit: props.interval,
           tooltipFormat: "DD/MM/YYYY HH:mm",
         },
+        ticks: {
+          color: props.labelColor,
+        },
       },
       y: {
         title: {
           display: true,
           text: props.unit,
+          color: props.labelColor,
         },
         grid: {
           color: "rgba(255, 255, 255, 0.05)",
+        },
+        ticks: {
+          color: props.labelColor,
         },
       },
     },

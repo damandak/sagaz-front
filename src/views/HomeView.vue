@@ -1,13 +1,11 @@
 <template>
   <div class="main-content">
     <div class="lakes_container">
-      <div class="lakes_content">
-        <ModeSwitch />
-        <transition name="fade" mode="out-in">
-          <LakesList :lakesdata="lakesdata" v-if="mapMode" />
-          <LakesMap :lakesdata="lakesdata" v-else />
-        </transition>
-      </div>
+      <!--<ModeSwitch v-if="!mapMode" />-->
+      <transition name="fade" mode="out-in">
+        <LakesList :lakesdata="lakesdata" v-if="mapMode" />
+        <LakesMap :lakesdata="lakesdata" v-else />
+      </transition>
     </div>
   </div>
 </template>
@@ -19,31 +17,31 @@ import LakesList from "@/components/Lakes/LakesList.vue";
 import LakesMap from "@/components/Lakes/LakesMap.vue";
 import { getLakes } from "@/components/composables/getLakes.js";
 import { useMode } from "@/components/composables/lakeMode.js";
+import { onActivated } from "vue";
 
-const { mapMode } = useMode();
+var { mapMode } = useMode();
+const { setFalse } = useMode();
 const { lakesdata } = getLakes();
+
+onActivated(() => {
+  setFalse();
+});
 </script>
 
 <style>
+.lakes_container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  top: 0px;
+  align-items: center;
+}
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 1s ease;
+  transition: opacity 0.2s ease;
 }
-
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
-}
-.main-content {
-  position: absolute;
-  width: 100%;
-  padding-top: 60px;
-  overflow-y: visible;
-  overflow-x: hidden;
-  height: calc(100vh - 60px);
-  background-size: cover;
-  background-position: center;
-  margin: 0;
-  text-align: center;
 }
 </style>
