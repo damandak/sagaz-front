@@ -96,7 +96,7 @@ onMounted(() => {
   .loc-more {
     color: #fff;
     cursor: pointer;
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
     text-decoration: none;
     padding: 7px;
     border-radius: 5px;
@@ -104,7 +104,7 @@ onMounted(() => {
     width: 100px;
   }
   .loc-more:hover {
-    background-color: var(--primary-color-light);
+    background-color: var(--secondary-color-light);
   }
 }
 .col-right {

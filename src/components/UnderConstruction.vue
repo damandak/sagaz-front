@@ -1,58 +1,39 @@
 <template>
   <div id="temp-container">
-    <div class="main-image" />
-    <h1 class="titleunderconst">Sitio en Construcción</h1>
+    <div class="flex-child">
+      <div class="main-image" />
+      <h1 class="titleunderconst">Sitio en Construcción</h1>
+    </div>
   </div>
 </template>
 <style lang="scss">
-#main-title {
-  font-family: "Poppins", sans-serif;
-  font-weight: bold;
-  color: white;
-  font-size: 80px;
-  display: block;
-  line-height: 80px;
-  margin-bottom: 0px;
-  background: linear-gradient(to right, #fff 40%, #04cdd1 50%, #fff 60%);
-  background-size: 400% auto;
-  color: #000;
-  background-clip: text;
-  text-fill-color: transparent;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shine 12s linear infinite;
-  @keyframes shine {
-    to {
-      background-position: 400% center;
-    }
-  }
-}
-#coming-soon {
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  font-size: 30px;
-  color: white;
-  margin-top: 10px;
-}
-.underconst {
+.flex-child {
   margin: auto;
-  text-align: center;
-  overflow: hidden;
+}
+#temp-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(
+    -45deg,
+    #0f0f0f 0%,
+    rgb(37, 37, 37) 20%,
+    rgba(87, 111, 230, 1) 61%,
+    rgba(59, 173, 227, 1) 100%
+  );
+  animation: AnimateBG 20s ease infinite;
 }
 @media screen and (max-width: 1000px) {
   h1.titleunderconst {
     font-size: 25px;
   }
-  .underconst {
-    padding-top: 100px;
-  }
 }
 @media screen and (min-width: 1000px) {
   h1.titleunderconst {
     font-size: 50px;
-  }
-  .underconst {
-    padding-top: 200px;
   }
 }
 .underconst .main-image {

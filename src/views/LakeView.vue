@@ -14,7 +14,6 @@
         <p><b>Estado Estación: </b>{{ lake.lakedata.station_status }}</p>
       </div>
     </div>
-    <h2>Título de series de tiempo</h2>
     <LakeDetail :id="id" :interval="interval" />
   </div>
 </template>

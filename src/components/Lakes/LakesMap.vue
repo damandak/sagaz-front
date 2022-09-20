@@ -31,7 +31,22 @@
         :key="lake.id"
         :lat-lng="[lake.lat, lake.lon]"
       >
-        <l-icon :icon-url="iconUrl" :icon-size="iconSize" />
+        <l-icon
+          v-if="lake.station_status == 'Verde'"
+          :icon-url="iconUrlGreen"
+          :icon-size="iconSize"
+        />
+        <l-icon
+          v-else-if="lake.station_status == 'Amarillo'"
+          :icon-url="iconUrlYellow"
+          :icon-size="iconSize"
+        />
+        <l-icon
+          v-else-if="lake.station_status == 'Rojo'"
+          :icon-url="iconUrlRed"
+          :icon-size="iconSize"
+        />
+        <l-icon v-else :icon-url="iconUrlGray" :icon-size="iconSize" />
         <l-popup>
           <button
             class="map-button"
@@ -110,9 +125,24 @@ function closeLoc(palabra) {
   lake_id.value = 0;
 }
 
-const iconUrl = computed({
+const iconUrlGreen = computed({
   get() {
     return require("@/assets/marker.png");
+  },
+});
+const iconUrlYellow = computed({
+  get() {
+    return require("@/assets/marker_y.png");
+  },
+});
+const iconUrlRed = computed({
+  get() {
+    return require("@/assets/marker_r.png");
+  },
+});
+const iconUrlGray = computed({
+  get() {
+    return require("@/assets/marker_g.png");
   },
 });
 const iconSize = computed({

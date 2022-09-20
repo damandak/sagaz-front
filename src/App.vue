@@ -5,11 +5,13 @@
   </div>
   <div v-else class="full-container">
     <MainNav />
-    <router-view v-slot="{ Component }">
-      <keep-alive>
-        <component :is="Component" />
-      </keep-alive>
-    </router-view>
+    <transition name="fade_comp" mode="out-in">
+      <router-view v-slot="{ Component }">
+        <keep-alive>
+          <component :is="Component" />
+        </keep-alive>
+      </router-view>
+    </transition>
   </div>
 </template>
 
@@ -38,11 +40,8 @@ function click() {
 :root {
   --primary-color: #0082ad;
   --primary-color-light: #52cff8;
-  --secondary-color: #d72300;
-  --triadic-color-one: #a40089;
-  --triadic-color-one-light: #d700b4;
-  --triadic-color-two: #89a400;
-  --triadic-color-two-light: #b4d700;
+  --secondary-color: #f03e6e;
+  --secondary-color-light: #ce7b91;
 }
 
 .full-container {
@@ -95,5 +94,13 @@ function click() {
   background-color: rgba(255, 255, 255, 0);
   cursor: pointer;
   border: none;
+}
+.fade_comp-enter-active,
+.fade_comp-leave-active {
+  transition: opacity 0.5s ease;
+}
+.fade_comp-enter-from,
+.fade_comp-leave-to {
+  opacity: 0;
 }
 </style>

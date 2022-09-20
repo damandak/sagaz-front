@@ -4,6 +4,7 @@ import AboutView from "../views/AboutView.vue";
 import ContactView from "../views/ContactView.vue";
 import LakeView from "../views/LakeView.vue";
 import FakeView from "../views/FakeView.vue";
+import TeamView from "../views/TeamView.vue";
 
 const routes = [
   {
@@ -15,6 +16,11 @@ const routes = [
     path: "/about",
     name: "about",
     component: AboutView,
+  },
+  {
+    path: "/team",
+    name: "team",
+    component: TeamView,
   },
   {
     path: "/contact",

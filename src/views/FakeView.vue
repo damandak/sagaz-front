@@ -19,13 +19,10 @@ import MainNav from "../components/Nav/MainNav.vue";
 }
 
 :root {
-  --primary-color: #0089a4;
-  --primary-color-light: #00b4d7;
-  --secondary-color: #d72300;
-  --triadic-color-one: #a40089;
-  --triadic-color-one-light: #d700b4;
-  --triadic-color-two: #89a400;
-  --triadic-color-two-light: #b4d700;
+  --primary-color: #0082ad;
+  --primary-color-light: #52cff8;
+  --secondary-color: #f03e6e;
+  --secondary-color-light: #ce7b91;
 }
 
 .full-container {

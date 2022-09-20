@@ -32,7 +32,7 @@ export default {
     var(--primary-color-light) 20%,
     #ffffff 50%
   );
-  background-size: 500%;
+  background-size: 540%;
   background-position: -400%;
   -webkit-background-clip: text;
   background-clip: text;
