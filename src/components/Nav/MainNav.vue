@@ -2,11 +2,13 @@
   <nav class="mainnav">
     <MainLogo></MainLogo>
     <div class="nav-wrapper">
-      <Icon :icon="menuFill" />
-      <NavButton to="/" content="LAGOS"></NavButton>
-      <NavButton to="/about" content="SOBRE SAGAZ"></NavButton>
-      <NavButton to="/team" content="EQUIPO"></NavButton>
-      <NavButton to="/contact" content="CONTACTO"></NavButton>
+      <div class="buttongroup">
+        <NavButton to="/" content="LAGOS"></NavButton>
+        <NavButton to="/about" content="SOBRE SAGAZ"></NavButton>
+        <NavButton to="/team" content="EQUIPO"></NavButton>
+        <NavButton to="/contact" content="CONTACTO"></NavButton>
+      </div>
+      <Icon :icon="menuFill" @click="toggleMenu" class="menu-icon"></Icon>
     </div>
   </nav>
 </template>
@@ -14,12 +16,35 @@
 <script setup>
 import NavButton from "./NavButton.vue";
 import MainLogo from "./MainLogo.vue";
-
+import { watch } from "vue";
+import { useRoute } from "vue-router";
 import { Icon } from "@iconify/vue";
 import menuFill from "@iconify-icons/eva/menu-fill";
 
 const icons = {
   menuFill,
+};
+
+const route = useRoute();
+// watcher for when route changes
+watch(
+  () => route.path,
+  (newPath) => {
+    const buttongroup = document.querySelector(".buttongroup");
+    const mainnav = document.querySelector(".mainnav");
+    if (buttongroup.classList.contains("show")) {
+      buttongroup.classList.remove("show");
+      mainnav.classList.remove("show");
+    }
+  }
+);
+
+const toggleMenu = () => {
+  // add class show to buttongroup
+  const buttongroup = document.querySelector(".buttongroup");
+  const mainnav = document.querySelector(".mainnav");
+  buttongroup.classList.toggle("show");
+  mainnav.classList.toggle("show");
 };
 </script>
 
@@ -49,14 +74,19 @@ const icons = {
   justify-content: space-between;
   svg {
     font-size: 45px;
+    margin-right: 10px;
     pointer-events: auto;
     cursor: pointer;
-    z-index: 70;
+    z-index: 700;
     display: none;
     color: white;
+    position: absolute;
+    top: 5px;
+    right: 0;
+    transition: none;
     &:hover {
       color: var(--primary-color-light);
-      transition: 0.6s ease-out;
+      transition: color 0.6s ease-out;
       background-position: -355%;
     }
   }
@@ -64,15 +94,60 @@ const icons = {
 @media screen and (max-width: 600px) {
   .mainnav {
     height: 50px;
+    transition: all 0.6s ease-in-out;
   }
-  .nav-wrapper {
-    margin: 5px 10px 10px 0;
-    svg {
-      display: inline-block;
+  .mainnav.show {
+    height: 100vh;
+    transition: all 0.6s ease-in-out;
+    .nav-wrapper {
+      margin: 0;
+      svg {
+        top: 5px;
+        transition: none;
+      }
     }
   }
-  .navbutton {
-    display: none;
+  .nav-wrapper {
+    margin: 0px 10px 10px 0;
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    text-align: right;
+    height: 100vh;
+    svg {
+      display: flex;
+      transition: none;
+    }
+    .buttongroup {
+      z-index: 60;
+      display: flex;
+      position: absolute;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background-color: #0f0f0f;
+      width: 100%;
+      transition: all 0.6s ease-out;
+      transform: translateY(-100vh);
+      a {
+        font-size: 40px;
+        text-decoration: none;
+        text-shadow: none;
+        &:hover {
+          color: var(--primary-color-light);
+          background-position: -355%;
+        }
+      }
+    }
+    .buttongroup.show {
+      transform: translateY(0);
+    }
   }
 }
 </style>
