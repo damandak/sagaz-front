@@ -81,7 +81,7 @@
   </div>
 </template>
 <script setup>
-import { onMounted } from "vue";
+import { onActivated, onMounted } from "vue";
 import WaterLevel from "./WaterLevel.vue";
 import DataChart from "./DataChart.vue";
 import {
@@ -156,6 +156,10 @@ if (props.interval === "daily") {
 }
 
 onMounted(async () => {
+  await getLakeMeasurements(props.id, props.interval);
+});
+
+onActivated(async () => {
   await getLakeMeasurements(props.id, props.interval);
 });
 </script>

@@ -36,7 +36,7 @@ if (process.env.NODE_ENV === "d") {
   apiKey = process.env.VUE_APP_API_KEY;
 }
 
-export async function getLakeMeasurements(id, interval) {
+export function getLakeMeasurements(id, interval) {
   data = [];
   const apiUrlwithId = apiUrl + id + "/" + interval + "/";
   axios.defaults.headers.common.Authorization = `Api-Key ${apiKey}`;
@@ -44,8 +44,7 @@ export async function getLakeMeasurements(id, interval) {
   console.log(apiUrlwithId);
   console.log(id);
   console.log(interval);
-  const response = await axios.get(apiUrlwithId);
-  if (response.data.status === "success") {
+  axios.get(apiUrlwithId).then((response) => {
     console.log(response.data.data);
     data = response.data.data;
     console.log(data);
@@ -100,7 +99,7 @@ export async function getLakeMeasurements(id, interval) {
       });
     }
     lakemeasurements.loaded = true;
-  }
+  });
   return {
     lakemeasurements,
   };
