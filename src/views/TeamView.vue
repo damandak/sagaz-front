@@ -1,7 +1,102 @@
 <template>
   <div class="main-content team-container">
-    <SectionTitle content="Equipo" />
-    <div class="team-section">
+    <div class="institutions-section">
+      <div class="institution-wrapper" id="anid">
+        <h3>Financiado por</h3>
+        <img
+          src="../assets/financia-anid.png"
+          alt=""
+          class="mgmt-institution-img"
+        />
+      </div>
+      <div
+        v-for="institution in managing_institutions"
+        :key="institution.id"
+        class="institution-wrapper"
+        :class="institution.orientation"
+        :id="institution.id_name"
+      >
+        <h3 v-if="institution.first">Instituciones Encargadas</h3>
+        <img
+          v-bind:src="require('../assets/' + institution.image)"
+          alt=""
+          class="mgmt-institution-img"
+        />
+      </div>
+      <div
+        v-for="institution in associated_institutions"
+        :key="institution.id"
+        class="institution-wrapper inst-wrap-small"
+        :id="institution.id_name"
+      >
+        <h3 v-if="institution.first">Instituciones Asociadas</h3>
+        <img
+          v-bind:src="require('../assets/' + institution.image)"
+          alt=""
+          class="asso-institution-img"
+        />
+      </div>
+    </div>
+
+    <h1 class="team-title">Equipo</h1>
+
+    <div class="team-section team-section-normal">
+      <div
+        v-for="member in first_members"
+        :key="member.id"
+        class="team-member-wrapper"
+      >
+        <div class="team-member">
+          <img
+            v-bind:src="require('../assets/' + member.image)"
+            class="team-member-img"
+          />
+          <div class="team-member-img-cover"></div>
+          <div class="member-info">
+            <h3>{{ member.name }}</h3>
+            <p>{{ member.position }}</p>
+          </div>
+          <div class="member-detail">
+            <p v-if="member.affiliation != ''">
+              Afiliación: {{ member.affiliation }}
+            </p>
+            <p>{{ member.description }}</p>
+          </div>
+        </div>
+        <div class="member-icons">
+          <a v-if="member.linkedin" :href="member.linkedin" target="_blank">
+            <Icon :icon="linkedinBoxFill" />
+          </a>
+          <a v-if="member.instagram" :href="member.instagram" target="_blank">
+            <Icon :icon="instagramFill" />
+          </a>
+          <a
+            v-if="member.researchgate"
+            :href="member.researchgate"
+            target="_blank"
+          >
+            <Icon :icon="researchgateSquare" />
+          </a>
+          <a v-if="member.github" :href="member.github" target="_blank">
+            <Icon :icon="githubSquare" />
+          </a>
+          <a v-if="member.cv" :href="member.cv" target="_blank">
+            <Icon :icon="cvSquare" />
+          </a>
+          <a v-if="member.external" :href="member.external" target="_blank">
+            <Icon :icon="linkExternal" />
+          </a>
+          <a v-if="member.orcid" :href="member.orcid" target="_blank">
+            <Icon :icon="orcidIcon" />
+          </a>
+          <a v-if="member.twitter" :href="member.twitter" target="_blank">
+            <Icon :icon="twitterSquare" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="team-section team-section-normal">
       <div
         v-for="member in members"
         :key="member.id"
@@ -28,20 +123,86 @@
           <a v-if="member.linkedin" :href="member.linkedin" target="_blank">
             <Icon :icon="linkedinBoxFill" />
           </a>
-          <a v-if="member.instagram" :href="member.instagram">
+          <a v-if="member.instagram" :href="member.instagram" target="_blank">
             <Icon :icon="instagramFill" />
           </a>
-          <a v-if="member.researchgate" :href="member.researchgate">
+          <a
+            v-if="member.researchgate"
+            :href="member.researchgate"
+            target="_blank"
+          >
             <Icon :icon="researchgateSquare" />
           </a>
-          <a v-if="member.github" :href="member.github">
+          <a v-if="member.github" :href="member.github" target="_blank">
             <Icon :icon="githubSquare" />
           </a>
-          <a v-if="member.cv" :href="member.cv">
+          <a v-if="member.cv" :href="member.cv" target="_blank">
             <Icon :icon="cvSquare" />
           </a>
-          <a v-if="member.external" :href="member.external">
+          <a v-if="member.external" :href="member.external" target="_blank">
             <Icon :icon="linkExternal" />
+          </a>
+          <a v-if="member.orcid" :href="member.orcid" target="_blank">
+            <Icon :icon="orcidIcon" />
+          </a>
+          <a v-if="member.twitter" :href="member.twitter" target="_blank">
+            <Icon :icon="twitterSquare" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="team-section tesistas">
+      <div
+        v-for="member in tesistas"
+        :key="member.id"
+        class="team-member-wrapper"
+      >
+        <div class="team-member">
+          <img
+            v-bind:src="require('../assets/' + member.image)"
+            class="team-member-img"
+          />
+          <div class="team-member-img-cover"></div>
+          <div class="member-info">
+            <h3>{{ member.name }}</h3>
+            <p>{{ member.position }}</p>
+            <p v-if="member.affiliation != ''">
+              {{ member.affiliation }}
+            </p>
+          </div>
+          <div class="member-detail">
+            <p>{{ member.description }}</p>
+          </div>
+        </div>
+        <div class="member-icons">
+          <a v-if="member.linkedin" :href="member.linkedin" target="_blank">
+            <Icon :icon="linkedinBoxFill" />
+          </a>
+          <a v-if="member.instagram" :href="member.instagram" target="_blank">
+            <Icon :icon="instagramFill" />
+          </a>
+          <a
+            v-if="member.researchgate"
+            :href="member.researchgate"
+            target="_blank"
+          >
+            <Icon :icon="researchgateSquare" />
+          </a>
+          <a v-if="member.github" :href="member.github" target="_blank">
+            <Icon :icon="githubSquare" />
+          </a>
+          <a v-if="member.cv" :href="member.cv" target="_blank">
+            <Icon :icon="cvSquare" />
+          </a>
+          <a v-if="member.external" :href="member.external" target="_blank">
+            <Icon :icon="linkExternal" />
+          </a>
+          <a v-if="member.orcid" :href="member.orcid" target="_blank">
+            <Icon :icon="orcidIcon" />
+          </a>
+          <a v-if="member.twitter" :href="member.twitter" target="_blank">
+            <Icon :icon="twitterSquare" />
           </a>
         </div>
       </div>
@@ -57,10 +218,92 @@ import cvSquare from "@iconify-icons/academicons/cv-square";
 import researchgateSquare from "@iconify-icons/academicons/researchgate-square";
 import linkExternal from "@iconify-icons/charm/link-external";
 import githubSquare from "@iconify-icons/fa/github-square";
+import orcidIcon from "@iconify-icons/academicons/orcid";
+import twitterSquare from "@iconify-icons/fa/twitter-square";
 
 var intro_text = false;
 
-var members = [
+var managing_institutions = [
+  {
+    name: "Universidad de Magallanes",
+    shortname: "UMAG",
+    image: "encargada-1-logo-umag.png",
+    link: "https://www.umag.cl/",
+    first: "yes",
+    orientation: "vertical",
+    id_name: "UMAG",
+  },
+  {
+    name: "Universidad de Chile",
+    shortname: "uChile",
+    image: "encargada-2-logo-uChile.png",
+    link: "https://www.uchile.cl/",
+    orientation: "horizontal",
+    id_name: "uChile",
+  },
+  {
+    name: "Universidad de Aysén",
+    shortname: "UAysen",
+    image: "encargada-3-logo-uAysen.png",
+    link: "https://www.uaysen.cl/",
+    orientation: "vertical",
+    id_name: "UAysen",
+  },
+  {
+    name: "Centro de Investigación de Ecosistemas de la Patagonia",
+    shortname: "CIEP",
+    image: "encargada-4-logo-ciep.png",
+    link: "https://www.ciep.cl/",
+    orientation: "horizontal",
+    id_name: "CIEP",
+  },
+];
+var associated_institutions = [
+  {
+    name: "Universidad de la Frontera",
+    shortname: "UFRO",
+    image: "asociada-1-logo-ufro.png",
+    link: "https://www.ufro.cl/",
+    first: "yes",
+    id_name: "UFRO",
+  },
+  {
+    name: "University of Calgary",
+    shortname: "UCalgary",
+    image: "asociada-2-logo-uCalgary.png",
+    link: "https://www.ucalgary.ca/",
+    id_name: "UCalgary",
+  },
+  {
+    name: "Corporación Nacional Forestal",
+    shortname: "CONAF",
+    image: "asociada-3-logo-CONAF.png",
+    link: "https://www.conaf.cl/",
+    id_name: "CONAF",
+  },
+  {
+    name: "Dirección General de Aguas",
+    shortname: "DGA",
+    image: "asociada-4-logo-DGA.png",
+    link: "https://www.dga.cl/",
+    id_name: "DGA",
+  },
+  {
+    name: "Skorpios",
+    shortname: "Skorpios",
+    image: "asociada-5-logo-skorpios.png",
+    link: "https://www.skorpios.cl/",
+    id_name: "Skorpios",
+  },
+  {
+    name: "Exploradores",
+    shortname: "Exploradores",
+    image: "asociada-6-logo-exploradores.png",
+    link: "https://www.exploradores.cl/",
+    id_name: "Exploradores",
+  },
+];
+var first_members = [
   {
     name: "Camilo Rada Giacaman",
     position: "Director",
@@ -69,6 +312,9 @@ var members = [
     description:
       "Camilo es Doctor en Geofísica de la University of British Columbia (Canadá), dedicado a la Glaciología desde hace ya más de 12 años, y es además un apasionado montañista. En la glaciología se ha especializado en procesos subglaciares, dinámica glaciar, percepción remota y desarrollo de instrumentos, mientras que en la montaña se ha abocado a la exploración, contando con 26 primeras ascensiones en Patagonia, Antártica y el Yukón. Es profesor del Magister en Ciencias Antárticas mención Glaciología de la Universidad de Magallanes, y se lo puede ver igualmente feliz escalando una montaña, programando algún nuevo algoritmo en el computador, inventado algo entretenido con cables y Arduinos, o simplemente compartiendo un mate o un asado con los amigos.",
     linkedin: "https://www.linkedin.com/in/camilo-rada-giacaman-0b1b3b1b9/",
+    researchgate: "https://www.researchgate.net/profile/Camilo-Rada",
+    external: "https://unchart.org/",
+    orcid: "https://orcid.org/0000-0001-9865-2530",
   },
   {
     name: "Sergio Andrés Rivera",
@@ -76,17 +322,21 @@ var members = [
     image: "sergio.png",
     affiliation: "Universidad de Chile",
     description:
-      "Andrés se graduó de Geógrafo en 1989 y de Magister en Geografía en 1997 en la Universidad de Chile. En el año 2004 obtuvo el grado de PhD en la Universidad de Bristol en Inglaterra. Ha dedicado toda su carrera académica a la glaciología, estudiando el comportamiento reciente de glaciares, sus respuestas a los cambios climáticos y las interacciones glacio-volcánicas. En la actualidad concentra sus estudios en los glaciares de montaña de los Andes de Chile central, en los glaciares que producen témpanos en los Campos de Hielo Patagónicos y en el estudio de lagos subglaciares en Antártica Occidental. Desde el año 1994 es académico de la Universidad de Chile donde actualmente es Profesor Titular del Departamento de Geografía. También ha trabajado como consultor privado y fue investigador senior del Centro de Estudios Científicos desde el año 2004 al 2019. Ha dirigido numerosas memorias de título y ha sido financiado en forma casi ininterrumpida por ANID entre otras fuentes de financiamiento. Tiene una larga lista de publicaciones en las más prestigiosas revistas científicas internacionales y ha colaborado en numerosos proyectos de extensión, entre los que destaca su página web http://www.glaciologia.cl",
-    external: "http://www.glaciologia.cl",
+      "Andrés es doctor en Geografía de la Universidad de Bristol en Inglaterra. Ha dedicado toda su carrera académica a la glaciología, estudiando el comportamiento reciente de glaciares, sus respuestas a los cambios climáticos y las interacciones glacio-volcánicas. En la actualidad concentra sus estudios en los glaciares de montaña de los Andes de Chile central, los glaciares que producen témpanos en los Campos de Hielo Patagónicos y en lagos subglaciares de Antártica. Es Profesor Titular del Departamento de Geografía de la Universidad de Chile. Ha dirigido numerosas memorias de título y ha sido financiado en forma casi ininterrumpida por ANID y otras fuentes de financiamiento. Tiene una larga lista de publicaciones en las más prestigiosas revistas científica. Te invitamos a su página web http://www.glaciologia.cl",
     instagram: "https://www.instagram.com/glaciologia/",
+    external: "http://www.glaciologia.cl",
   },
+];
+var members = [
   {
     name: "Alejandro Dussaillant",
     position: "Investigador",
-    image: "unknown2.png",
+    image: "alejandro.png",
     affiliation: "Universidad de Aysén",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptas, quod, quia, voluptates quae voluptatibus quidem necessitatibus voluptatum quibusdam quos natus. Quisquam, quae voluptates. Quisquam, quae voluptates. Quisquam, quae voluptates.",
+      "Alejandro es doctor en Ingeniería Civil Industrial Ambiental  Información de la Universidad de Wisconsin-Madison y actualmente es académico de Universidad de Aysén. Tiene más de  20 años de experiencia investigando procesos hidrológicos, vía monitoreo, análisis y modelación, aplicados a ríos, humedales, drenaje urbano y cuencas. Alejandro ha estudiado los ríos de la Patagonia desde 2008, incluyendo efectos hidráulicos y geomorfológicos de crecidas extremas, liderando y colaborado en proyectos internacionales sobre crecidas por vaciamientos de lagos glaciales (Glacial-Lake Outburst Floods, GLOFs) en Patagonia, crecidas por erupciones del volcán Calbuco (lahares), y transferencia tecnológica Inglaterra-Chile sobre sensores de bajo costo para monitoreo de ríos.",
+    linkedin: "https://www.linkedin.com/in/riversandgreenfrastructure/",
+    twitter: "https://twitter.com/rios_lab",
   },
   {
     name: "Íñigo Irarrázaval Bustos",
@@ -95,16 +345,19 @@ var members = [
     affiliation:
       "Centro de Investigación de Ecosistemas de la Patagonia (CIEP)",
     description:
-      "Iñigo se ha enfocado en comprender las dinámicas asociadas a los glaciares, sus efectos en el paisaje y en la hidrología de la cuenca. Particularmente interesado en temas de hidrología glaciar, formación de lagos proglaciales, geomorfología en zonas pro/para/periglaciar e investigación en vaciamientos de lagunas glaciales (GLOFs). Entre sus herramientas se cuenta el análisis de imágenes satelitales, drones/UAVs, modelos hidrológicos, modelos geoestadísticos, y observaciones/datos de terreno. Estudié un Doctorado en Ciencias de la Tierra Universidad de Lausanne (Suiza), Magister en Hidrogeología University of New South Wales (Australia) y Geología en la Universidad de Chile (Chile). Actualmente me desempeño como investigador en el Centro de Investigación en Ecosistemas de la Patagonia (www.ciep.cl). Vivo en Coyhaique, donde aprovecho las innumerables oportunidad que nos presenta el territorio para hacer actividades al aire libre en familia y con amigos.",
+      "Iñigo es doctor en Ciencias de la Tierra Universidad de Lausanne (Suiza). Su trabajo se ha enfocado en comprender las dinámicas asociadas a los glaciares, sus efectos en el paisaje y en la hidrología. Particularmente interesado en temas de hidrología glaciar, formación de lagos proglaciales, geomorfología en zonas pro/para/periglaciar e investigación en vaciamientos de lagunas glaciales (GLOFs). Entre sus herramientas se cuenta el análisis de imágenes satelitales, drones/UAVs, modelos hidrológicos, modelos geoestadísticos, y observaciones/datos de terreno. Actualmente es investigador en el Centro de Investigación en Ecosistemas de la Patagonia (www.ciep.cl), en Coyhaique, donde aprovecha las innumerables oportunidades para hacer actividades al aire libre en familia y con amigos.",
     external: "https://patagoniaglacial.wordpress.com",
   },
   {
     name: "Marcelo Somos-Valenzuela",
     position: "Investigador",
-    image: "unknown2.png",
+    image: "marcelo.png",
     affiliation: "Universidad de la Frontera",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptas, quod, quia, voluptates quae voluptatibus quidem necessitatibus voluptatum quibusdam quos natus. Quisquam, quae voluptates. Quisquam, quae voluptates. Quisquam, quae voluptates.",
+      "Marcelo es doctor en  Recursos Hídricos de la Universidad de Austin Texas. Sus estudiosestán relacionados con el agua en sus diferentes formas y ambientes. Desde 2017 es académico en la Universidad de la Frontera, dictando cursos de pre y posgrado asociados al recurso hídrico. Su investigación se centra en los impactos de los cambios en la cobertura del suelo y el clima, el incremento de eventos extremos como inundaciones y sequías, y la parametrización de modelos para mejorar la predicción y adaptación al cambio global en sistemas montañosos. Marcelo a ayudado a comunidades en áreas remotas de Patagonia, Nepal y Perú a aplicar la ciencia para comprender mejor los problemas que enfrentan debido al cambio climático.",
+    linkedin: "https://www.linkedin.com/in/marcelo-somos-valenzuela-487a5021",
+    orcid: "https://orcid.org/0000-0001-7863-4407",
+    external: "https://marcelo-somos.com/",
   },
   {
     name: "Sebastián Enrique Alfaro Gómez",
@@ -112,7 +365,7 @@ var members = [
     image: "sebastian.png",
     affiliation: "Universidad de Magallanes / INACH",
     description:
-      "Se define como un apasionado por la glaciología y el trabajo de campo para el estudio de la dinámica antártica y subantártica. Sebastián se ha especializado en la vigilancia del medio ambiente mediante sistemas de estaciones automáticas. Se le ve muy interesado en desarrollar investigaciones que combinen el análisis de imágenes de satélite, la teledetección y las mediciones de campo. Durante su pregrado estudió en detalle el área ingeniería, disfrutando bastante la administración, Ciencias básicas y presumiendo de un par de especializaciones técnicas (Minería, geología, prevención de riesgos, topografía). A su haber cuenta con una vasta experiencia como técnico en electrónica, implementando redes de monitoreo ambiental durante los últimos 7 años en centros de investigación científica nacionales (CEAZA, CIEP, INACH, CIGA). Sin duda se le puede considerar una persona inquieta y versátil, el busca concretar las ideas y tiene habilidad llevando a cabo proyectos desde la parte técnica (diseño e implementación) hasta lo administrativo (gestión y formulación de nuevas iniciativas). Actualmente forma parte de la unidad de proyectos del instituto antártico chileno y es uno de los investigadores jóvenes asociados al centro GAIA Antártica. Oriundo de la cuarta región de Coquimbo en su afán de perfeccionamiento y espíritu aventurero hace 5 años se trasladó a Patagonia, primero a Coyhaique y luego a Punta Arenas. Hoy por hoy, cursa su 2do año en el Magister en Ciencias Antárticas de la Universidad de Magallanes y anhela continuar especializándose en las ciencias de la tierra.",
+      "Sebastián es un apasionado por la glaciología y el trabajo de campo. Busca desarrollar investigaciones que combinen el análisis de imágenes de satélite, la teledetección y las mediciones de campo. Es técnico en electrónica e Ingeniero Civil de Minas, con especializaciones en Minería, geología, prevención de riesgos y topografía. Durante los últimos 7 años a implementando redes de monitoreo ambiental CEAZA, CIEP, INACH y CIGA. Actualmente forma parte de la unidad de proyectos del instituto antártico chileno. Es oriundo de la cuarta región de Coquimbo, y actualmente cursa su segundo año en el Magister en Ciencias Antárticas de la Universidad de Magallanes y anhela continuar especializándose en las ciencias de la tierra.",
     linkedin: "https://www.linkedin.com/in/sebastianenriquealfarogomez/",
     researchgate: "https://www.researchgate.net/profile/Sebastian-Alfaro-4",
   },
@@ -126,7 +379,7 @@ var members = [
     linkedin: "https://www.linkedin.com/in/catalina-medina-porcile-9896661b7/",
   },
   {
-    name: "Damir Antonio Mandakovic Pizarro",
+    name: "Damir Mandakovic Pizarro",
     position: "Ingeniero, encargado de desarrollo del sitio web",
     image: "damir.png",
     affiliation: "",
@@ -139,15 +392,33 @@ var members = [
   {
     name: "Francisco Javier Aguirre González",
     position: "Investigador / Posdoctorado",
-    image: "unknown2.png",
+    image: "francisco.png",
     affiliation: "Universidad de Magallanes / The School for Field Studies",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptas, quod, quia, voluptates quae voluptatibus quidem necessitatibus voluptatum quibusdam quos natus. Quisquam, quae voluptates. Quisquam, quae voluptates. Quisquam, quae voluptates.",
+      "Francisco es Ingeniero Civil en Geografía y candidato a Doctor en Ciencias Antarticas y Subantarticas de la Universidad de Magallanes (Chile), dedicado los ultimos 5 años a la Glaciología y Climatologia, y es además un apasionado por las montañas y la practica de Karate Do. En la glaciología y climatología se ha especializado en procesos y dinámica nival, percepción remota y modelación. Es profesor residente de SFS Chile, Centro de Estudios del Clima en Puerto Natales, con un estrecho contacto con la naturaleza. Se le puede ver con su hija y señora tanto en una montaña como dentro de un kayak en los alrededores de Puerto Natales.",
   },
+  {
+    name: "Natalia Martínez",
+    position: "Guía de montaña, encargada de logística y trabajos en terreno",
+    image: "natalia.png",
+    affiliation: "",
+    description:
+      "La montaña es el elemento de Natalia. Guía, instuctora de esquí, escaladora y por sobre todo aventurera. Natalia se ha especializado como guía profesional brindando apoyo técnico, logístico y de seguridad a expediciones científicas en los principales Campos de Hielo de Patagonia y Norteamérica. Ha alcanzado numerosas cumbres en los Andes de Argentina y Chile, Bolivia, Nepal, Canadá y Estados Unidos. Pero su zona favorita y escenario de sus mayores logros es la Patagonia, donde realizó la segunda ascensión del Monte Sarmiento y cuenta con 12 primeras ascenciones, las que incluyen el volcán Reclus, el Volcán Aguilera (2.498 m, el último gran volcán no escalado de los Andes) y los cerros Trono y Alas de Ángel en Cordillera de Sarmiento.",
+  },
+  {
+    name: "Gonzalo Rosenfeld",
+    position: "Encargado de administación",
+    image: "gonzalo.png",
+    affiliation: "Universidad de Magallanes",
+    description:
+      "Gonzalo es Ingeniero Comercial y Master en Planificación Territorial y Gestión Ambiental de la Universidad de Barcelona (España), actualmente docente en la carrera de ingeniería civil industrial de la Universidad de Magallanes. Gonzalo se ha dedicado los últimos 5 años a la gestión de proyectos FONDEF y FONDECYT. Adicionalmente, participa a través de la ONG Wild Aid en la elaboración de planes territoriales de protección de ecosistemas marinos en las áreas silvestres protegidas de Magallanes y Aysén. Participa tambien en las mesas territoriales de SERNATUR, junto a representantes de empresas turísticas de la región de Magallanes y Antártica Chilena. Actualmente se encuentra trabajando como director de carrera del área de administración y negocios de INACAP, Punta Arenas (Chile).",
+  },
+];
+var tesistas = [
   {
     name: "Galo Andrade",
     position: "Tesista Magister",
-    image: "unknown2.png",
+    image: "galo.png",
     affiliation: "Universidad de Magallanes",
     description:
       "Su proyecto de tesis, el cual busca establecer la geometría de morrenas suceptibles de GLOF y generar un algoritmo de detección automática de éstas morrenas en modelos de elevación. Además espera generar un listado de lagos represados por morrenas ordenados según su suceptibilidad de GLOFs.",
@@ -155,7 +426,7 @@ var members = [
   {
     name: "Natalia Gallo",
     position: "Tesista Doctorado",
-    image: "unknown2.png",
+    image: "nataliagallo.png",
     affiliation: "Universidad de Magallanes",
     description:
       "Natalia está generando series de tiempo de volumen de lagos represados por hielo, en base a imágenes satelitales ópticas y modelos de elevación que generará ella con imágenes Planet. Luego estudiará las dinámicas de cada lago y como se correlacionan con la meteorología. Esto generará datos para la calibración del modelo.",
@@ -163,7 +434,7 @@ var members = [
   {
     name: "Pamela Maldonado",
     position: "Tesista Magister",
-    image: "unknown2.png",
+    image: "pamela.png",
     affiliation: "Universidad de Magallanes",
     description:
       "Pamela estudiará la historia de los lagos represados por hielo en Campo de Hielo Norte, combinando registros satelitales, vuelos aerofotogramétricos, Radar de apertura sintética y registros hidrológicos (estaciones DGA con medición de caudal o nivel).",
@@ -171,7 +442,7 @@ var members = [
   {
     name: "Yerko Ortega",
     position: "Tesista Pregrado Geología",
-    image: "unknown2.png",
+    image: "yerko.png",
     affiliation: "Universidad Andrés Bello",
     description:
       "Yerko está trabajando en la caracterización de los condicionantes geológicos y glaciológicos de los lagos represados por morrena que son parte de SAGAZ (y algunos más), determinando la probabilidad de derrumbes, avalanchas, caídas de hielo, etc. En base a las pendientes, tipos de roca, parecencia de glaciares colgantes, etc.",
@@ -197,6 +468,74 @@ var members = [
     flex: 0 0 auto;
     text-align: center;
   }
+  .team-title {
+    margin: 0px !important;
+  }
+  .institutions-section {
+    width: 84%;
+    max-width: 1100px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 20px;
+    padding: 100px 0 0px 0;
+    flex-wrap: wrap;
+    gap: 20px;
+    .institution-wrapper {
+      position: relative;
+      width: 200px;
+      height: 160px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      h3 {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 60px;
+        margin: 0px;
+        width: 250px;
+        font-size: 1.1em;
+      }
+      .mgmt-institution-img {
+        max-width: 100px;
+        max-height: 100px;
+        object-fit: cover;
+      }
+      .asso-institution-img {
+        max-width: 100px;
+        max-height: 100px;
+        object-fit: cover;
+      }
+    }
+    .horizontal {
+      .mgmt-institution-img {
+        max-width: 140px;
+      }
+    }
+    .vertical {
+      .mgmt-institution-img {
+        max-height: 100px;
+        max-width: 80px;
+      }
+    }
+    .inst-wrap-small {
+      width: 100px;
+      height: 150px;
+      h3 {
+        width: 180px;
+        font-size: 1em;
+      }
+    }
+    #uChile {
+      img {
+        margin-bottom: 15px;
+      }
+    }
+  }
   .team-section {
     display: flex;
     flex-direction: row;
@@ -204,14 +543,7 @@ var members = [
     justify-content: center;
     align-items: flex-start;
     align-content: flex-start;
-    gap: 20px 30px;
-    width: 100%;
-    max-width: 1400px;
-    height: 80%;
-    margin: 0 auto;
     .team-member-wrapper {
-      width: 340px;
-      height: 510px;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -222,8 +554,6 @@ var members = [
       border: 5px white solid;
       .team-member {
         position: relative;
-        width: 340px;
-        height: 480px;
         transition: all 1s ease-in-out;
         border-radius: 25px;
         overflow: hidden;
@@ -251,6 +581,8 @@ var members = [
         .member-detail {
           display: flex;
           flex-direction: column;
+          justify-content: center;
+          gap: 4px;
           position: absolute;
           opacity: 0;
           top: 0;
@@ -259,8 +591,9 @@ var members = [
           height: 100%;
           text-align: left;
           p {
-            font-size: 0.82rem;
+            font-size: 0.75rem;
             font-weight: 400;
+            margin: 0;
           }
         }
         .member-info {
@@ -325,9 +658,61 @@ var members = [
     }
   }
 }
+.team-section-normal {
+  gap: 40px 20px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto 20px auto;
+  .team-member-wrapper {
+    width: 300px;
+    height: 450px;
+    .team-member {
+      width: 300px;
+      height: 420px;
+    }
+  }
+}
+.tesistas {
+  gap: 10px 20px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto 20px auto;
+  .team-member-wrapper {
+    width: 280px;
+    height: 280px;
+    .team-member {
+      width: 280px;
+      height: 310px;
+      .team-member-img {
+        object-position: top;
+      }
+    }
+  }
+}
 @media only screen and (max-width: 1000px) {
   .team-container {
     gap: 0px;
+  }
+}
+@media only screen and (max-width: 800px) {
+  .team-container {
+    .institutions-section {
+      flex-direction: column;
+      height: auto;
+      padding-top: 60px;
+      gap: 0px;
+      .institution-wrapper {
+        margin: 0px 0 0 0;
+        justify-content: center;
+        height: 120px;
+      }
+      #anid,
+      #UMAG,
+      #UFRO {
+        margin: 20px 0 0 0;
+        justify-content: flex-end;
+      }
+    }
   }
 }
 </style>

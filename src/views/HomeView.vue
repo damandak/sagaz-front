@@ -15,16 +15,17 @@
 import ModeSwitch from "@/components/MainContainer/ModeSwitch.vue";
 import LakesList from "@/components/Lakes/LakesList.vue";
 import LakesMap from "@/components/Lakes/LakesMap.vue";
-import { getLakes } from "@/components/composables/getLakes.js";
+import { getLakes, lakesdata } from "@/components/composables/getLakes.js";
 import { useMode } from "@/components/composables/lakeMode.js";
 import { onActivated } from "vue";
 
 var { mapMode } = useMode();
 const { setFalse } = useMode();
-const { lakesdata } = getLakes();
+//const { lakesdata } = getLakes();
 
 onActivated(() => {
   setFalse();
+  getLakes();
 });
 </script>
 

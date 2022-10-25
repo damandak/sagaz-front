@@ -1,5 +1,8 @@
 <template>
-  <div v-if="lakemeasurements.loaded" class="lake-detail-container">
+  <div
+    v-if="lakemeasurements.nodata === false && lakemeasurements.loaded"
+    class="lake-detail-container"
+  >
     <DataChart
       :chartData="lakemeasurements.water_level"
       :label="labels"
@@ -41,9 +44,12 @@
     />
     <p>Ultima actualización: {{ lakemeasurements.end_date }}</p>
   </div>
+  <div v-else class="lake-detail-container">
+    <h3 class="no-info">No hay información para mostrar de la estación</h3>
+  </div>
 </template>
 <script setup>
-import { onMounted } from "vue";
+import { onActivated } from "vue";
 import WaterLevel from "./WaterLevel.vue";
 import DataChart from "./DataChart.vue";
 import {
@@ -55,7 +61,7 @@ import { lake } from "../composables/getLake";
 
 const props = defineProps({
   id: {
-    type: String,
+    type: Number,
     required: true,
   },
   interval: {
@@ -106,8 +112,8 @@ if (props.interval === "daily") {
   axis_interval = "month";
 }
 
-onMounted(async () => {
-  getLakeMeasurements(props.id, props.interval);
+onActivated(async () => {
+  await getLakeMeasurements(props.id, props.interval);
 });
 </script>
 <style lang="scss">
@@ -123,5 +129,13 @@ onMounted(async () => {
   width: 800px;
   max-width: 95% !important;
   height: 10vw;
+}
+@media screen and (max-width: 1330px) {
+  h3.no-info {
+    text-align: center;
+  }
+  .loc-chart-container {
+    height: 20vw;
+  }
 }
 </style>

@@ -42,8 +42,8 @@ onMounted(() => {
 }
 .lake-image {
   margin: auto;
-  height: 70vh;
-  max-height: 600px;
+  width: 90%;
+  max-width: 650px;
   object-fit: cover;
   border: solid 2px white;
   border-radius: 10px;

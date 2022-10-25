@@ -5,13 +5,13 @@
   </div>
   <div v-else class="full-container">
     <MainNav />
-    <transition name="fade_comp" mode="out-in">
-      <router-view v-slot="{ Component }">
+    <router-view v-slot="{ Component }">
+      <transition name="fade_comp" mode="out-in">
         <keep-alive>
           <component :is="Component" />
         </keep-alive>
-      </router-view>
-    </transition>
+      </transition>
+    </router-view>
   </div>
 </template>
 
@@ -20,7 +20,7 @@ import { ref } from "vue";
 import MainNav from "./components/Nav/MainNav.vue";
 import UnderConstruction from "./components/UnderConstruction.vue";
 
-var underConstruction = ref(true);
+var underConstruction = ref(false);
 
 function click() {
   console.log("click");
@@ -37,6 +37,13 @@ function click() {
   color: #e1e1e1;
 }
 
+body {
+  &::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
 :root {
   --primary-color: #0082ad;
   --primary-color-light: #52cff8;

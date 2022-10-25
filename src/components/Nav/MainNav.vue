@@ -131,7 +131,7 @@ const toggleMenu = () => {
       width: 100%;
       top: 0;
       left: 0;
-      background-color: #0f0f0f;
+      background-color: #0f0f0fd6;
       width: 100%;
       transition: all 0.6s ease-out;
       transform: translateY(-100vh);

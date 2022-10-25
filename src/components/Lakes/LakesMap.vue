@@ -32,17 +32,25 @@
         :lat-lng="[lake.lat, lake.lon]"
       >
         <l-icon
-          v-if="lake.station_status == 'Verde'"
+          v-if="
+            String(lake.current_alert_status).toLowerCase().startsWith('verde')
+          "
           :icon-url="iconUrlGreen"
           :icon-size="iconSize"
         />
         <l-icon
-          v-else-if="lake.station_status == 'Amarillo'"
+          v-else-if="
+            String(lake.current_alert_status)
+              .toLowerCase()
+              .startsWith('amarillo')
+          "
           :icon-url="iconUrlYellow"
           :icon-size="iconSize"
         />
         <l-icon
-          v-else-if="lake.station_status == 'Rojo'"
+          v-else-if="
+            String(lake.current_alert_status).toLowerCase().startsWith('rojo')
+          "
           :icon-url="iconUrlRed"
           :icon-size="iconSize"
         />
@@ -54,22 +62,21 @@
             @click="changeLake(lake.id)"
           >
             <h3 class="popup-title">{{ lake.name }}</h3>
-            <div
-              class="popup-image"
-              style="background-image: url({{ lake.image }});"
-            ></div>
-            <!--<img class="p-img" :src="lake.image" alt="" />-->
+            <img class="p-img" :src="lake.image" alt="" />
+            <p class="popup-text">
+              Nivel de alerta: {{ lake.current_alert_status }}
+            </p>
+            <p class="popup-text-small">
+              Actualizado:
+              {{ moment(lake.updated_at).format("HH:mm, DD-MM-YYYY") }}
+            </p>
+            <div class="popup-moreinfo">Más Info</div>
           </button>
         </l-popup>
       </l-marker>
     </l-map>
     <transition name="locwrap" appear>
-      <LakeOverview
-        v-if="lake_id > 0"
-        :id="lake_id"
-        @close-loc="closeLoc()"
-        :lakeReady="lakeReady"
-      />
+      <LakeOverview v-if="lake_id > 0" :id="lake_id" @close-loc="closeLoc()" />
     </transition>
   </div>
 </template>
@@ -90,6 +97,7 @@ import "leaflet/dist/leaflet.css";
 import { CRS } from "leaflet/dist/leaflet-src.esm";
 import LakeOverview from "@/components/Lakes/LakeOverview.vue";
 import { process } from "ipaddr.js";
+import moment from "moment";
 
 var lake_id = ref(0);
 var map = ref(map);
@@ -111,6 +119,11 @@ const center = computed(() => {
 
 const maxBounds = computed(() => [
   [-45.98, -79.1],
+  [-56.2, -62.5],
+]);
+// define extreme bounds a little bit to the north of maxBounds
+const extremeBounds = computed(() => [
+  [-43.98, -79.1],
   [-56.2, -62.5],
 ]);
 
@@ -161,6 +174,12 @@ function changeLake(id) {
 function onMapReady() {
   map.value.leafletObject.fitBounds(maxBounds.value);
   map.value.leafletObject.setMinZoom(map.value.leafletObject.getZoom());
+  map.value.leafletObject.on("popupopen", function () {
+    map.value.leafletObject.setMaxBounds(extremeBounds.value);
+  });
+  map.value.leafletObject.on("popupclose", function () {
+    map.value.leafletObject.setMaxBounds(maxBounds.value);
+  });
 }
 
 onMounted(() => {
@@ -207,33 +226,73 @@ function resizeHandler() {
   //background: red;
 }
 .leaflet-popup-content-wrapper {
-  background: #0089a5;
+  background: white;
   border: 2px solid white;
   //height: 100px;
 }
+.leaflet-popup-close-button {
+  display: none;
+}
 .leaflet-popup-content {
-  margin: 0px 24px 0px 20px;
+  margin: 0;
   line-height: 0.2;
 }
 .leaflet-popup-close-button {
   color: white !important;
 }
 .popup-title {
-  line-height: 0;
+  margin: 8px 0;
 }
 img.p-img {
-  width: 120px;
-  height: 80px;
+  width: 160px;
+  height: 120px;
   object-fit: cover;
 }
+.leaflet-popup:hover {
+  cursor: pointer;
+  .map-button {
+    //background-color: var(--primary-color-light);
+    opacity: 1;
+    transition: all 0.2s ease-in-out;
+  }
+  .popup-moreinfo {
+    background-color: var(--secondary-color-light);
+    transition: all 0.2s ease-in-out;
+  }
+}
 .map-button {
-  padding: 0px;
-  background-color: var(--primary-color);
-  color: white;
+  padding: 0px 10px 0 10px;
+  background-color: white;
+  color: var(--primary-color);
   border: none;
   z-index: 40;
+  width: 100%;
+  border-radius: 10px;
+  opacity: 1;
+  .popup-text {
+    margin: 0;
+    font-size: 11px;
+  }
+  .popup-text-small {
+    font-size: 10px;
+    margin: 2px;
+  }
+  .popup-moreinfo {
+    color: #fff;
+    background-color: var(--secondary-color);
+    text-decoration: none;
+    padding: 4px 0px 4px 0px;
+    border-radius: 5px;
+    margin: 5px auto;
+    width: 80px;
+  }
 }
 .map-button:hover {
   cursor: pointer;
+}
+@media (max-width: 768px) {
+  .leaflet-control-zoom {
+    display: none;
+  }
 }
 </style>

@@ -1,5 +1,8 @@
 <template>
-  <div v-if="lakemeasurements.loaded" class="lake-detail-container">
+  <div
+    v-if="lakemeasurements.nodata === false && lakemeasurements.loaded"
+    class="lake-detail-container"
+  >
     <DataChart
       :chartData="lakemeasurements.water_level"
       :label="labels"
@@ -72,6 +75,9 @@
       :point_color="point_as"
       :chartCSS="chartCSS"
     />
+  </div>
+  <div v-else class="lake-detail-container">
+    <h3>No hay información para mostrar de la estación</h3>
   </div>
 </template>
 <script setup>
@@ -150,7 +156,7 @@ if (props.interval === "daily") {
 }
 
 onMounted(async () => {
-  getLakeMeasurements(props.id, props.interval);
+  await getLakeMeasurements(props.id, props.interval);
 });
 </script>
 <style></style>

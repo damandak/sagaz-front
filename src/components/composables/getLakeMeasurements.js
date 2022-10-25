@@ -3,7 +3,7 @@ import axios from "axios";
 import { useRoute } from "vue-router";
 import moment from "moment";
 
-let data = reactive({
+var data = reactive({
   data: [],
 });
 let format = "";
@@ -12,8 +12,9 @@ function showNewDate(date) {
   return new Date(Date.parse(date));
 }
 
-export const lakemeasurements = reactive({
+export var lakemeasurements = reactive({
   loaded: false,
+  nodata: false,
   start_date: "",
   end_date: "",
   water_level: [],
@@ -27,7 +28,7 @@ export const lakemeasurements = reactive({
 var apiUrl = "";
 var apiKey = "";
 
-if (process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV === "d") {
   apiUrl = "http://localhost:8000/api/lakemeasurements/";
   apiKey = "4hJb3MIV.T7rL0Q4w4or5dnfr9qvRNX0bG0tdqoVS";
 } else {
@@ -35,24 +36,19 @@ if (process.env.NODE_ENV === "development") {
   apiKey = process.env.VUE_APP_API_KEY;
 }
 
-export function getLakeMeasurements(id, interval) {
+export async function getLakeMeasurements(id, interval) {
+  data = [];
   const apiUrlwithId = apiUrl + id + "/" + interval + "/";
   axios.defaults.headers.common.Authorization = `Api-Key ${apiKey}`;
-  if (interval === "daily") {
-    format = "YYYY-MM-DD HH:mm:ss";
-  } else if (interval === "biweekly") {
-    format = "YYYY-MM-DD HH:mm:ss";
-  } else if (interval === "weekly") {
-    format = "YYYY-MM-DD HH:mm:ss";
-  } else if (interval === "monthly") {
-    format = "YYYY-MM-DD HH:mm:ss";
-  } else if (interval === "yearly") {
-    format = "YYYY-MM-DD HH:mm:ss";
-  } else {
-    format = "YYYY-MM-DD HH:mm:ss";
-  }
-  axios.get(apiUrlwithId).then((response) => {
+  format = "YYYY-MM-DD HH:mm:ss";
+  console.log(apiUrlwithId);
+  console.log(id);
+  console.log(interval);
+  const response = await axios.get(apiUrlwithId);
+  if (response.data.status === "success") {
+    console.log(response.data.data);
     data = response.data.data;
+    console.log(data);
     lakemeasurements.water_level = [];
     lakemeasurements.water_temperature = [];
     lakemeasurements.atmospheric_pressure = [];
@@ -61,48 +57,50 @@ export function getLakeMeasurements(id, interval) {
     lakemeasurements.alert_status = [];
     // Si no hay datos, acá se caería!!
     if (data.length === 0) {
-      console.log(
-        "Error porque no hay datos que mostrar en el intervalo escogido"
+      lakemeasurements.nodata = true;
+    } else {
+      lakemeasurements.nodata = false;
+      lakemeasurements.start_date = moment(data[0].date).format(format);
+      lakemeasurements.end_date = moment(data[data.length - 1].date).format(
+        format
       );
+      console.log("solicitud de datos exitosa");
+      data.forEach((data, id) => {
+        lakemeasurements.water_level.push({
+          id: data.id,
+          date: moment(data.date).format(format),
+          data: data.water_level,
+        });
+        lakemeasurements.water_temperature.push({
+          id: data.id,
+          date: moment(data.date).format(format),
+          data: data.water_temperature,
+        });
+        lakemeasurements.atmospheric_pressure.push({
+          id: data.id,
+          date: moment(data.date).format(format),
+          data: data.atmospheric_pressure,
+        });
+        lakemeasurements.atmospheric_temperature.push({
+          id: data.id,
+          date: moment(data.date).format(format),
+          data: data.atmospheric_temperature,
+        });
+        lakemeasurements.precipitation.push({
+          id: data.id,
+          date: moment(data.date).format(format),
+          data: data.precipitation,
+        });
+        lakemeasurements.alert_status.push({
+          id: data.id,
+          date: moment(data.date).format(format),
+          data: data.alert_status,
+        });
+        console.log(moment(data.date).format(format));
+      });
     }
-    lakemeasurements.start_date = moment(data[0].date).format(format);
-    lakemeasurements.end_date = moment(data[data.length - 1].date).format(
-      format
-    );
-    data.forEach((data, id) => {
-      lakemeasurements.water_level.push({
-        id: data.id,
-        date: moment(data.date).format(format),
-        data: data.water_level,
-      });
-      lakemeasurements.water_temperature.push({
-        id: data.id,
-        date: moment(data.date).format(format),
-        data: data.water_temperature,
-      });
-      lakemeasurements.atmospheric_pressure.push({
-        id: data.id,
-        date: moment(data.date).format(format),
-        data: data.atmospheric_pressure,
-      });
-      lakemeasurements.atmospheric_temperature.push({
-        id: data.id,
-        date: moment(data.date).format(format),
-        data: data.atmospheric_temperature,
-      });
-      lakemeasurements.precipitation.push({
-        id: data.id,
-        date: moment(data.date).format(format),
-        data: data.precipitation,
-      });
-      lakemeasurements.alert_status.push({
-        id: data.id,
-        date: moment(data.date).format(format),
-        data: data.alert_status,
-      });
-    });
     lakemeasurements.loaded = true;
-  });
+  }
   return {
     lakemeasurements,
   };
