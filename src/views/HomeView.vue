@@ -1,31 +1,29 @@
 <template>
   <div class="main-content">
     <div class="lakes_container">
-      <!--<ModeSwitch v-if="!mapMode" />-->
-      <transition name="fade" mode="out-in">
-        <LakesList :lakesdata="lakesdata" v-if="mapMode" />
-        <LakesMap :lakesdata="lakesdata" v-else />
-      </transition>
+      <LakesMap :lakesdata="lakesdata" @refreshLakesData="refreshLakesData" />
     </div>
   </div>
 </template>
 
 <script setup>
 // @ is an alias to /src
-import ModeSwitch from "@/components/MainContainer/ModeSwitch.vue";
-import LakesList from "@/components/Lakes/LakesList.vue";
 import LakesMap from "@/components/Lakes/LakesMap.vue";
 import { getLakes, lakesdata } from "@/components/composables/getLakes.js";
-import { useMode } from "@/components/composables/lakeMode.js";
-import { onActivated } from "vue";
+import { onMounted, onUnmounted } from "vue";
 
-var { mapMode } = useMode();
-const { setFalse } = useMode();
-//const { lakesdata } = getLakes();
+var interval = setInterval(() => {
+  refreshLakesData();
+}, 60000);
 
-onActivated(() => {
-  setFalse();
+function refreshLakesData() {
   getLakes();
+}
+onMounted(() => {
+  getLakes();
+});
+onUnmounted(() => {
+  clearInterval(interval);
 });
 </script>
 

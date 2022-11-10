@@ -38,13 +38,7 @@
   </div>
 </template>
 <script setup>
-import {
-  onMounted,
-  computed,
-  onDeactivated,
-  onUnmounted,
-  onUpdated,
-} from "vue";
+import { onMounted } from "vue";
 import { getLake, lake } from "@/components/composables/getLake.js";
 import LakeOverviewDetailVues from "./LakeOverviewDetail.vue";
 import { useRoute } from "vue-router";

@@ -30,6 +30,7 @@
         v-for="lake in lakesdata.lakes"
         :key="lake.id"
         :lat-lng="[lake.lat, lake.lon]"
+        @click="$emit('refreshLakesData')"
       >
         <l-icon
           v-if="
@@ -110,6 +111,7 @@ const props = defineProps({
   },
 });
 
+const emit = defineEmits(["refreshLakesData"]);
 var zoom = ref(6);
 
 const center = computed(() => {
@@ -134,7 +136,6 @@ const iconHeight = 30;
 var markers_coords = [];
 
 function closeLoc(palabra) {
-  console.log(palabra);
   lake_id.value = 0;
 }
 
