@@ -2,8 +2,10 @@
   <div class="main-content lake-view-container">
     <div v-if="lake.loaded" class="lake-main-data">
       <h1 class="section-title">{{ lake.lakedata.name }}</h1>
+      <AlertStatus :status="lake.lakedata.current_alert_status" />
       <img :src="lake.lakedata.image" class="lake-image" alt="" />
       <div class="lake-general-data">
+        <p class="lake-description">{{ lake.lakedata.description }}</p>
         <p><b>País: </b>{{ lake.lakedata.country }}</p>
         <p><b>Región: </b>{{ lake.lakedata.region }}</p>
         <p><b>Latitud: </b>{{ lake.lakedata.lat.toFixed(4) }}°</p>
@@ -22,6 +24,7 @@
 import { onMounted, computed } from "vue";
 import { getLake, lake } from "@/components/composables/getLake.js";
 import LakeDetail from "@/components/Lakes/LakeDetail.vue";
+import AlertStatus from "@/components/Lakes/AlertStatus.vue";
 import { useRoute } from "vue-router";
 
 const id = useRoute().params.id;
@@ -32,13 +35,16 @@ onMounted(() => {
 });
 </script>
 
-<style>
+<style lang="scss">
 .lake-view-container {
   background-image: linear-gradient(
     -45deg,
     rgb(0 180 215 / 92%),
     #070707f1 95%
   );
+  .section-title {
+    margin-bottom: 10px;
+  }
 }
 .lake-image {
   margin: auto;
@@ -56,5 +62,13 @@ onMounted(() => {
   color: #fff;
   font-size: 15px;
   line-height: 14px;
+}
+.lake-description {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  margin: auto auto 20px auto;
+  width: 90%;
+  max-width: 650px;
 }
 </style>
