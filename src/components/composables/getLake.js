@@ -21,6 +21,12 @@ if (process.env.NODE_ENV === "d") {
 export function getLake(id) {
   const apiUrlwithId = apiUrl + id + "/";
   axios.defaults.headers.common.Authorization = `Api-Key ${apiKey}`;
+  // axios.defaults.headers.common["Cache-Control"] = "no-cache";
+  // axios.defaults.pragma = "no-cache";
+  // axios.defaults.expires = 0;
+  axios.defaults.params = {
+    t: new Date().getTime(),
+  };
   axios.get(apiUrlwithId).then((response) => {
     lake.value.lakedata = response.data.data;
     lake.value.loaded = true;

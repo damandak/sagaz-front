@@ -40,14 +40,17 @@ export function getLakeMeasurements(id, interval) {
   data = [];
   const apiUrlwithId = apiUrl + id + "/" + interval + "/";
   axios.defaults.headers.common.Authorization = `Api-Key ${apiKey}`;
+  //no cache
+  // axios.defaults.headers.common["Cache-Control"] = "no-cache";
+  // axios.defaults.pragma = "no-cache";
+  // axios.defaults.expires = 0;
+  // axios params
+  axios.defaults.params = {
+    t: new Date().getTime(),
+  };
   format = "YYYY-MM-DD HH:mm:ss";
-  console.log(apiUrlwithId);
-  console.log(id);
-  console.log(interval);
   axios.get(apiUrlwithId).then((response) => {
-    console.log(response.data.data);
     data = response.data.data;
-    console.log(data);
     lakemeasurements.water_level = [];
     lakemeasurements.water_temperature = [];
     lakemeasurements.atmospheric_pressure = [];
@@ -63,7 +66,6 @@ export function getLakeMeasurements(id, interval) {
       lakemeasurements.end_date = moment(data[data.length - 1].date).format(
         format
       );
-      console.log("solicitud de datos exitosa");
       data.forEach((data, id) => {
         lakemeasurements.water_level.push({
           id: data.id,
@@ -95,7 +97,6 @@ export function getLakeMeasurements(id, interval) {
           date: moment(data.date).format(format),
           data: data.alert_status,
         });
-        console.log(moment(data.date).format(format));
       });
     }
     lakemeasurements.loaded = true;
