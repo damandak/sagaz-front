@@ -63,18 +63,6 @@
       :point_color="point_pp"
       :chartCSS="chartCSS"
     />
-    <DataChart
-      :chartData="lakemeasurements.alert_status"
-      :label="labels"
-      :title="title_as"
-      :start_date="lakemeasurements.start_date"
-      :end_date="lakemeasurements.end_date"
-      :interval="axis_interval"
-      :unit="unit_as"
-      :line_color="line_as"
-      :point_color="point_as"
-      :chartCSS="chartCSS"
-    />
   </div>
   <div v-else class="lake-detail-container">
     <h3>No hay información para mostrar de la estación</h3>
@@ -117,28 +105,24 @@ const title_wt = "Temperatura del agua";
 const title_ap = "Presión atmosférica";
 const title_at = "Temperatura atmosférica";
 const title_pp = "Precipitación";
-const title_as = "Estado de Alerta";
 
 const unit_wl = "metros - mts";
 const unit_wt = "grados Celsius - °C";
 const unit_ap = "hectopascal - hPa";
 const unit_at = "grados Celsius - °C";
 const unit_pp = "milímetros - mm";
-const unit_as = "";
 
 const line_wl = "rgba(45, 108, 196, 1)";
 const line_wt = "rgba(45, 176, 196, 1)";
 const line_ap = "rgba(255, 99, 132, 1)";
 const line_at = "rgba(123, 45, 196, 1)";
 const line_pp = "rgba(148, 196, 45, 1)";
-const line_as = "rgba(255, 0, 0, 1)";
 
 const point_wl = "rgba(45, 108, 196, 0.6)";
 const point_wt = "rgba(45, 176, 196, 0.5)";
 const point_ap = "rgba(255, 99, 132, 1)";
 const point_at = "rgba(123, 45, 196, 0.5)";
 const point_pp = "rgba(148, 196, 45, 0.5)";
-const point_as = "rgba(255, 0, 0, 0.5)";
 
 let axis_interval = "day";
 if (props.interval === "daily") {
