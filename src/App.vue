@@ -23,7 +23,6 @@ import UnderConstruction from "./components/UnderConstruction.vue";
 var underConstruction = ref(false);
 
 function click() {
-  console.log("click");
   underConstruction.value = false;
 }
 </script>

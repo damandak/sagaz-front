@@ -16,11 +16,10 @@
           Inundaciones por Vaciamiento de Lagos Glaciares.
         </p>
       </div>
-      <div class="scroll-call-to-action" @click="scrollNext">
-        <p class="smaller-p">Aprende qué es un GLOF</p>
-        <img src="@/assets/scroll-down.png" class="scroll-down-img" alt="" />
-      </div>
     </div>
+    <template v-if="scrollerVisibility">
+      <ScrollAction text="Sigue Avanzando" :visibility="scrollerVisibility" />
+    </template>
 
     <div id="about-intro-text" class="about-section" ref="second">
       <p class="about-second-text">
@@ -33,10 +32,6 @@
         General de Aguas (DGA) región de Aysén, Naviera y Turismo Skorpios y
         Ecoturismo Patagonia Exploradores.
       </p>
-      <div class="scroll-call-to-action" @click="scrollNext">
-        <p class="smaller-p">Sigue Avanzando</p>
-        <img src="@/assets/scroll-down.png" class="scroll-down-img" alt="" />
-      </div>
     </div>
 
     <div
@@ -44,23 +39,8 @@
       class="about-section about-big-section"
       ref="third"
     >
-      <img src="@/assets/dibujo1.png" alt="" class="drawing" />
       <div class="about-subsection about-sub-visible" ref="thirdA">
         <h3>¿Qué son los lagos glaciares y que riesgo representan?</h3>
-        <div class="scroll-call-to-action" @click="scrollNext">
-          <p class="smaller-p">Sigue Avanzando</p>
-          <img src="@/assets/scroll-down.png" class="scroll-down-img" alt="" />
-        </div>
-      </div>
-      <div class="about-subsection" ref="thirdB">
-        <p class="supporting-text">
-          Un glaciar estable presenta pocos riesgos. Sin embargo
-          <b>si el glaciar avanza o retrocede estos riesgos aumentan.</b>
-        </p>
-        <div class="scroll-call-to-action" @click="scrollNext">
-          <p class="smaller-p">Sigue Avanzando</p>
-          <img src="@/assets/scroll-down.png" class="scroll-down-img" alt="" />
-        </div>
       </div>
     </div>
 
@@ -69,22 +49,28 @@
       class="about-section about-big-section"
       ref="fourth"
     >
-      <img src="@/assets/dibujo2.png" alt="" class="drawing" />
-      <div class="scroll-call-to-action" @click="scrollNext">
-        <p class="smaller-p">Sigue Avanzando</p>
-        <img src="@/assets/scroll-down.png" class="scroll-down-img" alt="" />
+      <img src="@/assets/dibujo1.png" alt="" class="drawing" />
+      <div class="about-subsection" ref="fourthA">
+        <p class="supporting-text">
+          Un glaciar estable presenta pocos riesgos. Sin embargo
+          <b>si el glaciar avanza o retrocede estos riesgos aumentan.</b>
+        </p>
       </div>
-      <div class="about-subsection about-sub-visible" ref="fourthA">
+    </div>
+
+    <div
+      id="about-diagram3"
+      class="about-section about-big-section"
+      ref="fifth"
+    >
+      <img src="@/assets/dibujo2.png" alt="" class="drawing" />
+      <div class="about-subsection about-sub-visible" ref="fifthA">
         <p class="supporting-text">
           Al retroceder un glaciar, suelen formarse lagos “periglaciares” en su
           margen y en las quebradas y valles anexos
         </p>
-        <div class="scroll-call-to-action" @click="scrollNext">
-          <p class="smaller-p">Sigue Avanzando</p>
-          <img src="@/assets/scroll-down.png" class="scroll-down-img" alt="" />
-        </div>
       </div>
-      <div class="about-subsection" ref="fourthB">
+      <div class="about-subsection" ref="fifthB">
         <p class="supporting-text">
           Cuando el nivel del agua es suficientemente alto,
           <b>estos lagos pueden vaciarse abruptamente</b>
@@ -92,25 +78,17 @@
           todos los años o incluso varias veces al año.
         </p>
         <img src="@/assets/dibujo2-helper.png" alt="" class="helper-img" />
-        <div class="scroll-call-to-action" @click="scrollNext">
-          <p class="smaller-p">Sigue Avanzando</p>
-          <img src="@/assets/scroll-down.png" class="scroll-down-img" alt="" />
-        </div>
       </div>
-      <div class="about-subsection" ref="fourthC">
-        <p class="supporting-text">
+      <div class="about-subsection" ref="fifthC">
+        <p class="supporting-text smaller-support">
           El retroceso de un glaciar también suele resultar en la formación de
           un lago "proglaciar" en su frente, el cual es represado por una
           acumulación de sedimentos y rocas poco consolidadas que el mismo
           glaciar acumuló durante un periodo de estabilidad en el pasado.
         </p>
         <img src="@/assets/dibujo2-helper2.png" alt="" class="helper-img" />
-        <div class="scroll-call-to-action" @click="scrollNext">
-          <p class="smaller-p">Sigue Avanzando</p>
-          <img src="@/assets/scroll-down.png" class="scroll-down-img" alt="" />
-        </div>
       </div>
-      <div class="about-subsection" ref="fourthD">
+      <div class="about-subsection" ref="fifthD">
         <p class="supporting-text">
           Cuando un nivel alto del lago se combina con un gatillante como un
           derrumbe o una gran lluvia, esta presa puede ser erosionada de manera
@@ -122,25 +100,17 @@
           alt=""
           class="helper-img no-top"
         />
-        <div class="scroll-call-to-action" @click="scrollNext">
-          <p class="smaller-p">Sigue Avanzando</p>
-          <img src="@/assets/scroll-down.png" class="scroll-down-img" alt="" />
-        </div>
       </div>
     </div>
 
     <div
-      id="about-diagram3"
+      id="about-diagram4"
       class="about-section about-big-section"
-      ref="fifth"
+      ref="sixth"
     >
       <img src="@/assets/dibujo3.png" alt="" class="drawing" />
-      <div class="scroll-call-to-action" @click="scrollNext">
-        <p class="smaller-p">Sigue Avanzando</p>
-        <img src="@/assets/scroll-down.png" class="scroll-down-img" alt="" />
-      </div>
-      <div class="about-subsection about-sub-visible" ref="fifthA">
-        <p class="supporting-text smaller-support">
+      <div class="about-subsection about-sub-visible" ref="sixthA">
+        <p class="supporting-text smallest-support">
           Al retroceder, los glaciares también se fragmentan en múltiples
           glaciares menores. Algunos de ellos se transforman en
           <b>glaciares colgantes que pueden liberar avalanchas de hielo</b>, que
@@ -150,25 +120,17 @@
           caminos o puentes.
         </p>
         <img src="@/assets/dibujo3-helper.png" alt="" class="helper-img" />
-        <div class="scroll-call-to-action" @click="scrollNext">
-          <p class="smaller-p">Sigue Avanzando</p>
-          <img src="@/assets/scroll-down.png" class="scroll-down-img" alt="" />
-        </div>
       </div>
     </div>
 
     <div
-      id="about-diagram4"
+      id="about-diagram5"
       class="about-section about-big-section"
-      ref="sixth"
+      ref="seventh"
     >
       <img src="@/assets/dibujo4.png" alt="" class="drawing" />
-      <div class="scroll-call-to-action" @click="scrollNext">
-        <p class="smaller-p">Sigue Avanzando</p>
-        <img src="@/assets/scroll-down.png" class="scroll-down-img" alt="" />
-      </div>
-      <div class="about-subsection about-sub-visible" ref="sixthA">
-        <p class="supporting-text smaller-support">
+      <div class="about-subsection about-sub-visible" ref="seventhA">
+        <p class="supporting-text smallest-support">
           El retroceso del glaciar también expone escarpadas laderas montañosas
           que
           <b
@@ -180,66 +142,88 @@
           catastrófica de la morrena frontal o producir destrucción directa.
         </p>
         <img src="@/assets/dibujo4-helper.png" alt="" class="helper-img" />
-        <div class="scroll-call-to-action" @click="scrollNext">
-          <p class="smaller-p">Sigue Avanzando</p>
-          <img src="@/assets/scroll-down.png" class="scroll-down-img" alt="" />
-        </div>
-      </div>
-    </div>
-
-    <div
-      id="about-diagram5"
-      class="about-section about-big-section"
-      ref="seventh"
-    >
-      <img src="@/assets/dibujo5.png" alt="" class="drawing" />
-      <div class="scroll-call-to-action" @click="scrollNext">
-        <p class="smaller-p">Sigue Avanzando</p>
-        <img src="@/assets/scroll-down.png" class="scroll-down-img" alt="" />
-      </div>
-      <div class="about-subsection about-sub-visible" ref="seventhA">
-        <p class="supporting-text">
-          Incluso mucho después de la desaparición completa de los glaciares en
-          una cuenca, los lagos contenidos por morrenas pueden aún ser
-          inestables y presentan un riesgo de derrumbe considerable.
-        </p>
-        <div class="scroll-call-to-action" @click="scrollNext">
-          <p class="smaller-p">Sigue Avanzando</p>
-          <img src="@/assets/scroll-down.png" class="scroll-down-img" alt="" />
-        </div>
       </div>
     </div>
 
     <div
       id="about-diagram6"
       class="about-section about-big-section"
-      ref="eigth"
+      ref="eighth"
+    >
+      <img src="@/assets/dibujo5.png" alt="" class="drawing" />
+      <div class="about-subsection about-sub-visible" ref="eighthA">
+        <p class="supporting-text">
+          Incluso mucho después de la desaparición completa de los glaciares en
+          una cuenca, los lagos contenidos por morrenas pueden aún ser
+          inestables y presentan un riesgo de derrumbe considerable.
+        </p>
+      </div>
+    </div>
+
+    <div
+      id="about-diagram7"
+      class="about-section about-big-section"
+      ref="ninth"
     >
       <img src="@/assets/dibujo6.png" alt="" class="drawing" />
-      <div class="scroll-call-to-action" @click="scrollNext">
-        <p class="smaller-p">Sigue Avanzando</p>
-        <img src="@/assets/scroll-down.png" class="scroll-down-img" alt="" />
-      </div>
-      <div class="about-subsection about-sub-visible" ref="eigthA">
-        <p class="supporting-text">
+      <div class="about-subsection about-sub-visible" ref="ninthA">
+        <p class="supporting-text smaller-support">
           Las abruptas laderas de un valle glaciar son especialmente
           <b
-            >susceptibles a derrumbers incluso décadas después de la
-            desaparición de los glaciares y sus lagos asociados.</b
+            >susceptibles a derrumbes incluso décadas después de la desaparición
+            de los glaciares y sus lagos asociados.</b
           >
           Por lo tanto, conocer la historia glaciar de una zona es fundamental
           para determinar el riesgo de derrumbes.
         </p>
-        <div class="scroll-call-to-action" @click="scrollNext">
-          <p class="smaller-p">Sigue Avanzando</p>
-          <img src="@/assets/scroll-down.png" class="scroll-down-img" alt="" />
-        </div>
       </div>
+    </div>
+
+    <div
+      id="about-diagram8"
+      class="about-section about-big-section"
+      ref="tenth"
+    >
+      <img src="@/assets/dibujo7.png" alt="" class="drawing" />
+      <div class="about-subsection about-sub-visible" ref="tenthA">
+        <p class="supporting-text smaller-support">
+          En la presente etapa de prototipo, el proyecto SAGAZ instalará una red
+          de 12 estaciones de monitoreo. En conjunto con pronósticos
+          meteorológicos, los datos de estas estaciones alimentarán el modelo
+          glacio-hidrológico predictivo que calcula los niveles de alerta
+          presentados en esta página web.
+        </p>
+      </div>
+    </div>
+
+    <div
+      id="about-diagram9"
+      class="about-section about-big-section"
+      ref="eleventh"
+    >
+      <img src="@/assets/dibujo8.png" alt="" class="drawing" />
+      <div class="about-subsection about-sub-visible" ref="eleventhA">
+        <p class="supporting-text smaller-support">
+          Las estaciones de la red de monitoreo de SAGAZ fueron diseñadas en la
+          Universidad de Magallanes y construidas en Chile. La primera fue
+          instalada en Noviembre 2020 en la Laguna de los Témpanos, en Campo de
+          Hielo Norte junto a una estación DGA, con el propósito de testear y
+          validar la tecnología desarrollada.
+        </p>
+      </div>
+    </div>
+    <div
+      id="about-diagram10"
+      class="about-section about-last-section"
+      ref="twelveth"
+    >
+      <img src="@/assets/white_sm.png" alt="" class="drawing" />
     </div>
   </div>
 </template>
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
+import ScrollAction from "@/components/About/ScrollAction";
 
 const first = ref(null);
 const second = ref(null);
@@ -248,35 +232,31 @@ const fourth = ref(null);
 const fifth = ref(null);
 const sixth = ref(null);
 const seventh = ref(null);
-const eigth = ref(null);
+const eighth = ref(null);
+const ninth = ref(null);
+const tenth = ref(null);
+const eleventh = ref(null);
+const twelveth = ref(null);
 
 const thirdA = ref(null);
-const thirdB = ref(null);
-
 const fourthA = ref(null);
-const fourthB = ref(null);
-const fourthC = ref(null);
-const fourthD = ref(null);
 
 const fifthA = ref(null);
+const fifthB = ref(null);
+const fifthC = ref(null);
+const fifthD = ref(null);
 
 const sixthA = ref(null);
 
 const seventhA = ref(null);
 
-const eigthA = ref(null);
+const eighthA = ref(null);
 
-const scrollNext = () => {
-  console.log("wenazaas");
-  const currentPos = window.scrollY;
-  const windowHeight = window.innerHeight;
-  const section = Math.floor(currentPos / (windowHeight * 2));
-  console.log(windowHeight * 2 * (section + 1));
-  window.scrollTo({
-    top: windowHeight * 2 * (section + 1),
-    behavior: "smooth",
-  });
-};
+const ninthA = ref(null);
+
+const tenthA = ref(null);
+
+const eleventhA = ref(null);
 
 onMounted(() => {
   document.addEventListener("scroll", handleScroll);
@@ -285,30 +265,38 @@ onUnmounted(() => {
   document.removeEventListener("scroll", handleScroll);
 });
 
+let scrollerVisibility = ref(true);
+
 const handleScroll = () => {
   const scrollY = window.scrollY;
   const windowHeight = window.innerHeight;
   const sections = [
     { element: first.value, position: 0, sectionSize: 1 },
     { element: second.value, position: 1, sectionSize: 1 },
-    { element: third.value, position: 2, sectionSize: 2 },
-    { element: fourth.value, position: 4, sectionSize: 4 },
-    { element: fifth.value, position: 8, sectionSize: 1 },
-    { element: sixth.value, position: 9, sectionSize: 1 },
-    { element: seventh.value, position: 10, sectionSize: 1 },
-    { element: eigth.value, position: 11, sectionSize: 1 },
+    { element: third.value, position: 2, sectionSize: 1 },
+    { element: fourth.value, position: 3, sectionSize: 1 },
+    { element: fifth.value, position: 4, sectionSize: 4 },
+    { element: sixth.value, position: 8, sectionSize: 1 },
+    { element: seventh.value, position: 9, sectionSize: 1 },
+    { element: eighth.value, position: 10, sectionSize: 1 },
+    { element: ninth.value, position: 11, sectionSize: 1 },
+    { element: tenth.value, position: 12, sectionSize: 1 },
+    { element: eleventh.value, position: 13, sectionSize: 1 },
+    { element: twelveth.value, position: 14, sectionSize: 1 },
   ];
   const subsections = [
     { element: thirdA.value, position: 2, sectionSize: 1 },
-    { element: thirdB.value, position: 3, sectionSize: 1 },
-    { element: fourthA.value, position: 4, sectionSize: 1 },
-    { element: fourthB.value, position: 5, sectionSize: 1 },
-    { element: fourthC.value, position: 6, sectionSize: 1 },
-    { element: fourthD.value, position: 7, sectionSize: 1 },
-    { element: fifthA.value, position: 8, sectionSize: 1 },
-    { element: sixthA.value, position: 9, sectionSize: 1 },
-    { element: seventhA.value, position: 10, sectionSize: 1 },
-    { element: eigthA.value, position: 11, sectionSize: 1 },
+    { element: fourthA.value, position: 3, sectionSize: 1 },
+    { element: fifthA.value, position: 4, sectionSize: 1 },
+    { element: fifthB.value, position: 5, sectionSize: 1 },
+    { element: fifthC.value, position: 6, sectionSize: 1 },
+    { element: fifthD.value, position: 7, sectionSize: 1 },
+    { element: sixthA.value, position: 8, sectionSize: 1 },
+    { element: seventhA.value, position: 9, sectionSize: 1 },
+    { element: eighthA.value, position: 10, sectionSize: 1 },
+    { element: ninthA.value, position: 11, sectionSize: 1 },
+    { element: tenthA.value, position: 12, sectionSize: 1 },
+    { element: eleventhA.value, position: 13, sectionSize: 1 },
   ];
   sections.forEach((section) => {
     const sectionStart = windowHeight * 2 * section.position;
@@ -336,6 +324,15 @@ const handleScroll = () => {
       subsection.element.classList.remove("about-sub-visible");
     }
   });
+  // when last section is visible, add class to last subsection
+  if (
+    scrollY + windowHeight >=
+    windowHeight * 2 * (subsections[subsections.length - 1].position + 1)
+  ) {
+    scrollerVisibility.value = false;
+  } else if (scrollerVisibility.value === false) {
+    scrollerVisibility.value = true;
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -345,19 +342,59 @@ const handleScroll = () => {
   }
   -ms-overflow-style: none; /* Internet Explorer 10+ */
   scrollbar-width: none; /* Firefox */
-  height: 5000vh;
+  height: 2900vh;
   overflow: hidden;
   .background-container {
     //position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
-    height: 200vh;
-    background-image: linear-gradient(
-      -45deg,
-      rgba(0, 0, 0, 0.92) 20%,
-      rgba(0, 180, 215, 0.92) 80%,
-      rgba(7, 7, 7, 0.9450980392) 99%
+    height: 2800vh;
+    // background: linear-gradient(
+    //   -0deg,
+    //   rgba(0, 0, 0, 0.92) 10%,
+    //   rgba(255, 255, 255, 1) 11%,
+    //   rgba(0, 0, 0, 0.92) 12%,
+    //   rgba(0, 180, 215, 0.9) 20%,
+    //   rgba(7, 7, 7, 0.9450980392) 100%
+    // );
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.92) 17.95%,
+      rgba(255, 255, 255, 1) 18%,
+      rgba(0, 0, 0, 0.92) 18.05%,
+      rgba(0, 180, 215, 0.9) 25.45%,
+      rgba(255, 255, 255, 1) 25.5%,
+      rgba(0, 180, 215, 0.9) 25.55%,
+      rgba(0, 180, 215, 1) 32.95%,
+      rgba(255, 255, 255, 1) 33%,
+      rgba(0, 180, 215, 1) 33.05%,
+      rgba(0, 180, 215, 0.7) 39.95%,
+      rgba(255, 255, 255, 1) 40%,
+      rgba(0, 180, 215, 0.7) 40.05%,
+      rgba(0, 180, 215, 1) 47.45%,
+      rgba(255, 255, 255, 1) 47.5%,
+      rgba(0, 180, 215, 1) 47.55%,
+      rgba(0, 180, 215, 0.7) 53.95%,
+      rgba(255, 255, 255, 1) 54%,
+      rgba(0, 180, 215, 0.7) 54.05%,
+      rgba(0, 180, 215, 1) 61.45%,
+      rgba(255, 255, 255, 1) 61.5%,
+      rgba(0, 180, 215, 1) 61.55%,
+      rgba(0, 180, 215, 0.7) 68.95%,
+      rgba(255, 255, 255, 1) 69%,
+      rgba(0, 180, 215, 0.7) 69.05%,
+      rgba(0, 180, 215, 1) 75.95%,
+      rgba(255, 255, 255, 1) 76%,
+      rgba(0, 180, 215, 1) 76.05%,
+      rgba(0, 180, 215, 0.7) 82.95%,
+      rgba(255, 255, 255, 1) 83%,
+      rgba(0, 180, 215, 0.7) 83.05%,
+      rgba(0, 180, 215, 0.7) 89.95%,
+      rgba(255, 255, 255, 1) 90%,
+      rgba(0, 180, 215, 0.7) 90.05%,
+      rgba(0, 180, 215, 0.9) 96.5%,
+      rgba(0, 0, 0, 0) 97.5%
     );
     z-index: -1;
   }
@@ -365,7 +402,7 @@ const handleScroll = () => {
     gap: 0px;
     .about-cover-text {
       width: 80%;
-      max-width: 800px;
+      max-width: 1300px;
       text-align: center;
       font-size: 18px;
       margin-bottom: 100px;
@@ -394,49 +431,18 @@ const handleScroll = () => {
     transition: all 0.8s ease-in-out;
     .about-second-text {
       width: 80%;
-      max-width: 800px;
+      max-width: 1300px;
       text-align: center;
-      font-size: 18px;
+      font-size: 2em;
     }
-    .scroll-call-to-action {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100vw;
-      height: 15vh;
-      z-index: 1;
-      cursor: pointer;
-      &:hover {
-        opacity: 0.8;
-      }
-      .smaller-p {
-        font-size: 14px;
-        margin: auto auto 10px;
-      }
-      img {
-        width: 30px;
-        height: 30px;
-        margin: auto;
-      }
-      @keyframes jump {
-        0% {
-          transform: translate3d(0, 0, 0);
-        }
-        40% {
-          transform: translate3d(0, 30%, 0);
-        }
-        100% {
-          transform: translate3d(0, 100%, 0);
-        }
-      }
-      .scroll-down-img {
-        transform-origin: 50% 50%;
-        animation: jump 1s linear alternate infinite;
-      }
+    p {
+      font-size: 1.5em;
+      width: 80%;
+      max-width: 1300px;
     }
   }
   .no-top {
-    top: 60% !important;
+    top: 50% !important;
   }
   .about-section-visible {
     opacity: 1;
@@ -445,10 +451,10 @@ const handleScroll = () => {
   .about-big-section {
     .drawing {
       position: absolute;
-      top: 60%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      max-height: 45vh;
+      top: 50%;
+      right: 5%;
+      transform: translate(0%, -50%);
+      max-width: 40vw;
     }
     .about-subsection {
       position: fixed;
@@ -459,45 +465,67 @@ const handleScroll = () => {
       opacity: 0;
       transition: all 1s ease-in-out;
       h3 {
-        margin: 100px auto auto auto;
-        font-size: 2em;
+        font-size: 3em;
         width: 600px;
         max-width: 80%;
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
       }
       .supporting-text {
-        margin: 160px auto auto auto;
         font-size: 1.25em;
         width: 700px;
-        max-width: 80%;
+        max-width: 40vw;
+        position: absolute;
+        top: 40%;
+        left: 5%;
+        text-align: left;
+        transform: translate(0%, -50%);
       }
       .smaller-support {
-        font-size: 1em !important;
+        //font-size: 1em !important;
       }
       .helper-img {
         position: absolute;
         top: -10%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        max-height: 45vh;
+        right: 5%;
+        transform: translate(0%, -50%);
+        max-width: 40vw;
         transition: opacity 1s ease-in-out;
       }
     }
     .about-sub-visible {
       opacity: 1;
       .helper-img {
-        top: 60%;
+        top: 50%;
         transition: all 1s ease-in-out;
       }
+    }
+  }
+  .about-last-section {
+    .drawing {
+      position: relative;
+      margin: auto;
     }
   }
 }
 @media screen and (max-width: 800px) {
   .about-container {
+    .no-top {
+      top: 60% !important;
+    }
     .about-section {
       width: 100%;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       p {
         width: 100%;
         font-size: 15px;
+      }
+      .about-second-text {
+        font-size: 1em;
       }
     }
     .about-section-visible {
@@ -507,16 +535,49 @@ const handleScroll = () => {
     }
     #about-diagram1 {
       h3 {
-        font-size: 1.2em;
+        font-size: 2em;
+        top: 45%;
       }
     }
   }
   .about-container {
     .about-big-section {
+      .drawing {
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-height: 45vh;
+        max-width: none;
+      }
       .about-subsection {
+        .helper-img {
+          top: -10%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          max-height: 45vh;
+          max-width: none;
+        }
         .supporting-text {
-          margin: 90px auto auto auto;
           font-size: 1em;
+          max-width: 80%;
+          position: absolute;
+          top: 50px;
+          left: 50%;
+          text-align: center;
+          transform: translateX(-50%);
+        }
+        .smaller-support {
+          font-size: 0.92em !important;
+        }
+        .smallest-support {
+          font-size: 0.8em !important;
+        }
+      }
+      .about-sub-visible {
+        .helper-img {
+          top: 60%;
+          transition: all 1s ease-in-out;
         }
       }
     }
