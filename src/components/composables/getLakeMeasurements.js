@@ -67,31 +67,47 @@ export function getLakeMeasurements(id, interval) {
         format
       );
       data.forEach((data, id) => {
-        lakemeasurements.water_level.push({
-          id: data.id,
-          date: moment(data.date).format(format),
-          data: data.water_level,
-        });
-        lakemeasurements.water_temperature.push({
-          id: data.id,
-          date: moment(data.date).format(format),
-          data: data.water_temperature,
-        });
-        lakemeasurements.atmospheric_pressure.push({
-          id: data.id,
-          date: moment(data.date).format(format),
-          data: data.atmospheric_pressure,
-        });
-        lakemeasurements.atmospheric_temperature.push({
-          id: data.id,
-          date: moment(data.date).format(format),
-          data: data.atmospheric_temperature,
-        });
-        lakemeasurements.precipitation.push({
-          id: data.id,
-          date: moment(data.date).format(format),
-          data: data.precipitation,
-        });
+        if (data.water_level >= -2 && data.water_level <= 150) {
+          lakemeasurements.water_level.push({
+            id: data.id,
+            date: moment(data.date).format(format),
+            data: data.water_level,
+          });
+        }
+        if (data.water_temperature >= -5 && data.water_temperature <= 15) {
+          lakemeasurements.water_temperature.push({
+            id: data.id,
+            date: moment(data.date).format(format),
+            data: data.water_temperature,
+          });
+        }
+        if (
+          data.atmospheric_pressure >= 700 &&
+          data.atmospheric_pressure <= 1100
+        ) {
+          lakemeasurements.atmospheric_pressure.push({
+            id: data.id,
+            date: moment(data.date).format(format),
+            data: data.atmospheric_pressure,
+          });
+        }
+        if (
+          data.atmospheric_temperature >= -5 &&
+          data.atmospheric_temperature <= 15
+        ) {
+          lakemeasurements.atmospheric_temperature.push({
+            id: data.id,
+            date: moment(data.date).format(format),
+            data: data.atmospheric_temperature,
+          });
+        }
+        if (data.precipitation >= 0 && data.precipitation <= 100) {
+          lakemeasurements.precipitation.push({
+            id: data.id,
+            date: moment(data.date).format(format),
+            data: data.precipitation,
+          });
+        }
         lakemeasurements.alert_status.push({
           id: data.id,
           date: moment(data.date).format(format),

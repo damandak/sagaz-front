@@ -79,6 +79,14 @@ const props = defineProps({
     type: String,
     default: "rgba(255, 255, 255, 1)",
   },
+  minLimit: {
+    type: Number,
+    default: 0,
+  },
+  maxLimit: {
+    type: Number,
+    default: 100,
+  },
 });
 
 const data = computed(() => ({
@@ -126,6 +134,8 @@ const data = computed(() => ({
         ticks: {
           color: props.labelColor,
         },
+        min: props.minLimit,
+        max: props.maxLimit,
       },
     },
     plugins: {
