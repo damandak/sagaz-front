@@ -11,9 +11,9 @@
         zoomSnap: 0,
         zoomDelta: 1,
       }"
-      :max-bounds="maxBounds"
       :min-zoom="6"
       :max-zoom="9"
+      :max-bounds="maxBounds"
       :max-bounds-viscosity="1"
       @ready="onMapReady"
     >
@@ -30,7 +30,10 @@
         v-for="lake in lakesdata.lakes"
         :key="lake.id"
         :lat-lng="[lake.lat, lake.lon]"
-        @click="$emit('refreshLakesData')"
+        @click="
+          openPopupFunction(lake);
+          $emit('refreshLakesData');
+        "
       >
         <l-icon
           v-if="
@@ -125,7 +128,7 @@ const maxBounds = computed(() => [
 ]);
 // define extreme bounds a little bit to the north of maxBounds
 const extremeBounds = computed(() => [
-  [-43.98, -79.1],
+  [-43.08, -79.1],
   [-56.2, -62.5],
 ]);
 
@@ -172,12 +175,16 @@ function changeLake(id) {
   }
 }
 
+function openPopupFunction(poppedLake) {
+  // if poppedLake is northern than south ice cap
+  if (poppedLake.lat > -49) {
+    map.value.leafletObject.setMaxBounds(extremeBounds.value);
+    map.value.leafletObject.panTo([poppedLake.lat, poppedLake.lon]);
+  }
+}
 function onMapReady() {
   map.value.leafletObject.fitBounds(maxBounds.value);
   map.value.leafletObject.setMinZoom(map.value.leafletObject.getZoom());
-  map.value.leafletObject.on("popupopen", function () {
-    map.value.leafletObject.setMaxBounds(extremeBounds.value);
-  });
   map.value.leafletObject.on("popupclose", function () {
     map.value.leafletObject.setMaxBounds(maxBounds.value);
   });

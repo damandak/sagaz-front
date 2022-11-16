@@ -8,7 +8,10 @@
         <button class="loc-close" @click="$emit('close-loc')">
           <Icon :icon="icons.closeSquareFill" />
         </button>
-        <h1 class="loc-section-title">{{ lake.lakedata.name }}</h1>
+        <div class="loc-section-title">
+          <h1>{{ lake.lakedata.name }}</h1>
+          <AlertStatus :status="lake.lakedata.current_alert_status" />
+        </div>
         <div class="col col-left">
           <div class="lake-main-data">
             <img :src="lake.lakedata.image" class="loc-lake-image" alt="" />
@@ -41,6 +44,7 @@
 import { onMounted } from "vue";
 import { getLake, lake } from "@/components/composables/getLake.js";
 import LakeOverviewDetailVues from "./LakeOverviewDetail.vue";
+import AlertStatus from "./AlertStatus.vue";
 import { useRoute } from "vue-router";
 import LakeOverviewDetail from "./LakeOverviewDetail.vue";
 import { Icon } from "@iconify/vue";
@@ -110,11 +114,20 @@ onMounted(() => {
     }
     .loc-section-title {
       margin-bottom: 10px;
-      font-size: 32px;
       margin-top: 10px;
       margin-left: auto;
       margin-right: auto;
       text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      gap: 20px;
+      h1 {
+        font-size: 32px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+      }
     }
     .col {
       display: inline-block;
@@ -211,6 +224,11 @@ onMounted(() => {
         margin-bottom: 20px;
         margin-right: auto;
         text-align: center;
+        flex-direction: column !important;
+        gap: 0px !important;
+        h1 {
+          margin-bottom: 10px !important;
+        }
       }
       .col {
         display: block;

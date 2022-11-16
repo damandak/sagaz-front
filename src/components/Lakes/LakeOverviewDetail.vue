@@ -15,8 +15,8 @@
       :point_color="point_wl"
       :chartCSS="chartCSS"
       :labelColor="labelColor"
-      :minLimit="minLimit_wl"
-      :maxLimit="maxLimit_wl"
+      :minLimit="lakemeasurements.water_level_limits.min"
+      :maxLimit="lakemeasurements.water_level_limits.max"
     />
     <DataChart
       :chartData="lakemeasurements.atmospheric_temperature"
@@ -30,8 +30,8 @@
       :point_color="point_at"
       :chartCSS="chartCSS"
       :labelColor="labelColor"
-      :minLimit="minLimit_at"
-      :maxLimit="maxLimit_at"
+      :minLimit="lakemeasurements.atmospheric_temperature_limits.min"
+      :maxLimit="lakemeasurements.atmospheric_temperature_limits.max"
     />
     <DataChart
       :chartData="lakemeasurements.precipitation"
@@ -45,8 +45,8 @@
       :point_color="point_pp"
       :chartCSS="chartCSS"
       :labelColor="labelColor"
-      :minLimit="minLimit_pp"
-      :maxLimit="maxLimit_pp"
+      :minLimit="lakemeasurements.precipitation_limits.min"
+      :maxLimit="lakemeasurements.precipitation_limits.max"
     />
     <p>Ultima actualización: {{ lakemeasurements.end_date }}</p>
   </div>
@@ -102,14 +102,6 @@ const line_pp = "rgba(148, 196, 45, 1)";
 const point_wl = "rgba(45, 108, 196, 0.6)";
 const point_at = "rgba(123, 45, 196, 0.5)";
 const point_pp = "rgba(148, 196, 45, 0.5)";
-
-const minLimit_wl = -2;
-const minLimit_at = -30;
-const minLimit_pp = 0;
-
-const maxLimit_wl = 150;
-const maxLimit_at = 40;
-const maxLimit_pp = 100;
 
 let axis_interval = "day";
 if (props.interval === "daily") {

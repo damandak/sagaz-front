@@ -12,6 +12,57 @@ function showNewDate(date) {
   return new Date(Date.parse(date));
 }
 
+const absoluteMin = {
+  water_temperature: -5,
+  pressure: 700,
+  level: -2,
+  at_temperature: -5,
+  precipitation: 0,
+};
+const absoluteMax = {
+  water_temperature: 15,
+  pressure: 1100,
+  level: 150,
+  at_temperature: 15,
+  precipitation: 100,
+};
+
+function defineMinAndMax(dataArray, minInterval, abs_min, abs_max) {
+  let min = Math.min.apply(
+    Math,
+    dataArray.map(function (o) {
+      return o.data;
+    })
+  );
+  let max = Math.max.apply(
+    Math,
+    dataArray.map(function (o) {
+      return o.data;
+    })
+  );
+  if (max - min < minInterval) {
+    let avg = dataArray.reduce((a, b) => a + b.data, 0) / dataArray.length;
+    max = avg + minInterval / 2;
+    if (max > abs_max) {
+      max = abs_max;
+    }
+    min = avg - minInterval / 2;
+    if (min < abs_min) {
+      min = abs_min;
+    }
+  }
+  if (max - min < minInterval) {
+    if (min == abs_min) {
+      max = abs_min + minInterval;
+    } else {
+      min = abs_max - minInterval;
+    }
+  }
+  min = Math.floor(min);
+  max = Math.ceil(max);
+  return { min, max };
+}
+
 export var lakemeasurements = reactive({
   loaded: false,
   nodata: false,
@@ -40,11 +91,6 @@ export function getLakeMeasurements(id, interval) {
   data = [];
   const apiUrlwithId = apiUrl + id + "/" + interval + "/";
   axios.defaults.headers.common.Authorization = `Api-Key ${apiKey}`;
-  //no cache
-  // axios.defaults.headers.common["Cache-Control"] = "no-cache";
-  // axios.defaults.pragma = "no-cache";
-  // axios.defaults.expires = 0;
-  // axios params
   axios.defaults.params = {
     t: new Date().getTime(),
   };
@@ -57,6 +103,26 @@ export function getLakeMeasurements(id, interval) {
     lakemeasurements.atmospheric_temperature = [];
     lakemeasurements.precipitation = [];
     lakemeasurements.alert_status = [];
+    lakemeasurements.water_level_limits = {
+      min: 0,
+      max: 0,
+    };
+    lakemeasurements.water_temperature_limits = {
+      min: 0,
+      max: 0,
+    };
+    lakemeasurements.atmospheric_pressure_limits = {
+      min: 0,
+      max: 0,
+    };
+    lakemeasurements.atmospheric_temperature_limits = {
+      min: 0,
+      max: 0,
+    };
+    lakemeasurements.precipitation_limits = {
+      min: 0,
+      max: 0,
+    };
     // Si no hay datos, acá se caería!!
     if (data.length === 0) {
       lakemeasurements.nodata = true;
@@ -67,14 +133,20 @@ export function getLakeMeasurements(id, interval) {
         format
       );
       data.forEach((data, id) => {
-        if (data.water_level >= -2 && data.water_level <= 150) {
+        if (
+          data.water_level >= absoluteMin.level &&
+          data.water_level <= absoluteMax.level
+        ) {
           lakemeasurements.water_level.push({
             id: data.id,
             date: moment(data.date).format(format),
             data: data.water_level,
           });
         }
-        if (data.water_temperature >= -5 && data.water_temperature <= 15) {
+        if (
+          data.water_temperature >= absoluteMin.water_temperature &&
+          data.water_temperature <= absoluteMax.water_temperature
+        ) {
           lakemeasurements.water_temperature.push({
             id: data.id,
             date: moment(data.date).format(format),
@@ -82,8 +154,8 @@ export function getLakeMeasurements(id, interval) {
           });
         }
         if (
-          data.atmospheric_pressure >= 700 &&
-          data.atmospheric_pressure <= 1100
+          data.atmospheric_pressure >= absoluteMin.pressure &&
+          data.atmospheric_pressure <= absoluteMax.pressure
         ) {
           lakemeasurements.atmospheric_pressure.push({
             id: data.id,
@@ -92,8 +164,8 @@ export function getLakeMeasurements(id, interval) {
           });
         }
         if (
-          data.atmospheric_temperature >= -5 &&
-          data.atmospheric_temperature <= 15
+          data.atmospheric_temperature >= absoluteMin.at_temperature &&
+          data.atmospheric_temperature <= absoluteMax.at_temperature
         ) {
           lakemeasurements.atmospheric_temperature.push({
             id: data.id,
@@ -101,7 +173,10 @@ export function getLakeMeasurements(id, interval) {
             data: data.atmospheric_temperature,
           });
         }
-        if (data.precipitation >= 0 && data.precipitation <= 100) {
+        if (
+          data.precipitation >= absoluteMin.precipitation &&
+          data.precipitation <= absoluteMax.precipitation
+        ) {
           lakemeasurements.precipitation.push({
             id: data.id,
             date: moment(data.date).format(format),
@@ -115,6 +190,37 @@ export function getLakeMeasurements(id, interval) {
         });
       });
     }
+    lakemeasurements.water_temperature_limits = defineMinAndMax(
+      lakemeasurements.water_temperature,
+      5,
+      absoluteMin.water_temperature,
+      absoluteMax.water_temperature
+    );
+    lakemeasurements.water_level_limits = defineMinAndMax(
+      lakemeasurements.water_level,
+      3,
+      absoluteMin.level,
+      absoluteMax.level
+    );
+    lakemeasurements.atmospheric_pressure_limits = defineMinAndMax(
+      lakemeasurements.atmospheric_pressure,
+      100,
+      absoluteMin.pressure,
+      absoluteMax.pressure
+    );
+    lakemeasurements.atmospheric_temperature_limits = defineMinAndMax(
+      lakemeasurements.atmospheric_temperature,
+      3,
+      absoluteMin.at_temperature,
+      absoluteMax.at_temperature
+    );
+    lakemeasurements.precipitation_limits = defineMinAndMax(
+      lakemeasurements.precipitation,
+      10,
+      absoluteMin.precipitation,
+      absoluteMax.precipitation
+    );
+
     lakemeasurements.loaded = true;
   });
   return {

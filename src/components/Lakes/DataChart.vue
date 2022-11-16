@@ -159,8 +159,8 @@ const data = computed(() => ({
 .chart-container {
   margin: auto;
   margin-bottom: 20px;
-  width: 600px;
-  max-width: 95% !important;
+  width: 85%;
+  min-width: 300 !important;
   height: 300px;
 }
 </style>

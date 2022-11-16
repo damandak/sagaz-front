@@ -1,5 +1,5 @@
 <template>
-  <div class="alert-status-container">
+  <div class="alert-status-container" :class="marginClass">
     <div
       class="alert-status-circle alert-status-circle-green"
       v-if="String(status).toLowerCase().startsWith('verde')"
@@ -23,6 +23,10 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  marginClass: {
+    type: String,
+    required: false,
+  },
 });
 </script>
 <style lang="scss">
@@ -33,7 +37,6 @@ const props = defineProps({
   justify-content: flex-start;
   gap: 10px;
   width: 200px;
-  margin: auto auto 20px auto;
   padding-top: 1px;
   padding-bottom: 2px;
   padding-left: 5px;
@@ -69,5 +72,8 @@ const props = defineProps({
     text-align: center;
     overflow: hidden;
   }
+}
+.specialMargin {
+  margin: auto auto 20px auto;
 }
 </style>

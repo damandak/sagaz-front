@@ -14,8 +14,8 @@
       :line_color="line_wl"
       :point_color="point_wl"
       :chartCSS="chartCSS"
-      :minLimit="minLimit_wl"
-      :maxLimit="maxLimit_wl"
+      :minLimit="lakemeasurements.water_level_limits.min"
+      :maxLimit="lakemeasurements.water_level_limits.max"
     />
     <DataChart
       :chartData="lakemeasurements.water_temperature"
@@ -28,8 +28,8 @@
       :line_color="line_wt"
       :point_color="point_wt"
       :chartCSS="chartCSS"
-      :minLimit="minLimit_wt"
-      :maxLimit="maxLimit_wt"
+      :minLimit="lakemeasurements.water_temperature_limits.min"
+      :maxLimit="lakemeasurements.water_temperature_limits.max"
     />
     <DataChart
       :chartData="lakemeasurements.atmospheric_pressure"
@@ -42,8 +42,8 @@
       :line_color="line_ap"
       :point_color="point_ap"
       :chartCSS="chartCSS"
-      :minLimit="minLimit_ap"
-      :maxLimit="maxLimit_ap"
+      :minLimit="lakemeasurements.atmospheric_pressure_limits.min"
+      :maxLimit="lakemeasurements.atmospheric_pressure_limits.max"
     />
     <DataChart
       :chartData="lakemeasurements.atmospheric_temperature"
@@ -56,8 +56,8 @@
       :line_color="line_at"
       :point_color="point_at"
       :chartCSS="chartCSS"
-      :minLimit="minLimit_at"
-      :maxLimit="maxLimit_at"
+      :minLimit="lakemeasurements.atmospheric_temperature_limits.min"
+      :maxLimit="lakemeasurements.atmospheric_temperature_limits.max"
     />
     <DataChart
       :chartData="lakemeasurements.precipitation"
@@ -70,8 +70,8 @@
       :line_color="line_pp"
       :point_color="point_pp"
       :chartCSS="chartCSS"
-      :minLimit="minLimit_pp"
-      :maxLimit="maxLimit_pp"
+      :minLimit="lakemeasurements.precipitation_limits.min"
+      :maxLimit="lakemeasurements.precipitation_limits.max"
     />
   </div>
   <div v-else class="lake-detail-container">
@@ -133,18 +133,6 @@ const point_wt = "rgba(45, 176, 196, 0.5)";
 const point_ap = "rgba(255, 99, 132, 1)";
 const point_at = "rgba(123, 45, 196, 0.5)";
 const point_pp = "rgba(148, 196, 45, 0.5)";
-
-const minLimit_wl = -2;
-const minLimit_wt = -5;
-const minLimit_ap = 700;
-const minLimit_at = -30;
-const minLimit_pp = 0;
-
-const maxLimit_wl = 150;
-const maxLimit_wt = 15;
-const maxLimit_ap = 1100;
-const maxLimit_at = 40;
-const maxLimit_pp = 100;
 
 let axis_interval = "day";
 if (props.interval === "daily") {

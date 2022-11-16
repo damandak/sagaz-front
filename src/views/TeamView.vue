@@ -227,7 +227,7 @@ var managing_institutions = [
   {
     name: "Universidad de Magallanes",
     shortname: "UMAG",
-    image: "encargada-1-logo-umag.png",
+    image: "encargada-1-logo-umag-min.png",
     link: "https://www.umag.cl/",
     first: "yes",
     orientation: "vertical",
@@ -236,7 +236,7 @@ var managing_institutions = [
   {
     name: "Universidad de Chile",
     shortname: "uChile",
-    image: "encargada-2-logo-uChile.png",
+    image: "encargada-2-logo-uChile-min.png",
     link: "https://www.uchile.cl/",
     orientation: "horizontal",
     id_name: "uChile",
@@ -244,7 +244,7 @@ var managing_institutions = [
   {
     name: "Universidad de Aysén",
     shortname: "UAysen",
-    image: "encargada-3-logo-uAysen.png",
+    image: "encargada-3-logo-uAysen-min.png",
     link: "https://www.uaysen.cl/",
     orientation: "vertical",
     id_name: "UAysen",
@@ -252,7 +252,7 @@ var managing_institutions = [
   {
     name: "Centro de Investigación de Ecosistemas de la Patagonia",
     shortname: "CIEP",
-    image: "encargada-4-logo-ciep.png",
+    image: "encargada-4-logo-ciep-min.png",
     link: "https://www.ciep.cl/",
     orientation: "horizontal",
     id_name: "CIEP",
@@ -262,7 +262,7 @@ var associated_institutions = [
   {
     name: "Universidad de la Frontera",
     shortname: "UFRO",
-    image: "asociada-1-logo-ufro.png",
+    image: "asociada-1-logo-ufro-min.png",
     link: "https://www.ufro.cl/",
     first: "yes",
     id_name: "UFRO",
@@ -270,35 +270,35 @@ var associated_institutions = [
   {
     name: "University of Calgary",
     shortname: "UCalgary",
-    image: "asociada-2-logo-uCalgary.png",
+    image: "asociada-2-logo-uCalgary-min.png",
     link: "https://www.ucalgary.ca/",
     id_name: "UCalgary",
   },
   {
     name: "Corporación Nacional Forestal",
     shortname: "CONAF",
-    image: "asociada-3-logo-CONAF.png",
+    image: "asociada-3-logo-CONAF-min.png",
     link: "https://www.conaf.cl/",
     id_name: "CONAF",
   },
   {
     name: "Dirección General de Aguas",
     shortname: "DGA",
-    image: "asociada-4-logo-DGA.png",
+    image: "asociada-4-logo-DGA-min.png",
     link: "https://www.dga.cl/",
     id_name: "DGA",
   },
   {
     name: "Skorpios",
     shortname: "Skorpios",
-    image: "asociada-5-logo-skorpios.png",
+    image: "asociada-5-logo-skorpios-min.png",
     link: "https://www.skorpios.cl/",
     id_name: "Skorpios",
   },
   {
     name: "Exploradores",
     shortname: "Exploradores",
-    image: "asociada-6-logo-exploradores.png",
+    image: "asociada-6-logo-exploradores-min.png",
     link: "https://www.exploradores.cl/",
     id_name: "Exploradores",
   },
@@ -307,7 +307,7 @@ var first_members = [
   {
     name: "Camilo Rada Giacaman",
     position: "Director",
-    image: "rada.png",
+    image: "rada.jpg",
     affiliation: "Universidad de Magallanes",
     description:
       "Camilo es Doctor en Geofísica de la University of British Columbia (Canadá), dedicado a la Glaciología desde hace ya más de 12 años, y es además un apasionado montañista. En la glaciología se ha especializado en procesos subglaciares, dinámica glaciar, percepción remota y desarrollo de instrumentos, mientras que en la montaña se ha abocado a la exploración, contando con 26 primeras ascensiones en Patagonia, Antártica y el Yukón. Es profesor del Magister en Ciencias Antárticas mención Glaciología de la Universidad de Magallanes, y se lo puede ver igualmente feliz escalando una montaña, programando algún nuevo algoritmo en el computador, inventado algo entretenido con cables y Arduinos, o simplemente compartiendo un mate o un asado con los amigos.",
@@ -319,7 +319,7 @@ var first_members = [
   {
     name: "Sergio Andrés Rivera",
     position: "Director Alterno",
-    image: "sergio.png",
+    image: "sergio.jpg",
     affiliation: "Universidad de Chile",
     description:
       "Andrés es doctor en Geografía de la Universidad de Bristol en Inglaterra. Ha dedicado toda su carrera académica a la glaciología, estudiando el comportamiento reciente de glaciares, sus respuestas a los cambios climáticos y las interacciones glacio-volcánicas. En la actualidad concentra sus estudios en los glaciares de montaña de los Andes de Chile central, los glaciares que producen témpanos en los Campos de Hielo Patagónicos y en lagos subglaciares de Antártica. Es Profesor Titular del Departamento de Geografía de la Universidad de Chile. Ha dirigido numerosas memorias de título y ha sido financiado en forma casi ininterrumpida por ANID y otras fuentes de financiamiento. Tiene una larga lista de publicaciones en las más prestigiosas revistas científica. Te invitamos a su página web http://www.glaciologia.cl",
@@ -331,7 +331,7 @@ var members = [
   {
     name: "Alejandro Dussaillant",
     position: "Investigador",
-    image: "alejandro.png",
+    image: "alejandro.jpg",
     affiliation: "Universidad de Aysén",
     description:
       "Alejandro es doctor en Ingeniería Civil Industrial Ambiental  Información de la Universidad de Wisconsin-Madison y actualmente es académico de Universidad de Aysén. Tiene más de  20 años de experiencia investigando procesos hidrológicos, vía monitoreo, análisis y modelación, aplicados a ríos, humedales, drenaje urbano y cuencas. Alejandro ha estudiado los ríos de la Patagonia desde 2008, incluyendo efectos hidráulicos y geomorfológicos de crecidas extremas, liderando y colaborado en proyectos internacionales sobre crecidas por vaciamientos de lagos glaciales (Glacial-Lake Outburst Floods, GLOFs) en Patagonia, crecidas por erupciones del volcán Calbuco (lahares), y transferencia tecnológica Inglaterra-Chile sobre sensores de bajo costo para monitoreo de ríos.",
@@ -341,7 +341,7 @@ var members = [
   {
     name: "Íñigo Irarrázaval Bustos",
     position: "Investigador",
-    image: "inigo.png",
+    image: "inigo.jpg",
     affiliation:
       "Centro de Investigación de Ecosistemas de la Patagonia (CIEP)",
     description:
@@ -351,7 +351,7 @@ var members = [
   {
     name: "Marcelo Somos-Valenzuela",
     position: "Investigador",
-    image: "marcelo.png",
+    image: "marcelo.jpg",
     affiliation: "Universidad de la Frontera",
     description:
       "Marcelo es doctor en  Recursos Hídricos de la Universidad de Austin Texas. Sus estudiosestán relacionados con el agua en sus diferentes formas y ambientes. Desde 2017 es académico en la Universidad de la Frontera, dictando cursos de pre y posgrado asociados al recurso hídrico. Su investigación se centra en los impactos de los cambios en la cobertura del suelo y el clima, el incremento de eventos extremos como inundaciones y sequías, y la parametrización de modelos para mejorar la predicción y adaptación al cambio global en sistemas montañosos. Marcelo a ayudado a comunidades en áreas remotas de Patagonia, Nepal y Perú a aplicar la ciencia para comprender mejor los problemas que enfrentan debido al cambio climático.",
@@ -362,7 +362,7 @@ var members = [
   {
     name: "Sebastián Enrique Alfaro Gómez",
     position: "Investigador",
-    image: "sebastian.png",
+    image: "sebastian.jpg",
     affiliation: "Universidad de Magallanes / INACH",
     description:
       "Sebastián es un apasionado por la glaciología y el trabajo de campo. Busca desarrollar investigaciones que combinen el análisis de imágenes de satélite, la teledetección y las mediciones de campo. Es técnico en electrónica e Ingeniero Civil de Minas, con especializaciones en Minería, geología, prevención de riesgos y topografía. Durante los últimos 7 años a implementando redes de monitoreo ambiental CEAZA, CIEP, INACH y CIGA. Actualmente forma parte de la unidad de proyectos del instituto antártico chileno. Es oriundo de la cuarta región de Coquimbo, y actualmente cursa su segundo año en el Magister en Ciencias Antárticas de la Universidad de Magallanes y anhela continuar especializándose en las ciencias de la tierra.",
@@ -372,7 +372,7 @@ var members = [
   {
     name: "Catalina Medina Porcile",
     position: "Ingeniera, encargada de desarrollos en electrónica",
-    image: "cata.png",
+    image: "cata.jpg",
     affiliation: "",
     description:
       "Catalina es Ingeniera Civil Electrica de la Universidad de Chile, con Magister en Ingenieria Electrica de la misma universidad. Se ha especializado en instrumentacion astronomica, trabajando actualmente en el nucleo milenio TITANS donde colabora estrechamente con el proyecto ngEHT el cual fue el primer telescopio del mundo en obtener una imagen de un agujero negro. Le apasiona la naturaleza y la ciencia, por lo que ha desarrollado a lo largo de su carrera distintos dispositivos de monitoreo de variables ambientales. Ademas, aprovecha cada momento que puede para practicar el montañismo, teniendo un primer ascenso en los andes centrales.",
@@ -381,7 +381,7 @@ var members = [
   {
     name: "Damir Mandakovic Pizarro",
     position: "Ingeniero, encargado de desarrollo del sitio web",
-    image: "damir.png",
+    image: "damir.jpg",
     affiliation: "",
     description:
       "Damir es Ingeniero Civil Industrial con mención en Tecnologías de Información de la Universidad Católica de Chile, pero se reconoce más como un montañista aficionado, guitarrista esporádico e hincha de Huachipato. Se ha dedicado al desarrollo y gestión de proyectos de elaboración de modelos de simulación estocásticos y modelos de optimización en diferentes industrias, desde salud a minería. En el último tiempo ha retomado su afición a construir sitios web trabajando como desarrollador independiente. En montaña cuenta con 3 primeras ascensiones en los Andes Centrales y creó el proyecto Andinismo de Escritorio de documentación de actividades de montañismo histórico en los Andes.",
@@ -392,7 +392,7 @@ var members = [
   {
     name: "Francisco Javier Aguirre González",
     position: "Investigador / Posdoctorado",
-    image: "francisco.png",
+    image: "francisco.jpg",
     affiliation: "Universidad de Magallanes / The School for Field Studies",
     description:
       "Francisco es Ingeniero Civil en Geografía y candidato a Doctor en Ciencias Antarticas y Subantarticas de la Universidad de Magallanes (Chile), dedicado los ultimos 5 años a la Glaciología y Climatologia, y es además un apasionado por las montañas y la practica de Karate Do. En la glaciología y climatología se ha especializado en procesos y dinámica nival, percepción remota y modelación. Es profesor residente de SFS Chile, Centro de Estudios del Clima en Puerto Natales, con un estrecho contacto con la naturaleza. Se le puede ver con su hija y señora tanto en una montaña como dentro de un kayak en los alrededores de Puerto Natales.",
@@ -400,7 +400,7 @@ var members = [
   {
     name: "Natalia Martínez",
     position: "Guía de montaña, encargada de logística y trabajos en terreno",
-    image: "natalia.png",
+    image: "natalia.jpg",
     affiliation: "",
     description:
       "La montaña es el elemento de Natalia. Guía, instuctora de esquí, escaladora y por sobre todo aventurera. Natalia se ha especializado como guía profesional brindando apoyo técnico, logístico y de seguridad a expediciones científicas en los principales Campos de Hielo de Patagonia y Norteamérica. Ha alcanzado numerosas cumbres en los Andes de Argentina y Chile, Bolivia, Nepal, Canadá y Estados Unidos. Pero su zona favorita y escenario de sus mayores logros es la Patagonia, donde realizó la segunda ascensión del Monte Sarmiento y cuenta con 12 primeras ascenciones, las que incluyen el volcán Reclus, el Volcán Aguilera (2.498 m, el último gran volcán no escalado de los Andes) y los cerros Trono y Alas de Ángel en Cordillera de Sarmiento.",
@@ -408,7 +408,7 @@ var members = [
   {
     name: "Gonzalo Rosenfeld",
     position: "Encargado de administación",
-    image: "gonzalo.png",
+    image: "gonzalo.jpg",
     affiliation: "Universidad de Magallanes",
     description:
       "Gonzalo es Ingeniero Comercial y Master en Planificación Territorial y Gestión Ambiental de la Universidad de Barcelona (España), actualmente docente en la carrera de ingeniería civil industrial de la Universidad de Magallanes. Gonzalo se ha dedicado los últimos 5 años a la gestión de proyectos FONDEF y FONDECYT. Adicionalmente, participa a través de la ONG Wild Aid en la elaboración de planes territoriales de protección de ecosistemas marinos en las áreas silvestres protegidas de Magallanes y Aysén. Participa tambien en las mesas territoriales de SERNATUR, junto a representantes de empresas turísticas de la región de Magallanes y Antártica Chilena. Actualmente se encuentra trabajando como director de carrera del área de administración y negocios de INACAP, Punta Arenas (Chile).",
@@ -418,7 +418,7 @@ var tesistas = [
   {
     name: "Galo Andrade",
     position: "Tesista Magister",
-    image: "galo.png",
+    image: "galo.jpg",
     affiliation: "Universidad de Magallanes",
     description:
       "Su proyecto de tesis, el cual busca establecer la geometría de morrenas suceptibles de GLOF y generar un algoritmo de detección automática de éstas morrenas en modelos de elevación. Además espera generar un listado de lagos represados por morrenas ordenados según su suceptibilidad de GLOFs.",
@@ -426,7 +426,7 @@ var tesistas = [
   {
     name: "Natalia Gallo",
     position: "Tesista Doctorado",
-    image: "nataliagallo.png",
+    image: "nataliagallo.jpg",
     affiliation: "Universidad de Magallanes",
     description:
       "Natalia está generando series de tiempo de volumen de lagos represados por hielo, en base a imágenes satelitales ópticas y modelos de elevación que generará ella con imágenes Planet. Luego estudiará las dinámicas de cada lago y como se correlacionan con la meteorología. Esto generará datos para la calibración del modelo.",
@@ -434,7 +434,7 @@ var tesistas = [
   {
     name: "Pamela Maldonado",
     position: "Tesista Magister",
-    image: "pamela.png",
+    image: "pamela.jpg",
     affiliation: "Universidad de Magallanes",
     description:
       "Pamela estudiará la historia de los lagos represados por hielo en Campo de Hielo Norte, combinando registros satelitales, vuelos aerofotogramétricos, Radar de apertura sintética y registros hidrológicos (estaciones DGA con medición de caudal o nivel).",
@@ -442,7 +442,7 @@ var tesistas = [
   {
     name: "Yerko Ortega",
     position: "Tesista Pregrado Geología",
-    image: "yerko.png",
+    image: "yerko.jpg",
     affiliation: "Universidad Andrés Bello",
     description:
       "Yerko está trabajando en la caracterización de los condicionantes geológicos y glaciológicos de los lagos represados por morrena que son parte de SAGAZ (y algunos más), determinando la probabilidad de derrumbes, avalanchas, caídas de hielo, etc. En base a las pendientes, tipos de roca, parecencia de glaciares colgantes, etc.",
@@ -453,8 +453,8 @@ var tesistas = [
 .team-container {
   background-image: linear-gradient(
     -45deg,
-    rgb(0 180 215 / 92%),
-    #070707f1 95%
+    rgba(0, 180, 215, 0.6925) 45%,
+    rgba(7, 7, 7, 0.9) 100%
   );
   display: flex;
   flex-direction: column;
@@ -504,11 +504,15 @@ var tesistas = [
         max-width: 100px;
         max-height: 100px;
         object-fit: cover;
+        -webkit-filter: drop-shadow(1px 1px 0.1px rgba(255, 255, 255, 0.2));
+        filter: drop-shadow(1px 1px 0.1px rgba(255, 255, 255, 0.2));
       }
       .asso-institution-img {
         max-width: 100px;
         max-height: 100px;
         object-fit: cover;
+        -webkit-filter: drop-shadow(1px 1px 0.1px rgba(255, 255, 255, 0.2));
+        filter: drop-shadow(1px 1px 0.1px rgba(255, 255, 255, 0.2));
       }
     }
     .horizontal {

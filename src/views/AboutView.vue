@@ -20,6 +20,9 @@
     <template v-if="scrollerVisibility">
       <ScrollAction text="Sigue Avanzando" :visibility="scrollerVisibility" />
     </template>
+    <template v-if="upScrollerVisibility">
+      <UpscrollAction text="Vuelve atrás" :visibility="upScrollerVisibility" />
+    </template>
 
     <div id="about-intro-text" class="about-section" ref="second">
       <p class="about-second-text">
@@ -49,7 +52,7 @@
       class="about-section about-big-section"
       ref="fourth"
     >
-      <img src="@/assets/dibujo1.png" alt="" class="drawing" />
+      <img src="@/assets/dibujo1-min.png" alt="" class="drawing" />
       <div class="about-subsection" ref="fourthA">
         <p class="supporting-text">
           Un glaciar estable presenta pocos riesgos. Sin embargo
@@ -63,7 +66,7 @@
       class="about-section about-big-section"
       ref="fifth"
     >
-      <img src="@/assets/dibujo2.png" alt="" class="drawing" />
+      <img src="@/assets/dibujo2-min.png" alt="" class="drawing" />
       <div class="about-subsection about-sub-visible" ref="fifthA">
         <p class="supporting-text">
           Al retroceder un glaciar, suelen formarse lagos “periglaciares” en su
@@ -108,7 +111,7 @@
       class="about-section about-big-section"
       ref="sixth"
     >
-      <img src="@/assets/dibujo3.png" alt="" class="drawing" />
+      <img src="@/assets/dibujo3-min.png" alt="" class="drawing" />
       <div class="about-subsection about-sub-visible" ref="sixthA">
         <p class="supporting-text smallest-support">
           Al retroceder, los glaciares también se fragmentan en múltiples
@@ -128,7 +131,7 @@
       class="about-section about-big-section"
       ref="seventh"
     >
-      <img src="@/assets/dibujo4.png" alt="" class="drawing" />
+      <img src="@/assets/dibujo4-min.png" alt="" class="drawing" />
       <div class="about-subsection about-sub-visible" ref="seventhA">
         <p class="supporting-text smallest-support">
           El retroceso del glaciar también expone escarpadas laderas montañosas
@@ -150,7 +153,7 @@
       class="about-section about-big-section"
       ref="eighth"
     >
-      <img src="@/assets/dibujo5.png" alt="" class="drawing" />
+      <img src="@/assets/dibujo5-min.png" alt="" class="drawing" />
       <div class="about-subsection about-sub-visible" ref="eighthA">
         <p class="supporting-text">
           Incluso mucho después de la desaparición completa de los glaciares en
@@ -165,7 +168,7 @@
       class="about-section about-big-section"
       ref="ninth"
     >
-      <img src="@/assets/dibujo6.png" alt="" class="drawing" />
+      <img src="@/assets/dibujo6-min.png" alt="" class="drawing" />
       <div class="about-subsection about-sub-visible" ref="ninthA">
         <p class="supporting-text smaller-support">
           Las abruptas laderas de un valle glaciar son especialmente
@@ -184,7 +187,7 @@
       class="about-section about-big-section"
       ref="tenth"
     >
-      <img src="@/assets/dibujo7.png" alt="" class="drawing" />
+      <img src="@/assets/dibujo7-min.png" alt="" class="drawing" />
       <div class="about-subsection about-sub-visible" ref="tenthA">
         <p class="supporting-text smaller-support">
           En la presente etapa de prototipo, el proyecto SAGAZ instalará una red
@@ -201,7 +204,7 @@
       class="about-section about-big-section"
       ref="eleventh"
     >
-      <img src="@/assets/dibujo8.png" alt="" class="drawing" />
+      <img src="@/assets/dibujo8-min.png" alt="" class="drawing" />
       <div class="about-subsection about-sub-visible" ref="eleventhA">
         <p class="supporting-text smaller-support">
           Las estaciones de la red de monitoreo de SAGAZ fueron diseñadas en la
@@ -212,18 +215,12 @@
         </p>
       </div>
     </div>
-    <div
-      id="about-diagram10"
-      class="about-section about-last-section"
-      ref="twelveth"
-    >
-      <img src="@/assets/white_sm.png" alt="" class="drawing" />
-    </div>
   </div>
 </template>
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 import ScrollAction from "@/components/About/ScrollAction";
+import UpscrollAction from "@/components/About/UpscrollAction";
 
 const first = ref(null);
 const second = ref(null);
@@ -266,6 +263,7 @@ onUnmounted(() => {
 });
 
 let scrollerVisibility = ref(true);
+let upScrollerVisibility = ref(false);
 
 const handleScroll = () => {
   const scrollY = window.scrollY;
@@ -282,7 +280,6 @@ const handleScroll = () => {
     { element: ninth.value, position: 11, sectionSize: 1 },
     { element: tenth.value, position: 12, sectionSize: 1 },
     { element: eleventh.value, position: 13, sectionSize: 1 },
-    { element: twelveth.value, position: 14, sectionSize: 1 },
   ];
   const subsections = [
     { element: thirdA.value, position: 2, sectionSize: 1 },
@@ -327,11 +324,17 @@ const handleScroll = () => {
   // when last section is visible, add class to last subsection
   if (
     scrollY + windowHeight >=
-    windowHeight * 2 * (subsections[subsections.length - 1].position + 1)
+    windowHeight * 2 * subsections[subsections.length - 1].position
   ) {
     scrollerVisibility.value = false;
   } else if (scrollerVisibility.value === false) {
     scrollerVisibility.value = true;
+  }
+  // when first section is visible, add class to first subsection
+  if (scrollY <= windowHeight * 2 * sections[1].position) {
+    upScrollerVisibility.value = false;
+  } else if (upScrollerVisibility.value === false) {
+    upScrollerVisibility.value = true;
   }
 };
 </script>
@@ -342,14 +345,14 @@ const handleScroll = () => {
   }
   -ms-overflow-style: none; /* Internet Explorer 10+ */
   scrollbar-width: none; /* Firefox */
-  height: 2900vh;
+  height: 2700vh;
   overflow: hidden;
   .background-container {
     //position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
-    height: 2800vh;
+    height: 2700vh;
     // background: linear-gradient(
     //   -0deg,
     //   rgba(0, 0, 0, 0.92) 10%,
@@ -360,41 +363,43 @@ const handleScroll = () => {
     // );
     background: linear-gradient(
       180deg,
-      rgba(0, 0, 0, 0.92) 17.95%,
-      rgba(255, 255, 255, 1) 18%,
-      rgba(0, 0, 0, 0.92) 18.05%,
-      rgba(0, 180, 215, 0.9) 25.45%,
-      rgba(255, 255, 255, 1) 25.5%,
-      rgba(0, 180, 215, 0.9) 25.55%,
-      rgba(0, 180, 215, 1) 32.95%,
-      rgba(255, 255, 255, 1) 33%,
-      rgba(0, 180, 215, 1) 33.05%,
-      rgba(0, 180, 215, 0.7) 39.95%,
-      rgba(255, 255, 255, 1) 40%,
-      rgba(0, 180, 215, 0.7) 40.05%,
-      rgba(0, 180, 215, 1) 47.45%,
-      rgba(255, 255, 255, 1) 47.5%,
-      rgba(0, 180, 215, 1) 47.55%,
-      rgba(0, 180, 215, 0.7) 53.95%,
-      rgba(255, 255, 255, 1) 54%,
-      rgba(0, 180, 215, 0.7) 54.05%,
-      rgba(0, 180, 215, 1) 61.45%,
-      rgba(255, 255, 255, 1) 61.5%,
-      rgba(0, 180, 215, 1) 61.55%,
-      rgba(0, 180, 215, 0.7) 68.95%,
-      rgba(255, 255, 255, 1) 69%,
-      rgba(0, 180, 215, 0.7) 69.05%,
-      rgba(0, 180, 215, 1) 75.95%,
-      rgba(255, 255, 255, 1) 76%,
-      rgba(0, 180, 215, 1) 76.05%,
-      rgba(0, 180, 215, 0.7) 82.95%,
-      rgba(255, 255, 255, 1) 83%,
-      rgba(0, 180, 215, 0.7) 83.05%,
-      rgba(0, 180, 215, 0.7) 89.95%,
-      rgba(255, 255, 255, 1) 90%,
-      rgba(0, 180, 215, 0.7) 90.05%,
-      rgba(0, 180, 215, 0.9) 96.5%,
-      rgba(0, 0, 0, 0) 97.5%
+      rgba(0, 0, 0, 0.92) 14.24%,
+      rgba(255, 255, 255, 1) 14.29%,
+      rgba(0, 0, 0, 0.92) 14.34%,
+      rgba(0, 180, 215, 0.9) 21.38%,
+      rgba(255, 255, 255, 1) 21.43%,
+      rgba(0, 180, 215, 0.9) 21.48%,
+      rgba(0, 180, 215, 1) 28.52%,
+      rgba(255, 255, 255, 1) 28.57%,
+      rgba(0, 180, 215, 1) 28.62%,
+      rgba(0, 180, 215, 0.7) 35.66%,
+      rgba(255, 255, 255, 1) 35.71%,
+      rgba(0, 180, 215, 0.7) 35.76%,
+      rgba(0, 180, 215, 1) 42.81%,
+      rgba(255, 255, 255, 1) 42.86%,
+      rgba(0, 180, 215, 1) 42.91%,
+      rgba(0, 180, 215, 0.7) 49.95%,
+      rgba(255, 255, 255, 1) 50%,
+      rgba(0, 180, 215, 0.7) 50.05%,
+      rgba(0, 180, 215, 1) 57.09%,
+      rgba(255, 255, 255, 1) 57.14%,
+      rgba(0, 180, 215, 1) 57.19%,
+      rgba(0, 180, 215, 0.7) 64.24%,
+      rgba(255, 255, 255, 1) 64.29%,
+      rgba(0, 180, 215, 0.7) 64.34%,
+      rgba(0, 180, 215, 1) 71.38%,
+      rgba(255, 255, 255, 1) 71.43%,
+      rgba(0, 180, 215, 1) 71.48%,
+      rgba(0, 180, 215, 0.7) 78.52%,
+      rgba(255, 255, 255, 1) 78.57%,
+      rgba(0, 180, 215, 0.7) 78.62%,
+      rgba(0, 180, 215, 0.7) 85.66%,
+      rgba(255, 255, 255, 1) 85.71%,
+      rgba(0, 180, 215, 0.7) 85.76%,
+      rgba(0, 180, 215, 0.7) 92.81%,
+      rgba(255, 255, 255, 1) 92.86%,
+      rgba(0, 180, 215, 0.7) 92.91%,
+      rgba(0, 180, 215, 0.9) 99.95%
     );
     z-index: -1;
   }
@@ -501,12 +506,6 @@ const handleScroll = () => {
         top: 50%;
         transition: all 1s ease-in-out;
       }
-    }
-  }
-  .about-last-section {
-    .drawing {
-      position: relative;
-      margin: auto;
     }
   }
 }
