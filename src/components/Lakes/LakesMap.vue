@@ -35,30 +35,38 @@
           $emit('refreshLakesData');
         "
       >
-        <l-icon
-          v-if="
-            String(lake.current_alert_status).toLowerCase().startsWith('verde')
-          "
-          :icon-url="iconUrlGreen"
-          :icon-size="iconSize"
-        />
-        <l-icon
-          v-else-if="
-            String(lake.current_alert_status)
-              .toLowerCase()
-              .startsWith('amarillo')
-          "
-          :icon-url="iconUrlYellow"
-          :icon-size="iconSize"
-        />
-        <l-icon
-          v-else-if="
-            String(lake.current_alert_status).toLowerCase().startsWith('rojo')
-          "
-          :icon-url="iconUrlRed"
-          :icon-size="iconSize"
-        />
-        <l-icon v-else :icon-url="iconUrlGray" :icon-size="iconSize" />
+        <l-icon :icon-size="iconSize">
+          <div class="icon-container">
+            <LakeIcon :alertStatus="lake.current_alert_status" />
+            <EmitSignal
+              v-if="
+                String(lake.current_alert_status)
+                  .toLowerCase()
+                  .startsWith('verde')
+              "
+              :color="'green'"
+              :stationStatus="lake.station_status"
+            />
+            <EmitSignal
+              v-else-if="
+                String(lake.current_alert_status)
+                  .toLowerCase()
+                  .startsWith('amarillo')
+              "
+              :color="'yellow'"
+              :stationStatus="lake.station_status"
+            />
+            <EmitSignal
+              v-else-if="
+                String(lake.current_alert_status)
+                  .toLowerCase()
+                  .startsWith('rojo')
+              "
+              :color="'red'"
+              :stationStatus="lake.station_status"
+            />
+          </div>
+        </l-icon>
         <l-popup>
           <button
             class="map-button"
@@ -103,6 +111,9 @@ import LakeOverview from "@/components/Lakes/LakeOverview.vue";
 import { process } from "ipaddr.js";
 import moment from "moment";
 
+import LakeIcon from "@/components/Lakes/LakeIcon.vue";
+import EmitSignal from "@/components/Lakes/EmitSignal.vue";
+
 var lake_id = ref(0);
 var map = ref(map);
 var tiles_url = process.env.BASE_URL + "tiles/{z}/{x}/{y}.png";
@@ -134,34 +145,14 @@ const extremeBounds = computed(() => [
 
 var fitBounds = [window.innerWidth, window.innerHeight];
 var crs = CRS.EPSG3857;
-const iconWidth = 30;
-const iconHeight = 30;
+const iconWidth = 40;
+const iconHeight = 40;
 var markers_coords = [];
 
 function closeLoc(palabra) {
   lake_id.value = 0;
 }
 
-const iconUrlGreen = computed({
-  get() {
-    return require("@/assets/marker.png");
-  },
-});
-const iconUrlYellow = computed({
-  get() {
-    return require("@/assets/marker_y.png");
-  },
-});
-const iconUrlRed = computed({
-  get() {
-    return require("@/assets/marker_r.png");
-  },
-});
-const iconUrlGray = computed({
-  get() {
-    return require("@/assets/marker_g.png");
-  },
-});
 const iconSize = computed({
   get() {
     return [iconWidth, iconHeight];
@@ -217,6 +208,14 @@ function resizeHandler() {
   top: 0px;
   align-items: center;
   overflow: hidden;
+  .icon-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+  }
 }
 .leaflet-bottom {
   bottom: 20px;
