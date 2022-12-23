@@ -31,7 +31,7 @@ const props = defineProps({
 });
 const iconUrlGreen = computed({
   get() {
-    return require("@/assets/marker.png");
+    return require("@/assets/marker_gr.png");
   },
 });
 const iconUrlYellow = computed({

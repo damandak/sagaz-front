@@ -34,7 +34,7 @@ const props = defineProps({
     animation: scaleIn 4s infinite cubic-bezier(0.36, 0.11, 0.89, 0.32);
   }
   .green {
-    background-color: #0283ae;
+    background-color: #00cc95;
     // border: 1px solid #0283ae;
   }
   .yellow {

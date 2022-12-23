@@ -52,7 +52,7 @@ const props = defineProps({
     border-radius: 50%;
   }
   .alert-status-circle-green {
-    background-color: #00b4d7;
+    background-color: #00cc95;
   }
   .alert-status-circle-yellow {
     background-color: #f7b500;
