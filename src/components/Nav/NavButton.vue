@@ -57,5 +57,6 @@ export default {
   transition: 0.6s ease-out;
   background-position: -355%;
   text-shadow: 0 0 2px black;
+  border-bottom: solid 2px var(--primary-color-light);
 }
 </style>
