@@ -1,23 +1,31 @@
 <template>
   <div>
     <LineChart
+      v-if="chartType === 'line'"
+      :chart-data="data"
+      :options="data.options"
+      :css-classes="chartCSS"
+    />
+    <BarChart
+      v-if="chartType === 'bar'"
       :chart-data="data"
       :options="data.options"
       :css-classes="chartCSS"
     />
   </div>
 </template>
-
 <script setup>
 import { onMounted } from "vue";
 import { ref, computed } from "vue";
-import { LineChart } from "vue-chart-3";
+import { LineChart, BarChart } from "vue-chart-3";
 import "chartjs-adapter-moment";
 import {
   Chart,
   LineController,
+  BarController,
   PointElement,
   LineElement,
+  BarElement,
   CategoryScale,
   LinearScale,
   TimeScale,
@@ -26,8 +34,10 @@ import {
 
 Chart.register(
   LineController,
+  BarController,
   PointElement,
   LineElement,
+  BarElement,
   CategoryScale,
   LinearScale,
   TimeScale,
@@ -87,6 +97,10 @@ const props = defineProps({
     type: Number,
     default: 100,
   },
+  chartType: {
+    type: String,
+    default: "line",
+  },
 });
 
 const data = computed(() => ({
@@ -103,6 +117,7 @@ const data = computed(() => ({
     },
   ],
   options: {
+    spanGaps: true,
     responsive: true,
     maintainAspectRatio: true,
     scales: {

@@ -72,6 +72,7 @@
       :chartCSS="chartCSS"
       :minLimit="lakemeasurements.precipitation_limits.min"
       :maxLimit="lakemeasurements.precipitation_limits.max"
+      :chartType="'bar'"
     />
   </div>
   <div v-else class="lake-detail-container">

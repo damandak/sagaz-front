@@ -47,6 +47,7 @@
       :labelColor="labelColor"
       :minLimit="lakemeasurements.precipitation_limits.min"
       :maxLimit="lakemeasurements.precipitation_limits.max"
+      :chartType="'bar'"
     />
     <p>Ultima actualización: {{ lakemeasurements.end_date }}</p>
   </div>
