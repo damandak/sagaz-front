@@ -41,21 +41,17 @@ function defineMinAndMax(dataArray, minInterval, abs_min, abs_max) {
     })
   );
   if (max - min < minInterval) {
-    let avg = dataArray.reduce((a, b) => a + b.data, 0) / dataArray.length;
-    max = avg + minInterval / 2;
+    const difference = minInterval - (max - min);
+    max = max + difference / 2;
+    min = min - difference / 2;
     if (max > abs_max) {
+      const max_dif = max - abs_max;
       max = abs_max;
-    }
-    min = avg - minInterval / 2;
-    if (min < abs_min) {
+      min = min - max_dif;
+    } else if (min < abs_min) {
+      const min_dif = abs_min - min;
       min = abs_min;
-    }
-  }
-  if (max - min < minInterval) {
-    if (min == abs_min) {
-      max = abs_min + minInterval;
-    } else {
-      min = abs_max - minInterval;
+      max = max + min_dif;
     }
   }
   min = Math.floor(min);
@@ -66,6 +62,7 @@ function defineMinAndMax(dataArray, minInterval, abs_min, abs_max) {
 export var lakemeasurements = reactive({
   loaded: false,
   nodata: false,
+  interval: "",
   start_date: "",
   end_date: "",
   water_level: [],
@@ -222,6 +219,7 @@ export function getLakeMeasurements(id, interval) {
     );
 
     lakemeasurements.loaded = true;
+    lakemeasurements.interval = interval;
   });
   return {
     lakemeasurements,
