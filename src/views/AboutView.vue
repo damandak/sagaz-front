@@ -409,7 +409,7 @@ const handleScroll = () => {
       width: 80%;
       max-width: 1300px;
       text-align: center;
-      font-size: 18px;
+      font-size: 1.13em;
       margin-bottom: 100px;
       p {
         margin: 30px auto auto auto;
@@ -438,10 +438,10 @@ const handleScroll = () => {
       width: 80%;
       max-width: 1300px;
       text-align: center;
-      font-size: 2em;
+      font-size: 1.7em;
     }
     p {
-      font-size: 1.5em;
+      font-size: 1.7rem;
       width: 80%;
       max-width: 1300px;
     }
@@ -479,7 +479,7 @@ const handleScroll = () => {
         transform: translate(-50%, -50%);
       }
       .supporting-text {
-        font-size: 1.25em;
+        font-size: 1.7em;
         width: 700px;
         max-width: 40vw;
         position: absolute;
@@ -567,7 +567,7 @@ const handleScroll = () => {
           transform: translateX(-50%);
         }
         .smaller-support {
-          font-size: 0.92em !important;
+          font-size: 0.885em !important;
         }
         .smallest-support {
           font-size: 0.8em !important;
