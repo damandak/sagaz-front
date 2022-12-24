@@ -1,6 +1,12 @@
 <template>
+  <div v-if="lakemeasurements.interval != interval" class="loading-charts">
+    <h3>Cargando información de la estación</h3>
+    <div class="moonloader-container">
+      <MoonLoader :color="loadingColor"></MoonLoader>
+    </div>
+  </div>
   <div
-    v-if="lakemeasurements.nodata === false && lakemeasurements.loaded"
+    v-else-if="lakemeasurements.nodata === false && lakemeasurements.loaded"
     class="lake-detail-container"
   >
     <DataChart
@@ -83,12 +89,15 @@
 import { onActivated, onMounted } from "vue";
 import WaterLevel from "./WaterLevel.vue";
 import DataChart from "./DataChart.vue";
+import MoonLoader from "vue-spinner/src/MoonLoader.vue";
 import {
   getLakeMeasurements,
   lakemeasurements,
 } from "../composables/getLakeMeasurements";
 import moment from "moment";
 import { lake } from "../composables/getLake";
+
+const loadingColor = "#52cff8";
 
 const props = defineProps({
   id: {
@@ -155,7 +164,25 @@ onMounted(async () => {
 });
 
 onActivated(async () => {
+  console.log("activated");
   await getLakeMeasurements(props.id, props.interval);
 });
 </script>
-<style></style>
+<style scoped lang="scss">
+.loading-charts {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  gap: 20px;
+  .moonloader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 160px;
+    width: 100%;
+  }
+}
+</style>
