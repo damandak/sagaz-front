@@ -96,6 +96,7 @@ import {
 } from "../composables/getLakeMeasurements";
 import moment from "moment";
 import { lake } from "../composables/getLake";
+import { useRoute } from "vue-router";
 
 const loadingColor = "#52cff8";
 
@@ -160,12 +161,13 @@ if (props.interval === "daily") {
 }
 
 onMounted(async () => {
-  await getLakeMeasurements(props.id, props.interval);
+  const lake_id = useRoute().params.id;
+  await getLakeMeasurements(lake_id, props.interval);
 });
 
 onActivated(async () => {
-  console.log("activated");
-  await getLakeMeasurements(props.id, props.interval);
+  const lake_id = useRoute().params.id;
+  await getLakeMeasurements(lake_id, props.interval);
 });
 </script>
 <style scoped lang="scss">
