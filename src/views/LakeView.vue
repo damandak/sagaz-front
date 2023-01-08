@@ -146,5 +146,8 @@ onMounted(() => {
       background-color: rgba(255, 255, 255, 0.699);
     }
   }
+  .interval-button.active {
+    background-color: rgba(255, 255, 255, 0.699);
+  }
 }
 </style>
