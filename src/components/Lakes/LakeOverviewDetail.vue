@@ -147,6 +147,10 @@ onActivated(async () => {
   }
   .loc-chart-container {
     height: 20vw;
+    min-height: 200px;
+  }
+  .loc-wrapper .lake-overview-container .col-right {
+    min-width: auto !important;
   }
 }
 </style>
