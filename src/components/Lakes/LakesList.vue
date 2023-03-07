@@ -5,14 +5,14 @@
       <thead>
         <tr>
           <th>Nombre</th>
-          <th>País</th>
-          <th>Región</th>
-          <th>Latitud</th>
-          <th>Longitud</th>
-          <th>Altitud</th>
-          <th>Área</th>
-          <th>Volumen</th>
-          <th>Estado Estación</th>
+          <th>{{ $t("lake.general.country") }}</th>
+          <th>{{ $t("lake.general.region") }}</th>
+          <th>{{ $t("lake.general.latitude") }}</th>
+          <th>{{ $t("lake.general.longitude") }}</th>
+          <th>{{ $t("lake.general.altitude") }}</th>
+          <th>{{ $t("lake.general.area") }}</th>
+          <th>{{ $t("lake.general.volume") }}</th>
+          <th>{{ $t("lake.general.stationstatus") }}</th>
         </tr>
       </thead>
       <tbody>

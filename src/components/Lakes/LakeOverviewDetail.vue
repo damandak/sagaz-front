@@ -49,15 +49,14 @@
       :maxLimit="lakemeasurements.precipitation_limits.max"
       :chartType="'bar'"
     />
-    <p>Ultima actualización: {{ lakemeasurements.end_date }}</p>
+    <p>{{ $t("lake.detail.lastupdate") }} {{ lakemeasurements.end_date }}</p>
   </div>
   <div v-else class="lake-detail-container">
-    <h3 class="no-info">No hay información para mostrar de la estación</h3>
+    <h3 class="no-info">{{ $t("lake.detail.noinfo") }}</h3>
   </div>
 </template>
 <script setup>
 import { onActivated, onMounted } from "vue";
-import WaterLevel from "./WaterLevel.vue";
 import DataChart from "./DataChart.vue";
 import {
   getLakeMeasurements,
@@ -65,6 +64,8 @@ import {
 } from "../composables/getLakeMeasurements";
 import moment from "moment";
 import { lake } from "../composables/getLake";
+
+import i18n from "@/i18n";
 
 const props = defineProps({
   id: {
@@ -88,13 +89,13 @@ let labels = {
 const chartCSS = "loc-chart-container";
 const labelColor = "#FFF";
 
-const title_wl = "Nivel de agua";
-const title_at = "Temperatura atmosférica";
-const title_pp = "Precipitación";
+const title_wl = i18n.global.t("lake.graphlabels.waterlevel");
+const title_at = i18n.global.t("lake.graphlabels.airtemperature");
+const title_pp = i18n.global.t("lake.graphlabels.precipitation");
 
-const unit_wl = "metros - mts";
-const unit_at = "grados Celsius - °C";
-const unit_pp = "milímetros - mm";
+const unit_wl = i18n.global.t("lake.graphlabels.meters");
+const unit_at = i18n.global.t("lake.graphlabels.celsius");
+const unit_pp = i18n.global.t("lake.graphlabels.milimeters");
 
 const line_wl = "rgba(45, 108, 196, 1)";
 const line_at = "rgba(123, 45, 196, 1)";

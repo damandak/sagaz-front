@@ -9,60 +9,84 @@
       <img :src="lake.lakedata.image" class="lake-image" alt="" />
       <div class="lake-general-data">
         <p class="lake-description">{{ lake.lakedata.description }}</p>
-        <p><b>País: </b>{{ lake.lakedata.country }}</p>
-        <p><b>Región: </b>{{ lake.lakedata.region }}</p>
-        <p><b>Latitud: </b>{{ lake.lakedata.lat.toFixed(4) }}°</p>
-        <p><b>Longitud: </b>{{ lake.lakedata.lon.toFixed(4) }}°</p>
-        <p><b>Altitud: </b>{{ lake.lakedata.altitude }} msnm</p>
-        <p><b>Área: </b>{{ lake.lakedata.area }} kms2</p>
-        <p><b>Volumen: </b>{{ lake.lakedata.volume }} millones de m3</p>
-        <p><b>Estado Estación: </b>{{ lake.lakedata.station_status }}</p>
+        <p>
+          <b>{{ $t("lake.general.country") }}: </b>
+          {{ lake.lakedata.country }}
+        </p>
+        <p>
+          <b>{{ $t("lake.general.region") }}: </b>
+          {{ lake.lakedata.region }}
+        </p>
+        <p>
+          <b>{{ $t("lake.general.latitude") }}: </b>
+          {{ lake.lakedata.lat.toFixed(4) }}°
+        </p>
+        <p>
+          <b>{{ $t("lake.general.longitude") }}: </b>
+          {{ lake.lakedata.lon.toFixed(4) }}°
+        </p>
+        <p>
+          <b>{{ $t("lake.general.altitude") }}: </b>
+          {{ lake.lakedata.altitude }} msnm
+        </p>
+        <p>
+          <b>{{ $t("lake.general.area") }}: </b>
+          {{ lake.lakedata.area }} kms2
+        </p>
+        <p>
+          <b>{{ $t("lake.general.volume") }}: </b>
+          {{ lake.lakedata.volume }} millones de m3
+        </p>
+        <p>
+          <b>{{ $t("lake.general.stationstatus") }}: </b>
+          {{ lake.lakedata.station_status }}
+        </p>
       </div>
     </div>
     <!-- Interval Selector -->
     <div class="interval-selector">
-      <p>Cambiar intervalo de fechas</p>
+      <p>{{ $t("lake.intervals.description") }}:</p>
       <button
         class="interval-button"
         :class="{ active: interval === 'daily' }"
         @click="changeInterval('daily')"
       >
-        Un Día
+        {{ $t("lake.intervals.day") }}
       </button>
       <button
         class="interval-button"
         :class="{ active: interval === 'weekly' }"
         @click="changeInterval('weekly')"
       >
-        Una Semana
+        {{ $t("lake.intervals.week") }}
       </button>
       <button
         class="interval-button"
         :class="{ active: interval === 'biweekly' }"
         @click="changeInterval('biweekly')"
       >
-        Dos Semanas
+        {{ $t("lake.intervals.biweek") }}
       </button>
       <button
         class="interval-button"
         :class="{ active: interval === 'monthly' }"
         @click="changeInterval('monthly')"
       >
-        Un Mes
+        {{ $t("lake.intervals.month") }}
       </button>
       <button
         class="interval-button"
         :class="{ active: interval === 'yearly' }"
         @click="changeInterval('yearly')"
       >
-        Un Año
+        {{ $t("lake.intervals.year") }}
       </button>
       <button
         class="interval-button"
         :class="{ active: interval === 'all' }"
         @click="changeInterval('all')"
       >
-        Histórico
+        {{ $t("lake.intervals.historic") }}
       </button>
     </div>
     <LakeDetail :id="id" :interval="interval" :key="changeableKey" />

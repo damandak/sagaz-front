@@ -1,6 +1,6 @@
 <template>
   <div v-if="lakemeasurements.interval != interval" class="loading-charts">
-    <h3>Cargando información de la estación</h3>
+    <h3>{{ $t("lake.detail.loading") }}</h3>
     <div class="moonloader-container">
       <MoonLoader :color="loadingColor"></MoonLoader>
     </div>
@@ -82,12 +82,11 @@
     />
   </div>
   <div v-else class="lake-detail-container">
-    <h3>No hay información para mostrar de la estación</h3>
+    <h3>{{ $t("lake.detail.noinfo") }}</h3>
   </div>
 </template>
 <script setup>
 import { onActivated, onMounted } from "vue";
-import WaterLevel from "./WaterLevel.vue";
 import DataChart from "./DataChart.vue";
 import MoonLoader from "vue-spinner/src/MoonLoader.vue";
 import {
@@ -97,6 +96,8 @@ import {
 import moment from "moment";
 import { lake } from "../composables/getLake";
 import { useRoute } from "vue-router";
+
+import i18n from "@/i18n";
 
 const loadingColor = "#52cff8";
 
@@ -121,17 +122,17 @@ let labels = {
 
 const chartCSS = "chart-container";
 
-const title_wl = "Nivel de agua";
-const title_wt = "Temperatura del agua";
-const title_ap = "Presión atmosférica";
-const title_at = "Temperatura atmosférica";
-const title_pp = "Precipitación";
+const title_wl = i18n.global.t("lake.graphlabels.waterlevel");
+const title_wt = i18n.global.t("lake.graphlabels.watertemperature");
+const title_ap = i18n.global.t("lake.graphlabels.airpressure");
+const title_at = i18n.global.t("lake.graphlabels.airtemperature");
+const title_pp = i18n.global.t("lake.graphlabels.precipitation");
 
-const unit_wl = "metros - mts";
-const unit_wt = "grados Celsius - °C";
-const unit_ap = "hectopascal - hPa";
-const unit_at = "grados Celsius - °C";
-const unit_pp = "milímetros - mm";
+const unit_wl = i18n.global.t("lake.graphlabels.meters");
+const unit_wt = i18n.global.t("lake.graphlabels.celsius");
+const unit_ap = i18n.global.t("lake.graphlabels.hectopascal");
+const unit_at = i18n.global.t("lake.graphlabels.celsius");
+const unit_pp = i18n.global.t("lake.graphlabels.milimeters");
 
 const line_wl = "rgba(45, 108, 196, 1)";
 const line_wt = "rgba(45, 176, 196, 1)";

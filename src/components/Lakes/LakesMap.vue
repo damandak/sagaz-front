@@ -76,13 +76,14 @@
             <h3 class="popup-title">{{ lake.name }}</h3>
             <img class="p-img" :src="lake.image" alt="" />
             <p class="popup-text">
-              Nivel de alerta: {{ lake.current_alert_status }}
+              {{ $t("lake.general.alertlevel") }}:
+              {{ lake.current_alert_status }}
             </p>
             <p class="popup-text-small">
-              Actualizado:
+              {{ $t("lake.general.updated") }}:
               {{ moment(lake.updated_at).format("HH:mm, DD-MM-YYYY") }}
             </p>
-            <div class="popup-moreinfo">Más Info</div>
+            <div class="popup-moreinfo">{{ $t("general.moreinfo") }}</div>
           </button>
         </l-popup>
       </l-marker>

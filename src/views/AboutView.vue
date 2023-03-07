@@ -9,11 +9,7 @@
       <div class="about-cover-text">
         <img src="@/assets/sagaz_const.png" alt="" id="big-logo" />
         <p>
-          SAGAZ es un proyecto que busca desarrollar un prototipo de sistema de
-          alerta para reducir el impacto de las inundaciones relacionadas con
-          glaciares. Estas inundaciones se conocen como GLOFs, acrónimo adoptado
-          del inglés “Glacial Lake Outburst Flood”, que se puede traducir como
-          Inundaciones por Vaciamiento de Lagos Glaciares.
+          {{ $t("about.a_section.content") }}
         </p>
       </div>
     </div>
@@ -26,14 +22,7 @@
 
     <div id="about-intro-text" class="about-section" ref="second">
       <p class="about-second-text">
-        SAGAZ es un proyecto financiado por FONDEF IDeA I+D concurso 2021
-        (código ID21I10094). Es también un proyecto conjunto entre la
-        Universidad de Aysén, Universidad de Chile, Universidad de la Frontera,
-        el Centro de Investigación de Ecosistemas de la Patagonia (CIEP), la
-        Universidad de Calgary (Canadá) y liderado por la Universidad de
-        Magallanes. Además cuenta con el apoyo de CONAF Magallanes, la Dirección
-        General de Aguas (DGA) región de Aysén, Naviera y Turismo Skorpios y
-        Ecoturismo Patagonia Exploradores.
+        {{ $t("about.a_section.content") }}
       </p>
     </div>
 
@@ -43,7 +32,7 @@
       ref="third"
     >
       <div class="about-subsection about-sub-visible" ref="thirdA">
-        <h3>¿Qué son los lagos glaciares y que riesgo representan?</h3>
+        <h3>{{ $t("about.c_section.content") }}</h3>
       </div>
     </div>
 
@@ -55,8 +44,8 @@
       <img src="@/assets/dibujo1-min.png" alt="" class="drawing" />
       <div class="about-subsection" ref="fourthA">
         <p class="supporting-text">
-          Un glaciar estable presenta pocos riesgos. Sin embargo
-          <b>si el glaciar avanza o retrocede estos riesgos aumentan.</b>
+          {{ $t("about.d_section.content") }}
+          <b>{{ $t("about.d_section.bold_content") }}</b>
         </p>
       </div>
     </div>
@@ -69,34 +58,28 @@
       <img src="@/assets/dibujo2-min.png" alt="" class="drawing" />
       <div class="about-subsection about-sub-visible" ref="fifthA">
         <p class="supporting-text">
-          Al retroceder un glaciar, suelen formarse lagos “periglaciares” en su
-          margen y en las quebradas y valles anexos
+          {{ $t("about.e_section.content") }}
         </p>
       </div>
       <div class="about-subsection" ref="fifthB">
         <p class="supporting-text">
-          Cuando el nivel del agua es suficientemente alto,
-          <b>estos lagos pueden vaciarse abruptamente</b>
-          produciendo grandes inundaciones. Estos fenómenos pueden repetirse
-          todos los años o incluso varias veces al año.
+          {{ $t("about.f_section.content") }}
+          <b>{{ $t("about.f_section.bold_content") }}</b>
+          {{ $t("about.f_section.second_content") }}
         </p>
         <img src="@/assets/dibujo2-helper.png" alt="" class="helper-img" />
       </div>
       <div class="about-subsection" ref="fifthC">
         <p class="supporting-text smaller-support">
-          El retroceso de un glaciar también suele resultar en la formación de
-          un lago "proglaciar" en su frente, el cual es represado por una
-          acumulación de sedimentos y rocas poco consolidadas que el mismo
-          glaciar acumuló durante un periodo de estabilidad en el pasado.
+          {{ $t("about.g_section.content") }}
         </p>
         <img src="@/assets/dibujo2-helper2.png" alt="" class="helper-img" />
       </div>
       <div class="about-subsection" ref="fifthD">
         <p class="supporting-text">
-          Cuando un nivel alto del lago se combina con un gatillante como un
-          derrumbe o una gran lluvia, esta presa puede ser erosionada de manera
-          catastrófica, <b>generando un vaciamiento abrupto</b> y produciendo
-          grandes inundaciones.
+          {{ $t("about.h_section.content") }}
+          <b>{{ $t("about.h_section.bold_content") }}</b>
+          {{ $t("about.h_section.second_content") }}
         </p>
         <img
           src="@/assets/dibujo2-helper2.png"
@@ -114,13 +97,9 @@
       <img src="@/assets/dibujo3-min.png" alt="" class="drawing" />
       <div class="about-subsection about-sub-visible" ref="sixthA">
         <p class="supporting-text smallest-support">
-          Al retroceder, los glaciares también se fragmentan en múltiples
-          glaciares menores. Algunos de ellos se transforman en
-          <b>glaciares colgantes que pueden liberar avalanchas de hielo</b>, que
-          al caer sobre un lago pueden generar inundaciones o gatillar un
-          proceso de erosión catastrófica de la morrena frontal. Estas
-          avalanchas de hielo también pueden producir destrucción directa sobre
-          caminos o puentes.
+          {{ $t("about.i_section.content") }}
+          <b>{{ $t("about.i_section.bold_content") }}</b>
+          {{ $t("about.i_section.second_content") }}
         </p>
         <img src="@/assets/dibujo3-helper.png" alt="" class="helper-img" />
       </div>
@@ -134,15 +113,9 @@
       <img src="@/assets/dibujo4-min.png" alt="" class="drawing" />
       <div class="about-subsection about-sub-visible" ref="seventhA">
         <p class="supporting-text smallest-support">
-          El retroceso del glaciar también expone escarpadas laderas montañosas
-          que
-          <b
-            >tras perder el soporte proporcionado por el hielo se vuelven
-            inestables</b
-          >
-          y propensas a derrumbes. Dichos derrumbes también pueden generar
-          inundaciones al caer sobre un lago, gatillando el proceso de erosión
-          catastrófica de la morrena frontal o producir destrucción directa.
+          {{ $t("about.j_section.content") }}
+          <b>{{ $t("about.j_section.bold_content") }}</b>
+          {{ $t("about.j_section.second_content") }}
         </p>
         <img src="@/assets/dibujo4-helper.png" alt="" class="helper-img" />
       </div>
@@ -156,9 +129,7 @@
       <img src="@/assets/dibujo5-min.png" alt="" class="drawing" />
       <div class="about-subsection about-sub-visible" ref="eighthA">
         <p class="supporting-text">
-          Incluso mucho después de la desaparición completa de los glaciares en
-          una cuenca, los lagos contenidos por morrenas pueden aún ser
-          inestables y presentan un riesgo de derrumbe considerable.
+          {{ $t("about.k_section.content") }}
         </p>
       </div>
     </div>
@@ -171,13 +142,9 @@
       <img src="@/assets/dibujo6-min.png" alt="" class="drawing" />
       <div class="about-subsection about-sub-visible" ref="ninthA">
         <p class="supporting-text smaller-support">
-          Las abruptas laderas de un valle glaciar son especialmente
-          <b
-            >susceptibles a derrumbes incluso décadas después de la desaparición
-            de los glaciares y sus lagos asociados.</b
-          >
-          Por lo tanto, conocer la historia glaciar de una zona es fundamental
-          para determinar el riesgo de derrumbes.
+          {{ $t("about.l_section.content") }}
+          <b>{{ $t("about.l_section.bold_content") }}</b>
+          {{ $t("about.l_section.second_content") }}
         </p>
       </div>
     </div>
@@ -190,11 +157,7 @@
       <img src="@/assets/dibujo7-min.png" alt="" class="drawing" />
       <div class="about-subsection about-sub-visible" ref="tenthA">
         <p class="supporting-text smaller-support">
-          En la presente etapa de prototipo, el proyecto SAGAZ instalará una red
-          de 12 estaciones de monitoreo. En conjunto con pronósticos
-          meteorológicos, los datos de estas estaciones alimentarán el modelo
-          glacio-hidrológico predictivo que calcula los niveles de alerta
-          presentados en esta página web.
+          {{ $t("about.m_section.content") }}
         </p>
       </div>
     </div>
@@ -207,11 +170,7 @@
       <img src="@/assets/dibujo8-min.png" alt="" class="drawing" />
       <div class="about-subsection about-sub-visible" ref="eleventhA">
         <p class="supporting-text smaller-support">
-          Las estaciones de la red de monitoreo de SAGAZ fueron diseñadas en la
-          Universidad de Magallanes y construidas en Chile. La primera fue
-          instalada en Noviembre 2020 en la Laguna de los Témpanos, en Campo de
-          Hielo Norte junto a una estación DGA, con el propósito de testear y
-          validar la tecnología desarrollada.
+          {{ $t("about.n_section.content") }}
         </p>
       </div>
     </div>

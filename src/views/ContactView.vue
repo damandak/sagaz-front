@@ -2,7 +2,7 @@
   <div class="main-content contact-container">
     <div id="contact-cover" class="contact-section">
       <img src="@/assets/sagaz_const.png" alt="" id="big-logo" />
-      <p class="contact-intro-text">Envíanos un correo a</p>
+      <p class="contact-intro-text">{{ $t("contact.sendus") }}</p>
       <p class="contact-mail">info@sagaz.org</p>
     </div>
   </div>

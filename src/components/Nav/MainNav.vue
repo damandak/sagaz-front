@@ -3,10 +3,24 @@
     <MainLogo></MainLogo>
     <div class="nav-wrapper">
       <div class="buttongroup">
-        <NavButton to="/" content="LAGOS"></NavButton>
-        <NavButton to="/about" content="SOBRE SAGAZ"></NavButton>
-        <NavButton to="/team" content="EQUIPO"></NavButton>
-        <NavButton to="/contact" content="CONTACTO"></NavButton>
+        <NavButton to="/" :content="$t('menu.home')"></NavButton>
+        <NavButton to="/about" :content="$t('menu.about')"></NavButton>
+        <NavButton to="/team" :content="$t('menu.team')"></NavButton>
+        <NavButton to="/contact" :content="$t('menu.contact')"></NavButton>
+        <button class="navbutton language-button">
+          <img
+            @click="toggleLanguage"
+            v-if="$i18n.locale === 'es'"
+            src="@/assets/british-flag.gif"
+            alt="English"
+          />
+          <img
+            @click="toggleLanguage"
+            v-else
+            src="@/assets/spanish-flag.gif"
+            alt="Español"
+          />
+        </button>
       </div>
       <Icon :icon="menuFill" @click="toggleMenu" class="menu-icon"></Icon>
     </div>
@@ -20,6 +34,8 @@ import { watch } from "vue";
 import { useRoute } from "vue-router";
 import { Icon } from "@iconify/vue";
 import menuFill from "@iconify-icons/eva/menu-fill";
+
+import i18n from "@/i18n";
 
 const icons = {
   menuFill,
@@ -45,6 +61,16 @@ const toggleMenu = () => {
   const mainnav = document.querySelector(".mainnav");
   buttongroup.classList.toggle("show");
   mainnav.classList.toggle("show");
+};
+
+const toggleLanguage = () => {
+  if (i18n.global.locale.value === "en") {
+    i18n.global.locale.value = "es";
+    localStorage.setItem("language", "es");
+  } else {
+    i18n.global.locale.value = "en";
+    localStorage.setItem("language", "en");
+  }
 };
 </script>
 
@@ -88,6 +114,23 @@ const toggleMenu = () => {
       color: var(--primary-color-light);
       transition: color 0.6s ease-out;
       background-position: -355%;
+    }
+  }
+  .language-button {
+    background: transparent;
+    border: none;
+    padding-bottom: 0;
+    top: 3px;
+    position: relative;
+    cursor: pointer;
+    img {
+      border-radius: 2px;
+      padding: 2px;
+    }
+    &:hover {
+      img {
+        opacity: 0.8;
+      }
     }
   }
 }

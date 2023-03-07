@@ -16,20 +16,44 @@
           <div class="lake-main-data">
             <img :src="lake.lakedata.image" class="loc-lake-image" alt="" />
             <div class="loc-general-data">
-              <p><b>País: </b>{{ lake.lakedata.country }}</p>
-              <p><b>Región: </b>{{ lake.lakedata.region }}</p>
-              <p><b>Latitud: </b>{{ lake.lakedata.lat.toFixed(4) }}°</p>
-              <p><b>Longitud: </b>{{ lake.lakedata.lon.toFixed(4) }}°</p>
-              <p><b>Altitud: </b>{{ lake.lakedata.altitude }} msnm</p>
-              <p><b>Área: </b>{{ lake.lakedata.area }} kms2</p>
-              <p><b>Volumen: </b>{{ lake.lakedata.volume }} millones de m3</p>
-              <p><b>Estado Estación: </b>{{ lake.lakedata.station_status }}</p>
+              <p>
+                <b>{{ $t("lake.general.country") }}:</b>
+                {{ lake.lakedata.country }}
+              </p>
+              <p>
+                <b>{{ $t("lake.general.region") }}:</b>
+                {{ lake.lakedata.region }}
+              </p>
+              <p>
+                <b>{{ $t("lake.general.latitude") }}:</b>
+                {{ lake.lakedata.lat.toFixed(4) }}°
+              </p>
+              <p>
+                <b>{{ $t("lake.general.longitude") }}:</b>
+                {{ lake.lakedata.lon.toFixed(4) }}°
+              </p>
+              <p>
+                <b>{{ $t("lake.general.altitude") }}:</b>
+                {{ lake.lakedata.altitude }} msnm
+              </p>
+              <p>
+                <b>{{ $t("lake.general.area") }}:</b>
+                {{ lake.lakedata.area }} kms2
+              </p>
+              <p>
+                <b>{{ $t("lake.general.volume") }}:</b>
+                {{ lake.lakedata.volume }} millones de m3
+              </p>
+              <p>
+                <b>{{ $t("lake.general.stationstatus") }}:</b>
+                {{ lake.lakedata.station_status }}
+              </p>
             </div>
             <router-link
               class="loc-more"
               :to="{ name: 'Lake', params: { id: lake.lakedata.id } }"
             >
-              Más Info
+              {{ $t("general.moreinfo") }}
             </router-link>
           </div>
         </div>
