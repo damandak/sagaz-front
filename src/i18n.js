@@ -1,8 +1,8 @@
 import { createI18n } from "vue-i18n";
 
 const i18n = createI18n({
-  locale: "es", // set the default language
-  fallbackLocale: "en", // set the fallback language
+  locale: navigator.language.split("-")[0], // set locale based on navigator language
+  fallbackLocale: "es", // set the fallback language
   legacy: false, // use the composition API
   messages: {
     es: {
@@ -354,7 +354,8 @@ const i18n = createI18n({
             "Gonzalo is a Business Engineer and Master in Territorial Planning & Environmental Management from the University of Barcelona (Spain). He is a professor of industrial civil engineering at the University of Magallanes. Gonzalo has spent the last five years managing FONDEF and FONDECYT projects. Additionally, he participates through the NGO Wild Aid in preparing territorial plans to protect marine ecosystems in the protected wild areas of Magallanes and Aysén. He also participates in the territorial tables of SERNATUR, together with representatives of tourist companies from the Magallanes and Antarctica. He is currently working as the career director of the administration and business area of INACAP, Punta Arenas (Chile).",
           galoandrade:
             "His thesis project seeks to establish the geometry of GLOF-susceptible moraines and generate an algorithm for the automatic detection of these moraines in elevation models. He also hopes to create a list of lakes dammed by moraines ordered according to their GLOF susceptibility.",
-          nataliagallo: "",
+          nataliagallo:
+            "Natalia is generating time series of volume of lakes dammed by ice, based on optical satellite images and elevation models that she will generate with Planet images. She will then study the dynamics of each lake and how they correlate with meteorology. This will generate data for model calibration.",
           pamelamaldonado:
             "Pamela is studying the history of lakes dammed by ice in Campo de Hielo Norte, combining satellite records, aerial photogrammetric flights, Synthetic Aperture Radar, and hydrological records (DGA stations with discharge or level measurement).",
           yerkoortega:

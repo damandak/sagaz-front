@@ -22,7 +22,7 @@
 
     <div id="about-intro-text" class="about-section" ref="second">
       <p class="about-second-text">
-        {{ $t("about.a_section.content") }}
+        {{ $t("about.b_section.content") }}
       </p>
     </div>
 

@@ -56,13 +56,13 @@
           <div class="team-member-img-cover"></div>
           <div class="member-info">
             <h3>{{ member.name }}</h3>
-            <p>{{ member.position }}</p>
+            <p>{{ member.position.value }}</p>
           </div>
           <div class="member-detail">
             <p v-if="member.affiliation != ''">
               {{ $t("team.affiliation") }}: {{ member.affiliation }}
             </p>
-            <p>{{ member.description }}</p>
+            <p>{{ member.description.value }}</p>
           </div>
         </div>
         <div class="member-icons">
@@ -112,13 +112,13 @@
           <div class="team-member-img-cover"></div>
           <div class="member-info">
             <h3>{{ member.name }}</h3>
-            <p>{{ member.position }}</p>
+            <p>{{ member.position.value }}</p>
           </div>
           <div class="member-detail">
             <p v-if="member.affiliation != ''">
-              Afiliación: {{ member.affiliation }}
+              {{ $t("team.affiliation") }}: {{ member.affiliation }}
             </p>
-            <p>{{ member.description }}</p>
+            <p>{{ member.description.value }}</p>
           </div>
         </div>
         <div class="member-icons">
@@ -168,13 +168,13 @@
           <div class="team-member-img-cover"></div>
           <div class="member-info">
             <h3>{{ member.name }}</h3>
-            <p>{{ member.position }}</p>
+            <p>{{ member.position.value }}</p>
             <p v-if="member.affiliation != ''">
               {{ member.affiliation }}
             </p>
           </div>
           <div class="member-detail">
-            <p>{{ member.description }}</p>
+            <p>{{ member.description.value }}</p>
           </div>
         </div>
         <div class="member-icons">
@@ -212,6 +212,7 @@
   </div>
 </template>
 <script setup>
+import { reactive, computed, ref, toRef } from "vue";
 import SectionTitle from "@/components/MainContainer/SectionTitle.vue";
 import { Icon } from "@iconify/vue";
 import linkedinBoxFill from "@iconify-icons/akar-icons/linkedin-box-fill";
@@ -307,13 +308,20 @@ var associated_institutions = [
     id_name: "Exploradores",
   },
 ];
-var first_members = [
+
+// Any time you have an array and you think each item needs a computed, you should look at making a component. That is how data and computeds get attached to each other.
+
+// In a lot of cases, you can make a computed based on the array, and it's fine, but you should be aware that any change to the array causes a recompute of the entire computed array. With a component, only the affected rows are recomputed. A simple example is embedded here.
+
+// If you need your computed to be writable, you won't be able to edit individual items, so you're really forced to make a component. It is pretty straightforward: just move the HTML into the template of the component, move the computed into the component (adjusting it to work on the prop value), and then – because it is operating on a prop – change the set function to use $emit rather than changing its value directly.
+
+const first_members = computed(() => [
   {
     name: "Camilo Rada Giacaman",
-    position: i18n.global.t("team.director"),
+    position: ref(i18n.global.t("team.director")),
     image: "rada.jpg",
     affiliation: "Universidad de Magallanes",
-    description: i18n.global.t("team.biographies.camilorada"),
+    description: ref(i18n.global.t("team.biographies.camilorada")),
     linkedin: "https://www.linkedin.com/in/camilo-rada-giacaman-0b1b3b1b9/",
     researchgate: "https://www.researchgate.net/profile/Camilo-Rada",
     external: "https://unchart.org/",
@@ -321,122 +329,122 @@ var first_members = [
   },
   {
     name: "Sergio Andrés Rivera",
-    position: i18n.global.t("team.alternatedirector"),
+    position: ref(i18n.global.t("team.alternatedirector")),
     image: "sergio.jpg",
     affiliation: "Universidad de Chile",
-    description: i18n.global.t("team.biographies.sergiorivera"),
+    description: ref(i18n.global.t("team.biographies.sergiorivera")),
     instagram: "https://www.instagram.com/glaciologia/",
     external: "http://www.glaciologia.cl",
   },
-];
-var members = [
+]);
+const members = computed(() => [
   {
     name: "Alejandro Dussaillant",
-    position: i18n.global.t("team.researcher"),
+    position: ref(i18n.global.t("team.researcher")),
     image: "alejandro.jpg",
     affiliation: "Universidad de Aysén",
-    description: i18n.global.t("team.biographies.alejandrodussaillant"),
+    description: ref(i18n.global.t("team.biographies.alejandrodussaillant")),
     linkedin: "https://www.linkedin.com/in/riversandgreenfrastructure/",
     twitter: "https://twitter.com/rios_lab",
   },
   {
     name: "Íñigo Irarrázaval Bustos",
-    position: i18n.global.t("team.researcher"),
+    position: ref(i18n.global.t("team.researcher")),
     image: "inigo.jpg",
     affiliation:
       "Centro de Investigación de Ecosistemas de la Patagonia (CIEP)",
-    description: i18n.global.t("team.biographies.inigoirarrazaval"),
+    description: ref(i18n.global.t("team.biographies.inigoirarrazaval")),
     external: "https://patagoniaglacial.wordpress.com",
   },
   {
     name: "Marcelo Somos-Valenzuela",
-    position: i18n.global.t("team.researcher"),
+    position: ref(i18n.global.t("team.researcher")),
     image: "marcelo.jpg",
     affiliation: "Universidad de la Frontera",
-    description: i18n.global.t("team.biographies.marcelosomos"),
+    description: ref(i18n.global.t("team.biographies.marcelosomos")),
     linkedin: "https://www.linkedin.com/in/marcelo-somos-valenzuela-487a5021",
     orcid: "https://orcid.org/0000-0001-7863-4407",
     external: "https://marcelo-somos.com/",
   },
   {
     name: "Sebastián Enrique Alfaro Gómez",
-    position: i18n.global.t("team.researcher"),
+    position: ref(i18n.global.t("team.researcher")),
     image: "sebastian.jpg",
     affiliation: "Universidad de Magallanes / INACH",
-    description: i18n.global.t("team.biographies.sebastianalfaro"),
+    description: ref(i18n.global.t("team.biographies.sebastianalfaro")),
     linkedin: "https://www.linkedin.com/in/sebastianenriquealfarogomez/",
     researchgate: "https://www.researchgate.net/profile/Sebastian-Alfaro-4",
   },
   {
     name: "Catalina Medina Porcile",
-    position: i18n.global.t("team.electronicengineer"),
+    position: ref(i18n.global.t("team.electronicengineer")),
     image: "cata.jpg",
     affiliation: "",
-    description: i18n.global.t("team.biographies.catalinamedina"),
+    description: ref(i18n.global.t("team.biographies.catalinamedina")),
     linkedin: "https://www.linkedin.com/in/catalina-medina-porcile-9896661b7/",
   },
   {
     name: "Damir Mandakovic Pizarro",
-    position: i18n.global.t("team.developer"),
+    position: ref(i18n.global.t("team.developer")),
     image: "damir.jpg",
     affiliation: "",
-    description: i18n.global.t("team.biographies.damirmandakovic"),
+    description: ref(i18n.global.t("team.biographies.damirmandakovic")),
     linkedin: "https://www.linkedin.com/in/damirmandakovic/",
     github: "https://github.com/damandak",
     external: "https://www.andinismodeescritorio.cl",
   },
   {
     name: "Francisco Javier Aguirre González",
-    position: i18n.global.t("team.researcher_postdoc"),
+    position: ref(i18n.global.t("team.researcher_postdoc")),
     image: "francisco.jpg",
     affiliation: "Universidad de Magallanes / The School for Field Studies",
-    description: i18n.global.t("team.biographies.franciscoaguirre"),
+    description: ref(i18n.global.t("team.biographies.franciscoaguirre")),
   },
   {
     name: "Natalia Martínez",
-    position: i18n.global.t("team.mountainguide"),
+    position: ref(i18n.global.t("team.mountainguide")),
     image: "natalia.jpg",
     affiliation: "",
-    description: i18n.global.t("team.biographies.nataliamartinez"),
+    description: ref(i18n.global.t("team.biographies.nataliamartinez")),
   },
   {
     name: "Gonzalo Rosenfeld",
-    position: i18n.global.t("team.administration"),
+    position: ref(i18n.global.t("team.administration")),
     image: "gonzalo.jpg",
     affiliation: "Universidad de Magallanes",
-    description: i18n.global.t("team.biographies.gonzalorosenfeld"),
+    description: ref(i18n.global.t("team.biographies.gonzalorosenfeld")),
   },
-];
-var tesistas = [
+]);
+const tesistas = computed(() => [
   {
     name: "Galo Andrade",
-    position: i18n.global.t("team.mscthesist"),
+    position: ref(i18n.global.t("team.mscthesist")),
     image: "galo.jpg",
     affiliation: "Universidad de Magallanes",
-    description: i18n.global.t("team.biographies.galoandrade"),
+    description: ref(i18n.global.t("team.biographies.galoandrade")),
   },
   {
     name: "Natalia Gallo",
-    position: i18n.global.t("team.phdthesist"),
+    position: ref(i18n.global.t("team.phdthesist")),
     image: "nataliagallo.jpg",
     affiliation: "Universidad de Magallanes",
-    description: i18n.global.t("team.biographies.nataliagallo"),
+    description: ref(i18n.global.t("team.biographies.nataliagallo")),
   },
   {
     name: "Pamela Maldonado",
-    position: i18n.global.t("team.mscthesist"),
+    position: ref(i18n.global.t("team.mscthesist")),
     image: "pamela.jpg",
     affiliation: "Universidad de Magallanes",
-    description: i18n.global.t("team.biographies.pamelamaldonado"),
+    description: ref(i18n.global.t("team.biographies.pamelamaldonado")),
   },
   {
     name: "Yerko Ortega",
-    position: i18n.global.t("team.geologythesist"),
+    position: ref(i18n.global.t("team.geologythesist")),
     image: "yerko.jpg",
     affiliation: "Universidad Andrés Bello",
-    description: i18n.global.t("team.biographies.yerkoortega"),
+    description: ref(i18n.global.t("team.biographies.yerkoortega")),
   },
-];
+]);
 </script>
 <style lang="scss" scoped>
 .team-container {

@@ -86,7 +86,7 @@
   </div>
 </template>
 <script setup>
-import { onActivated, onMounted } from "vue";
+import { onActivated, onMounted, ref } from "vue";
 import DataChart from "./DataChart.vue";
 import MoonLoader from "vue-spinner/src/MoonLoader.vue";
 import {
@@ -122,17 +122,17 @@ let labels = {
 
 const chartCSS = "chart-container";
 
-const title_wl = i18n.global.t("lake.graphlabels.waterlevel");
-const title_wt = i18n.global.t("lake.graphlabels.watertemperature");
-const title_ap = i18n.global.t("lake.graphlabels.airpressure");
-const title_at = i18n.global.t("lake.graphlabels.airtemperature");
-const title_pp = i18n.global.t("lake.graphlabels.precipitation");
+const title_wl = ref(i18n.global.t("lake.graphlabels.waterlevel"));
+const title_wt = ref(i18n.global.t("lake.graphlabels.watertemperature"));
+const title_ap = ref(i18n.global.t("lake.graphlabels.airpressure"));
+const title_at = ref(i18n.global.t("lake.graphlabels.airtemperature"));
+const title_pp = ref(i18n.global.t("lake.graphlabels.precipitation"));
 
-const unit_wl = i18n.global.t("lake.graphlabels.meters");
-const unit_wt = i18n.global.t("lake.graphlabels.celsius");
-const unit_ap = i18n.global.t("lake.graphlabels.hectopascal");
-const unit_at = i18n.global.t("lake.graphlabels.celsius");
-const unit_pp = i18n.global.t("lake.graphlabels.milimeters");
+const unit_wl = ref(i18n.global.t("lake.graphlabels.meters"));
+const unit_wt = ref(i18n.global.t("lake.graphlabels.celsius"));
+const unit_ap = ref(i18n.global.t("lake.graphlabels.hectopascal"));
+const unit_at = ref(i18n.global.t("lake.graphlabels.celsius"));
+const unit_pp = ref(i18n.global.t("lake.graphlabels.milimeters"));
 
 const line_wl = "rgba(45, 108, 196, 1)";
 const line_wt = "rgba(45, 176, 196, 1)";
