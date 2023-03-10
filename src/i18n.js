@@ -59,6 +59,7 @@ const i18n = createI18n({
         },
       },
       about: {
+        keep_going: "Seguir avanzando",
         a_section: {
           content:
             "SAGAZ es un proyecto que busca desarrollar un prototipo de sistema de alerta para reducir el impacto de las inundaciones relacionadas con glaciares. Estas inundaciones se conocen como GLOFs, acrónimo adoptado del inglés “Glacial Lake Outburst Flood”, que se puede traducir como Inundaciones por Vaciamiento de Lagos Glaciares.",
@@ -241,6 +242,7 @@ const i18n = createI18n({
         },
       },
       about: {
+        keep_going: "More",
         a_section: {
           content:
             "SAGAZ is a project that seeks to develop a prototype alert system to reduce the impact of glacier-related flooding. These floods are known as GLOFs (Glacial Lake Outburst Floods).",

@@ -14,7 +14,10 @@
       </div>
     </div>
     <template v-if="scrollerVisibility">
-      <ScrollAction text="Sigue Avanzando" :visibility="scrollerVisibility" />
+      <ScrollAction
+        :text="$t('about.keep_going')"
+        :visibility="scrollerVisibility"
+      />
     </template>
     <template v-if="upScrollerVisibility">
       <UpscrollAction text="Vuelve atrás" :visibility="upScrollerVisibility" />
