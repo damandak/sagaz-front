@@ -95,7 +95,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onUnmounted, onMounted } from "vue";
+import { ref, computed, onUnmounted, onMounted, nextTick } from "vue";
 import {
   LMap,
   LMarker,
@@ -180,6 +180,24 @@ function onMapReady() {
   map.value.leafletObject.on("popupclose", function () {
     map.value.leafletObject.setMaxBounds(maxBounds.value);
   });
+  map.value.leafletObject.on("layeradd", function () {
+    addGreenParentClass();
+  });
+
+  // Create a MutationObserver to observe changes in the DOM
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
+        addGreenParentClass();
+      }
+    });
+  });
+
+  // Observe the container element for the markers
+  const markerPane = document.querySelector(".leaflet-marker-pane");
+  if (markerPane) {
+    observer.observe(markerPane, { childList: true });
+  }
 }
 
 onMounted(() => {
@@ -188,6 +206,20 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener("resize", resizeHandler);
 });
+
+function addGreenParentClass() {
+  nextTick(() => {
+    const leafletMarkerIcons = document.querySelectorAll(
+      ".leaflet-marker-icon"
+    );
+    leafletMarkerIcons.forEach((markerIcon) => {
+      if (markerIcon.querySelector(".green")) {
+        console.log("green-parent");
+        markerIcon.classList.add("green-parent");
+      }
+    });
+  });
+}
 
 function resizeHandler() {
   map.value.leafletObject.fitBounds(maxBounds.value);
@@ -301,6 +333,14 @@ img.p-img {
 @media (max-width: 768px) {
   .leaflet-control-zoom {
     display: none;
+  }
+}
+.leaflet-marker-icon {
+  z-index: 30 !important;
+}
+.leaflet-marker-icon {
+  &.green-parent {
+    z-index: 50 !important;
   }
 }
 </style>
