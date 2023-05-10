@@ -74,6 +74,9 @@
             @click="changeLake(lake.id)"
           >
             <h3 class="popup-title">{{ lake.name }}</h3>
+            <p class="popup-location-text">
+              Ubicación: {{ lake.region }} - {{ lake.country }}
+            </p>
             <img class="p-img" :src="lake.image" alt="" />
             <p class="popup-text">
               {{ $t("lake.general.alertlevel") }}:
@@ -267,8 +270,16 @@ function resizeHandler() {
 }
 .leaflet-popup-content-wrapper {
   background: white;
-  border: 2px solid white;
+  border: 3px solid var(--primary-color);
   //height: 100px;
+}
+.leaflet-popup-tip-container {
+  margin-top: -3px !important;
+  .leaflet-popup-tip {
+    background-color: white;
+    border-bottom: 3px solid var(--primary-color);
+    border-right: 3px solid var(--primary-color);
+  }
 }
 .leaflet-popup-close-button {
   display: none;
@@ -281,7 +292,7 @@ function resizeHandler() {
   color: white !important;
 }
 .popup-title {
-  margin: 8px 0;
+  margin: 8px 0 2px 0;
 }
 img.p-img {
   width: 160px;
@@ -296,7 +307,7 @@ img.p-img {
     transition: all 0.2s ease-in-out;
   }
   .popup-moreinfo {
-    background-color: var(--secondary-color-light);
+    background-color: var(--primary-color-light);
     transition: all 0.2s ease-in-out;
   }
 }
@@ -313,13 +324,19 @@ img.p-img {
     margin: 0;
     font-size: 11px;
   }
+  .popup-location-text {
+    margin-top: 0px;
+    margin-bottom: 4px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
   .popup-text-small {
     font-size: 10px;
     margin: 2px;
   }
   .popup-moreinfo {
     color: #fff;
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     text-decoration: none;
     padding: 4px 0px 4px 0px;
     border-radius: 5px;
