@@ -120,7 +120,7 @@ import EmitSignal from "@/components/Lakes/EmitSignal.vue";
 
 var lake_id = ref(0);
 var map = ref(map);
-var tiles_url = process.env.BASE_URL + "tiles/{z}/{x}/{y}.png";
+var tiles_url = process.env.BASE_URL + "tiles/{z}/{x}/{y}.jpg";
 
 const props = defineProps({
   lakesdata: {
@@ -138,12 +138,12 @@ const center = computed(() => {
 });
 
 const maxBounds = computed(() => [
-  [-45.98, -79.1],
+  [-43.08, -79.1],
   [-56.2, -62.5],
 ]);
 // define extreme bounds a little bit to the north of maxBounds
 const extremeBounds = computed(() => [
-  [-43.08, -79.1],
+  [-40.08, -79.1],
   [-56.2, -62.5],
 ]);
 
@@ -265,7 +265,7 @@ function resizeHandler() {
   z-index: 20;
 }
 .leaflet-container {
-  background: #050a0e;
+  background: #010204;
   //background: red;
 }
 .leaflet-popup-content-wrapper {
