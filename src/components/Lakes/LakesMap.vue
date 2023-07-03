@@ -78,14 +78,49 @@
               Ubicación: {{ lake.region }} - {{ lake.country }}
             </p>
             <img class="p-img" :src="lake.image" alt="" />
-            <p class="popup-text">
-              {{ $t("lake.general.alertlevel") }}:
-              {{ lake.current_alert_status }}
-            </p>
-            <p class="popup-text-small">
-              {{ $t("lake.general.updated") }}:
-              {{ moment(lake.updated_at).format("HH:mm, DD-MM-YYYY") }}
-            </p>
+            <div class="popup-bottom-section">
+              <img
+                v-if="
+                  String(lake.current_alert_status)
+                    .toLowerCase()
+                    .startsWith('verde')
+                "
+                class="popup-lake-icon"
+                :src="iconUrlGreen"
+                alt=""
+              />
+              <img
+                v-else-if="
+                  String(lake.current_alert_status)
+                    .toLowerCase()
+                    .startsWith('amarillo')
+                "
+                class="popup-lake-icon"
+                :src="iconUrlYellow"
+                alt=""
+              />
+              <img
+                v-else-if="
+                  String(lake.current_alert_status)
+                    .toLowerCase()
+                    .startsWith('rojo')
+                "
+                class="popup-lake-icon"
+                :src="iconUrlRed"
+                alt=""
+              />
+              <img v-else class="popup-lake-icon" :src="iconUrlGray" alt="" />
+              <div>
+                <p class="popup-text">
+                  {{ $t("lake.general.alertlevel") }}:
+                  {{ lake.current_alert_status }}
+                </p>
+                <p class="popup-text-small">
+                  {{ $t("lake.general.updated") }}:
+                  {{ moment(lake.updated_at).format("HH:mm, DD-MM-YYYY") }}
+                </p>
+              </div>
+            </div>
             <div class="popup-moreinfo">{{ $t("general.moreinfo") }}</div>
           </button>
         </l-popup>
@@ -99,6 +134,7 @@
 
 <script setup>
 import { ref, computed, onUnmounted, onMounted, nextTick } from "vue";
+import { onBeforeRouteLeave } from "vue-router";
 import {
   LMap,
   LMarker,
@@ -228,6 +264,31 @@ function resizeHandler() {
   map.value.leafletObject.fitBounds(maxBounds.value);
   map.value.leafletObject.setMinZoom(map.value.leafletObject.getZoom());
 }
+
+const iconUrlGreen = computed({
+  get() {
+    return require("@/assets/marker_gr.png");
+  },
+});
+const iconUrlYellow = computed({
+  get() {
+    return require("@/assets/marker_y.png");
+  },
+});
+const iconUrlRed = computed({
+  get() {
+    return require("@/assets/marker_r.png");
+  },
+});
+const iconUrlGray = computed({
+  get() {
+    return require("@/assets/marker_g.png");
+  },
+});
+
+onBeforeRouteLeave(() => {
+  lake_id.value = 0;
+});
 </script>
 
 <style lang="scss">
@@ -297,6 +358,7 @@ function resizeHandler() {
 img.p-img {
   width: 160px;
   height: 120px;
+  border-radius: 10px;
   object-fit: cover;
 }
 .leaflet-popup:hover {
@@ -320,26 +382,41 @@ img.p-img {
   width: 100%;
   border-radius: 10px;
   opacity: 1;
-  .popup-text {
-    margin: 0;
-    font-size: 11px;
+  .popup-bottom-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    .popup-lake-icon {
+      width: 24px;
+      height: 24px;
+    }
+    .popup-text {
+      margin: 0;
+      font-size: 10.5px;
+      text-align: left;
+    }
+    .popup-text-small {
+      font-size: 9px;
+      margin: 2px 0 0 0;
+      text-align: left;
+    }
   }
+
   .popup-location-text {
     margin-top: 0px;
     margin-bottom: 4px;
     font-size: 0.8rem;
     font-weight: 500;
   }
-  .popup-text-small {
-    font-size: 10px;
-    margin: 2px;
-  }
+
   .popup-moreinfo {
     color: #fff;
     background-color: var(--primary-color);
     text-decoration: none;
     padding: 4px 0px 4px 0px;
-    border-radius: 5px;
+    border-radius: 15px;
     margin: 5px auto;
     width: 80px;
   }
