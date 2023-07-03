@@ -102,7 +102,7 @@ const props = defineProps({
     default: "line",
   },
 });
-
+console.log(props.start_date);
 const data = computed(() => ({
   backgroundColor: "#000",
   labels: props.chartData.map((element) => element.date),
@@ -122,11 +122,16 @@ const data = computed(() => ({
     maintainAspectRatio: true,
     scales: {
       x: {
+        barPercentage: 1.0,
+        categoryPercentage: 1.0,
         grid: {
           color: "rgba(255, 255, 255, 0.05)",
+          offset: false,
         },
         type: "time",
         distribution: "linear",
+        bounds: "ticks",
+        offset: false,
         min: props.start_date,
         max: props.end_date,
         time: {
