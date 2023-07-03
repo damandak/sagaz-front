@@ -49,12 +49,15 @@
                 {{ lake.lakedata.station_status }}
               </p>
             </div>
-            <router-link
-              class="loc-more"
-              :to="{ name: 'Lake', params: { id: lake.lakedata.id } }"
-            >
-              {{ $t("general.moreinfo") }}
-            </router-link>
+            <div class="loc-buttons">
+              <router-link
+                class="loc-more"
+                :to="{ name: 'Lake', params: { id: lake.lakedata.id } }"
+              >
+                {{ $t("general.moreinfo") }}
+              </router-link>
+              <a class="loc-close-button" @click="$emit('close-loc')">Cerrar</a>
+            </div>
           </div>
         </div>
         <div class="col col-right">
@@ -99,11 +102,7 @@ onMounted(() => {
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 100;
   .lake-overview-container {
-    background-image: linear-gradient(
-      -45deg,
-      rgb(0 180 215 / 92%),
-      #070707f1 95%
-    );
+    background-image: linear-gradient(-45deg, #0a5867eb, #070707f1 95%);
     position: absolute;
     z-index: 50;
     width: 85%;
@@ -131,7 +130,7 @@ onMounted(() => {
       cursor: pointer;
       color: rgba(255, 255, 255, 0.85);
       transition: all 0.3s ease-in-out;
-      transform: scale(1.2, 1);
+      transform: scale(1.05, 1);
     }
     .loc-close:hover {
       color: rgba(255, 255, 255, 0.4);
@@ -159,19 +158,42 @@ onMounted(() => {
     .col-left {
       margin-left: 5%;
       width: 31%;
+      height: 80%;
       float: left;
-      .loc-more {
-        color: #fff;
-        cursor: pointer;
-        background-color: var(--secondary-color);
-        text-decoration: none;
-        padding: 7px;
-        border-radius: 5px;
-        margin-top: 5px;
-        width: 100px;
-      }
-      .loc-more:hover {
-        background-color: var(--secondary-color-light);
+      .lake-main-data {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 10px;
+        height: 100%;
+        .loc-buttons {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          .loc-more,
+          .loc-close-button {
+            display: inline-block;
+            font-weight: 600;
+            color: #fff;
+            cursor: pointer;
+            background-color: var(--primary-color);
+            text-decoration: none;
+            padding: 7px 15px;
+            border-radius: 25px;
+            border: 3px solid white;
+            margin-top: 5px;
+            margin-left: 10px;
+            width: 35%;
+            text-align: center;
+          }
+          .loc-close-button {
+            opacity: 0.75;
+          }
+          .loc-more:hover,
+          .loc-close-button:hover {
+            background-color: var(--primary-color-light);
+          }
+        }
       }
     }
     .col-right {
@@ -201,6 +223,13 @@ onMounted(() => {
   //padding-top: 10px;
   font-size: 15px;
   line-height: 14px;
+  p {
+    margin: 10px;
+    font-size: 0.85rem;
+    b {
+      font-weight: 600;
+    }
+  }
 }
 // Transitions wrapper
 .locwrap-enter-from,
@@ -259,14 +288,12 @@ onMounted(() => {
       }
       .col-left {
         width: 80%;
+        height: auto;
         margin: auto;
         float: none;
         .lake-main-data {
           text-align: center;
           height: auto;
-          .loc-general-data {
-            margin-bottom: 30px;
-          }
         }
         margin-bottom: 30px;
       }
