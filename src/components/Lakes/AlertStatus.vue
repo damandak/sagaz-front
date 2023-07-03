@@ -1,23 +1,25 @@
 <template>
   <div class="alert-status-container" :class="marginClass">
-    <div
+    <img
       class="alert-status-circle alert-status-circle-green"
       v-if="String(status).toLowerCase().startsWith('verde')"
-    ></div>
-    <div
+      :src="iconUrlGreen"
+      alt=""
+    />
+    <img
       class="alert-status-circle alert-status-circle-yellow"
       v-else-if="String(status).toLowerCase().startsWith('amarillo')"
-    ></div>
-    <div
+    />
+    <img
       class="alert-status-circle alert-status-circle-red"
       v-else-if="String(status).toLowerCase().startsWith('rojo')"
-    ></div>
-    <div class="alert-status-circle alert-status-circle-gray" v-else></div>
+    />
+    <img class="alert-status-circle alert-status-circle-gray" v-else />
     <div class="alert-status-text">{{ status }}</div>
   </div>
 </template>
 <script setup>
-// props are defined here
+import { defineProps, computed } from "vue";
 const props = defineProps({
   status: {
     type: String,
@@ -26,6 +28,27 @@ const props = defineProps({
   marginClass: {
     type: String,
     required: false,
+  },
+});
+
+const iconUrlGreen = computed({
+  get() {
+    return require("@/assets/marker_gr.png");
+  },
+});
+const iconUrlYellow = computed({
+  get() {
+    return require("@/assets/marker_y.png");
+  },
+});
+const iconUrlRed = computed({
+  get() {
+    return require("@/assets/marker_r.png");
+  },
+});
+const iconUrlGray = computed({
+  get() {
+    return require("@/assets/marker_g.png");
   },
 });
 </script>
