@@ -13,9 +13,9 @@
       :chartData="lakemeasurements.water_level"
       :label="labels"
       :title="$t('lake.graphlabels.waterlevel')"
-      :start_date="lakemeasurements.start_date"
-      :end_date="lakemeasurements.end_date"
-      :interval="axis_interval"
+      :start_date="datesAndInterval.start_date"
+      :end_date="end_date"
+      :interval="datesAndInterval.axis_interval"
       :unit="$t('lake.graphlabels.meters')"
       :line_color="line_wl"
       :point_color="point_wl"
@@ -27,9 +27,9 @@
       :chartData="lakemeasurements.water_temperature"
       :label="labels"
       :title="$t('lake.graphlabels.watertemperature')"
-      :start_date="lakemeasurements.start_date"
-      :end_date="lakemeasurements.end_date"
-      :interval="axis_interval"
+      :start_date="datesAndInterval.start_date"
+      :end_date="end_date"
+      :interval="datesAndInterval.axis_interval"
       :unit="$t('lake.graphlabels.celsius')"
       :line_color="line_wt"
       :point_color="point_wt"
@@ -41,9 +41,9 @@
       :chartData="lakemeasurements.atmospheric_pressure"
       :label="labels"
       :title="$t('lake.graphlabels.airpressure')"
-      :start_date="lakemeasurements.start_date"
-      :end_date="lakemeasurements.end_date"
-      :interval="axis_interval"
+      :start_date="datesAndInterval.start_date"
+      :end_date="end_date"
+      :interval="datesAndInterval.axis_interval"
       :unit="$t('lake.graphlabels.hectopascal')"
       :line_color="line_ap"
       :point_color="point_ap"
@@ -55,9 +55,9 @@
       :chartData="lakemeasurements.atmospheric_temperature"
       :label="labels"
       :title="$t('lake.graphlabels.airtemperature')"
-      :start_date="lakemeasurements.start_date"
-      :end_date="lakemeasurements.end_date"
-      :interval="axis_interval"
+      :start_date="datesAndInterval.start_date"
+      :end_date="end_date"
+      :interval="datesAndInterval.axis_interval"
       :unit="$t('lake.graphlabels.celsius')"
       :line_color="line_at"
       :point_color="point_at"
@@ -69,9 +69,9 @@
       :chartData="lakemeasurements.precipitation"
       :label="labels"
       :title="$t('lake.graphlabels.precipitation')"
-      :start_date="lakemeasurements.start_date"
-      :end_date="lakemeasurements.end_date"
-      :interval="axis_interval"
+      :start_date="datesAndInterval.start_date"
+      :end_date="end_date"
+      :interval="datesAndInterval.axis_interval"
       :unit="$t('lake.graphlabels.milimeters')"
       :line_color="line_pp"
       :point_color="point_pp"
@@ -80,13 +80,23 @@
       :maxLimit="lakemeasurements.precipitation_limits.max"
       :chartType="'bar'"
     />
+    <button class="download-csv-button" @click="() => downloadCSV()">
+      {{ $t("lake.detail.downloadcsv") }}
+    </button>
   </div>
   <div v-else class="lake-detail-container">
-    <h3>{{ $t("lake.detail.noinfo") }}</h3>
+    <h3 v-if="lakemeasurements.last_data_date">
+      {{ $t("lake.detail.nodatasince") }}
+      {{ lakemeasurements.last_data_date }}
+    </h3>
+    <h3 v-else>
+      {{ $t("lake.detail.noinfo") }}
+    </h3>
   </div>
 </template>
 <script setup>
-import { onActivated, onMounted, ref } from "vue";
+import axios from "axios";
+import { onActivated, onMounted, ref, reactive } from "vue";
 import DataChart from "./DataChart.vue";
 import MoonLoader from "vue-spinner/src/MoonLoader.vue";
 import {
@@ -110,6 +120,10 @@ const props = defineProps({
     type: String,
     required: true,
     default: "day",
+  },
+  lake: {
+    type: Object,
+    required: true,
   },
 });
 
@@ -147,29 +161,96 @@ const point_at = "rgba(123, 45, 196, 0.5)";
 const point_pp = "rgba(148, 196, 45, 0.5)";
 
 let axis_interval = "day";
-if (props.interval === "daily") {
-  axis_interval = "hour";
-} else if (props.interval === "weekly") {
-  axis_interval = "day";
-} else if (props.interval === "biweekly") {
-  axis_interval = "day";
-} else if (props.interval === "monthly") {
-  axis_interval = "day";
-} else if (props.interval === "yearly") {
-  axis_interval = "month";
-} else {
-  axis_interval = "month";
-}
+let start_date = null;
+let end_date = moment().format("YYYY-MM-DD");
+
+const lake_id_url = useRoute().params.id;
+
+let datesAndInterval = reactive({
+  start_date: null,
+  axis_interval: "day",
+});
 
 onMounted(async () => {
   const lake_id = useRoute().params.id;
-  await getLakeMeasurements(lake_id, props.interval);
+  await getLakeMeasurements(
+    lake_id,
+    props.interval,
+    setAxisIntervalAndStartDate
+  );
 });
 
 onActivated(async () => {
   const lake_id = useRoute().params.id;
-  await getLakeMeasurements(lake_id, props.interval);
+  await getLakeMeasurements(
+    lake_id,
+    props.interval,
+    setAxisIntervalAndStartDate
+  );
 });
+
+function setAxisIntervalAndStartDate() {
+  if (props.interval === "daily") {
+    datesAndInterval.axis_interval = "hour";
+    datesAndInterval.start_date = moment()
+      .subtract(1, "day")
+      .format("YYYY-MM-DD");
+  } else if (props.interval === "weekly") {
+    datesAndInterval.axis_interval = "day";
+    datesAndInterval.start_date = moment()
+      .subtract(1, "week")
+      .format("YYYY-MM-DD");
+  } else if (props.interval === "biweekly") {
+    datesAndInterval.axis_interval = "day";
+    datesAndInterval.start_date = moment()
+      .subtract(2, "week")
+      .format("YYYY-MM-DD");
+  } else if (props.interval === "monthly") {
+    datesAndInterval.axis_interval = "day";
+    datesAndInterval.start_date = moment()
+      .subtract(1, "month")
+      .format("YYYY-MM-DD");
+  } else if (props.interval === "yearly") {
+    datesAndInterval.axis_interval = "month";
+    datesAndInterval.start_date = moment()
+      .subtract(1, "year")
+      .format("YYYY-MM-DD");
+  } else {
+    datesAndInterval.axis_interval = "month";
+    datesAndInterval.start_date = lakemeasurements.start_date;
+  }
+}
+const route = useRoute(); // Store the reactive object in a variable
+const lake_id = route.params.id; // Now it's safe to access the properties
+
+const downloadCSV = async () => {
+  try {
+    var apiUrl = "";
+    var apiKey = "";
+    if (process.env.NODE_ENV === "d") {
+      apiUrl = "http://localhost:8000/api/lakemeasurements/";
+      apiKey = "4hJb3MIV.T7rL0Q4w4or5dnfr9qvRNX0bG0tdqoVS";
+    } else {
+      apiUrl = "https://www.sagaz.org/api/lakemeasurements/";
+      apiKey = process.env.VUE_APP_API_KEY;
+    }
+    const response = await axios.get(
+      apiUrl + lake_id + "/" + props.interval + "/export/",
+      {
+        responseType: "blob",
+      }
+    );
+    const url = window.URL.createObjectURL(new Blob([response.data]));
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", "data.csv");
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  } catch (error) {
+    console.error("Failed to download CSV:", error);
+  }
+};
 </script>
 <style scoped lang="scss">
 .loading-charts {
@@ -186,6 +267,25 @@ onActivated(async () => {
     align-items: center;
     height: 160px;
     width: 100%;
+  }
+}
+.download-csv-button {
+  display: inline-block;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  text-decoration: none;
+  border-radius: 25px;
+  border: 3px solid white;
+  margin-top: 15px;
+  margin-left: 10px;
+  margin-bottom: 30px;
+  padding: 10px 22px 10px 22px;
+  font-size: 1.2rem;
+  text-align: center;
+  &:hover {
+    background-color: var(--primary-color-light);
   }
 }
 </style>

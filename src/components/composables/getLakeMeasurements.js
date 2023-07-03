@@ -71,6 +71,7 @@ export var lakemeasurements = reactive({
   atmospheric_temperature: [],
   precipitation: [],
   alert_status: [],
+  last_data_date: "",
 });
 
 var apiUrl = "";
@@ -84,7 +85,7 @@ if (process.env.NODE_ENV === "d") {
   apiKey = process.env.VUE_APP_API_KEY;
 }
 
-export function getLakeMeasurements(id, interval) {
+export const getLakeMeasurements = async (id, interval, callback) => {
   data = [];
   const apiUrlwithId = apiUrl + id + "/" + interval + "/";
   axios.defaults.headers.common.Authorization = `Api-Key ${apiKey}`;
@@ -121,14 +122,19 @@ export function getLakeMeasurements(id, interval) {
       max: 0,
     };
     // Si no hay datos, acá se caería!!
+    console.log(data);
     if (data.length === 0) {
       lakemeasurements.nodata = true;
+      lakemeasurements.last_data_date = response.data.last_data_date;
     } else {
       lakemeasurements.nodata = false;
       lakemeasurements.start_date = moment(data[0].date).format(format);
       lakemeasurements.end_date = moment(data[data.length - 1].date).format(
         format
       );
+      if (callback) {
+        callback();
+      }
       data.forEach((data, id) => {
         if (
           data.water_level >= absoluteMin.level &&
@@ -217,11 +223,10 @@ export function getLakeMeasurements(id, interval) {
       absoluteMin.precipitation,
       absoluteMax.precipitation
     );
-
     lakemeasurements.loaded = true;
     lakemeasurements.interval = interval;
   });
   return {
     lakemeasurements,
   };
-}
+};

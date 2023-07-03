@@ -52,7 +52,13 @@
     <p>{{ $t("lake.detail.lastupdate") }} {{ lakemeasurements.end_date }}</p>
   </div>
   <div v-else class="lake-detail-container">
-    <h3 class="no-info">{{ $t("lake.detail.noinfo") }}</h3>
+    <h3 class="no-info" v-if="lakemeasurements.last_data_date">
+      {{ $t("lake.detail.nodatasince") }}
+      {{ lakemeasurements.last_data_date }}
+    </h3>
+    <h3 class="no-info" v-else>
+      {{ $t("lake.detail.noinfo") }}
+    </h3>
   </div>
 </template>
 <script setup>

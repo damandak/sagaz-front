@@ -31,7 +31,9 @@ const i18n = createI18n({
         detail: {
           lastupdate: "Última actualización",
           loading: "Cargando información de la estación...",
-          noinfo: "No hay información disponible para esta estación",
+          noinfo: "No hay datos recolectados para esta estación",
+          nodatasince: "No hay datos recolectados para esta estación desde el ",
+          downloadcsv: "Descargar datos en formato CSV",
         },
         intervals: {
           description: "Cambiar intervalos de tiempo",
@@ -215,6 +217,8 @@ const i18n = createI18n({
           lastupdate: "Last update",
           loading: "Loading station data...",
           noinfo: "No data available for this station",
+          nodatasince: "No data available for this station since ",
+          downloadcsv: "Download data as CSV",
         },
         intervals: {
           description: "Change time intervals",
