@@ -89,7 +89,12 @@
         {{ $t("lake.intervals.historic") }}
       </button>
     </div>
-    <LakeDetail :id="id" :interval="interval" :key="changeableKey" />
+    <LakeDetail
+      :id="id"
+      :interval="interval"
+      :key="changeableKey"
+      :lake="lake"
+    />
   </div>
 </template>
 
@@ -118,11 +123,7 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .lake-view-container {
-  background-image: linear-gradient(
-    -45deg,
-    rgb(0 180 215 / 92%),
-    #070707f1 95%
-  );
+  background-image: linear-gradient(-45deg, #0a5867eb, #070707f1 95%);
   .section-title {
     margin-bottom: 10px;
   }
