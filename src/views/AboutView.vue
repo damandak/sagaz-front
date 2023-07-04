@@ -157,7 +157,7 @@
       class="about-section about-big-section"
       ref="tenth"
     >
-      <img src="@/assets/dibujo7-min.png" alt="" class="drawing" />
+      <img src="@/assets/cloud_based_servers.png" alt="" class="drawing" />
       <div class="about-subsection about-sub-visible" ref="tenthA">
         <p class="supporting-text smaller-support">
           {{ $t("about.m_section.content") }}
@@ -177,6 +177,7 @@
         </p>
       </div>
     </div>
+    <div class="progress-bar"></div>
   </div>
 </template>
 <script setup>
@@ -299,6 +300,16 @@ const handleScroll = () => {
     upScrollerVisibility.value = true;
   }
 };
+
+window.onscroll = function () {
+  const winScroll =
+    document.body.scrollTop || document.documentElement.scrollTop;
+  const height =
+    document.documentElement.scrollHeight -
+    document.documentElement.clientHeight;
+  const scrolled = (winScroll / height) * 100;
+  document.querySelector(".progress-bar").style.width = scrolled + "%";
+};
 </script>
 <style lang="scss" scoped>
 .about-container {
@@ -361,7 +372,7 @@ const handleScroll = () => {
       rgba(0, 180, 215, 0.7) 92.81%,
       rgba(255, 255, 255, 1) 92.86%,
       rgba(0, 180, 215, 0.7) 92.91%,
-      rgba(0, 180, 215, 0.9) 99.95%
+      rgba(0, 180, 215, 0.7) 99.95%
     );
     z-index: -1;
   }
@@ -449,9 +460,6 @@ const handleScroll = () => {
         left: 5%;
         text-align: left;
         transform: translate(0%, -50%);
-      }
-      .smaller-support {
-        //font-size: 1em !important;
       }
       .helper-img {
         position: absolute;
@@ -543,5 +551,16 @@ const handleScroll = () => {
       }
     }
   }
+}
+
+.progress-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 10px;
+  background-color: #4caf50;
+  z-index: 9999;
+  transition: width 0.2s ease-in-out;
 }
 </style>
