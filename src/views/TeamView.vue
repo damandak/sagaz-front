@@ -448,11 +448,7 @@ const tesistas = computed(() => [
 </script>
 <style lang="scss" scoped>
 .team-container {
-  background-image: linear-gradient(
-    -45deg,
-    rgba(0, 180, 215, 0.6925) 45%,
-    rgba(7, 7, 7, 0.9) 100%
-  );
+  background-image: linear-gradient(-45deg, #0a5867eb, #070707f1 95%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -501,15 +497,15 @@ const tesistas = computed(() => [
         max-width: 100px;
         max-height: 100px;
         object-fit: cover;
-        -webkit-filter: drop-shadow(1px 1px 0.1px rgba(255, 255, 255, 0.2));
-        filter: drop-shadow(1px 1px 0.1px rgba(255, 255, 255, 0.2));
+        // -webkit-filter: drop-shadow(1px 1px 0.1px rgba(255, 255, 255, 0.2));
+        // filter: drop-shadow(3px 20px 20px rgba(255, 255, 255, 0.5));
       }
       .asso-institution-img {
-        max-width: 100px;
-        max-height: 100px;
+        max-width: 150px;
+        max-height: 80px;
         object-fit: cover;
-        -webkit-filter: drop-shadow(1px 1px 0.1px rgba(255, 255, 255, 0.2));
-        filter: drop-shadow(1px 1px 0.1px rgba(255, 255, 255, 0.2));
+        // -webkit-filter: drop-shadow(1px 1px 30px #ffffff50);
+        // filter: drop-shadow(1px 1px 30px #ffffff50);
       }
     }
     .horizontal {
@@ -520,15 +516,17 @@ const tesistas = computed(() => [
     .vertical {
       .mgmt-institution-img {
         max-height: 100px;
-        max-width: 80px;
+        max-width: 90px;
       }
     }
     .inst-wrap-small {
       width: 100px;
       height: 150px;
       h3 {
-        width: 180px;
-        font-size: 1em;
+        left: 100%;
+        width: 300px;
+        top: 20px;
+        font-size: 1.1em;
       }
     }
     #uChile {
@@ -706,6 +704,11 @@ const tesistas = computed(() => [
         margin: 0px 0 0 0;
         justify-content: center;
         height: 120px;
+      }
+      .inst-wrap-small h3 {
+        left: 50% !important;
+        top: 0px !important;
+        width: 300px !important;
       }
       #anid,
       #UMAG,
