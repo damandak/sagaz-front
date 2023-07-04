@@ -10,11 +10,7 @@
 <script setup></script>
 <style lang="scss" scoped>
 .contact-container {
-  background-image: linear-gradient(
-    -45deg,
-    rgb(0 180 215 / 92%),
-    #070707f1 95%
-  );
+  background-image: linear-gradient(-45deg, #077c93eb, #070707f1 95%);
   display: flex;
   #contact-cover {
     #big-logo {
